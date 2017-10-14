@@ -1,3 +1,5 @@
+/* global __dirname process */
+
 // Get dependencies
 const express = require('express');
 const path = require('path');
@@ -15,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Set our api routes
 app.use('/api', api);

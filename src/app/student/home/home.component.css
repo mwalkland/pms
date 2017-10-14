@@ -1,0 +1,17 @@
+img {
+  width: 300px;
+}
+
+.logo {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 44px;
+  color: #0355A6;
+  margin-top: 10px;
+}

@@ -1,5 +1,7 @@
+import { StudentModule } from './student/student.module';
+import { AppRoutingModule } from './app.routing';
+import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
-import { StudentModule } from './Student/Student.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,16 +12,17 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent
-  ],
+],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
-    StudentModule,
     AuthModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule,
+    StudentModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

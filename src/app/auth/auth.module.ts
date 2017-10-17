@@ -1,11 +1,18 @@
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './../core/core.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { HttpClientModule } from '@angular/common/http';
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatRadioModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material';
 
 
 @NgModule({
@@ -16,11 +23,17 @@ import { MatButtonModule } from '@angular/material';
     MatInputModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatRadioModule,
+    HttpClientModule
   ],
   exports: [
     AuthComponent
   ],
-  declarations: [AuthComponent]
+  declarations: [
+    AuthComponent,
+    LoginComponent,
+    SignupComponent
+  ]
 })
 export class AuthModule { }

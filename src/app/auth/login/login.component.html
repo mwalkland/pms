@@ -1,0 +1,13 @@
+<div class="login-wrap">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" class="form">
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="loginForm.controls['email'].hasError('email')">Please enter a valid email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" (click)="onLogin()" [disabled]="!loginForm.valid">Submit</button>
+  </form>
+</div>

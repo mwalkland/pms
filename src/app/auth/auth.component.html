@@ -8,36 +8,8 @@
 
 <div class="auth-wrap">
 
-  <div class="login-wrap">
-    <h2>Login</h2>
-    <form [formGroup]="loginForm" class="form">
-      <mat-form-field>
-        <input matInput placeholder="Email" formControlName="email" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password" required>
-      </mat-form-field>
-      <button mat-raised-button color="primary" type="submit" (click)="onLogin()">Submit</button>
-    </form>
-  </div>
+  <app-login></app-login>
   <br>
-  <div class="signup-wrap">
-    <h2>Signup</h2>
-    <form [formGroup]="signupForm" class="form">
-      <mat-form-field>
-        <input matInput placeholder="First Name" formControlName="firstname" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Last Name" formControlName="surname" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Email" formControlName="signupEmail" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Password" formControlName="signupPassword" required>
-      </mat-form-field>
-      <button mat-raised-button color="primary" type="submit" (click)="onLogin()">Submit</button>
-    </form>
-  </div>
+  <app-signup></app-signup>
 
 </div>

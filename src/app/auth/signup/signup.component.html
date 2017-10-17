@@ -1,0 +1,24 @@
+<div class="signup-wrap">
+  <h2>Signup</h2>
+  <form [formGroup]="signupForm" class="form">
+    <mat-form-field>
+      <input matInput placeholder="First Name" formControlName="firstname">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Surname" formControlName="surname">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="signupForm.controls['email'].hasError('email')">Please enter a valid email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password">
+    </mat-form-field>
+    <mat-radio-group class="radio-type" formControlName="type">
+      <mat-radio-button value="student">Student</mat-radio-button>
+      <mat-radio-button value="staff">Staff</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <button mat-raised-button color="primary" type="submit" (click)="onSignup()" [disabled]="!signupForm.valid">Submit</button>
+  </form>
+</div>

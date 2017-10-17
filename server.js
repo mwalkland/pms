@@ -5,11 +5,15 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 // Get our API routes
 const api = require('./server/routes/api');
+const userRoutes = require('./server/routes/user');
 
 const app = express();
+
+mongoose.connect('localhost:27017/pms');
 
 // Parsers for POST data
 app.use(bodyParser.json());
@@ -21,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Set our api routes
 app.use('/api', api);
+app.use('/user', userRoutes);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

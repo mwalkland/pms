@@ -1,3 +1,4 @@
+import { AuthModule } from './../auth/auth.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentComponent } from './student.component';
@@ -12,7 +13,8 @@ import { StudentRoutingModule } from 'app/student/student.routing';
   imports: [
     CommonModule,
     MatListModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    AuthModule
   ],
   exports: [
     StudentHeaderComponent

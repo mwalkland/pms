@@ -1,3 +1,4 @@
+import { LogoutDialogComponent } from './logout/logout-dialog/logout-dialog.component';
 import { AuthGuard } from './auth-guard.service';
 import { AuthRoutingModule } from './auth.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,9 +13,12 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
-  MatRadioModule
+  MatRadioModule,
+  MatDialogModule,
+  MatListModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -28,18 +32,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatRadioModule,
     HttpClientModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    MatDialogModule,
+    MatListModule
   ],
   exports: [
-    AuthComponent
+    AuthComponent,
+    LogoutComponent
   ],
   declarations: [
     AuthComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LogoutComponent,
+    LogoutDialogComponent
   ],
   providers: [
     AuthGuard
-  ]
+  ],
+  entryComponents: [LogoutDialogComponent]
 })
 export class AuthModule { }

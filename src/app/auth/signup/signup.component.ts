@@ -23,7 +23,6 @@ export class SignupComponent implements OnInit {
       password: ['', Validators.required],
       type: ['', Validators.required]
     });
-    console.log(this.signupForm.controls);
   }
 
   onSignup() {

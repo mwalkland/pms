@@ -12,7 +12,7 @@
       <mat-error *ngIf="signupForm.controls['email'].hasError('email')">Please enter a valid email</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Password" formControlName="password">
+      <input matInput placeholder="Password" formControlName="password" type="password">
     </mat-form-field>
     <mat-radio-group class="radio-type" formControlName="type">
       <mat-radio-button value="student">Student</mat-radio-button>

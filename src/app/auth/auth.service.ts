@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class AuthService {
 
+  private user: User;
+
   constructor(private http: HttpClient) { }
 
   signup(user: User) {
@@ -20,6 +22,13 @@ export class AuthService {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post('http://localhost:3000/user/login', body, { headers: headers });
+  }
+
+  isLoggedIn() {
+    const token = localStorage.getItem('token');
+    const body = { token: token };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post('http://localhost:3000/user/verify', body, { headers: headers });
   }
 
 }

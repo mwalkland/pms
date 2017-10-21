@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  getType() {
+    if (localStorage.getItem('token')) {
+      return localStorage.getItem('type');
+    }
+  }
 }

@@ -1,3 +1,5 @@
+import { AuthGuard } from './auth-guard.service';
+import { AuthRoutingModule } from './auth.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './../core/core.module';
 import { NgModule } from '@angular/core';
@@ -25,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     MatButtonModule,
     MatRadioModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthRoutingModule
   ],
   exports: [
     AuthComponent
@@ -34,6 +37,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthComponent,
     LoginComponent,
     SignupComponent
+  ],
+  providers: [
+    AuthGuard
   ]
 })
 export class AuthModule { }

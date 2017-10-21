@@ -59,7 +59,8 @@ router.post('/login', (req, res) => {
           return res.status(200).json({
             message: 'User logged in',
             token: token,
-            userId: user._id
+            userId: user._id,
+            type: user.type
           });
         } else {
           return res.status(401).json({
@@ -68,6 +69,23 @@ router.post('/login', (req, res) => {
           });
         }
       });
+  });
+});
+
+/**
+ * Is called by the route guards on the front-end to check if the jwt token is valid
+ */
+router.post('/verify', (req, res) => {
+  const token = req.body.token;
+  return jwt.verify(token, 'WO3V%oIBK5c2', (err, decoded) => {
+    if (decoded) {
+      return res.status(200).json({
+        valid: true
+      });
+    }
+    return res.status(200).json({
+      valid: false
+    });
   });
 });
 

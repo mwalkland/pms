@@ -1,6 +1,6 @@
 <div class="app-container">
   <div class="bar header">
-    <app-header></app-header>
+    <app-student-header *ngIf="getType() == 'student'"></app-student-header>
   </div>
 
   <div class="main">

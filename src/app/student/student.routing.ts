@@ -1,3 +1,5 @@
+import { StudentHomeComponent } from './student-home/student-home.component';
+import { AuthGuard } from './../auth/auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { StudentProjectsComponent } from 'app/student/student-projects/student-projects.component';
@@ -5,10 +7,14 @@ import { StudentStaffComponent } from 'app/student/student-staff/student-staff.c
 
 const studentRoutes: Routes = [
   {
-    path: 'projects', component: StudentProjectsComponent
+    path: 'projects',
+    component: StudentProjectsComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'stafflist', component: StudentStaffComponent
+    path: 'stafflist',
+    component: StudentStaffComponent,
+    canActivate: [AuthGuard]
   }
 ]
 

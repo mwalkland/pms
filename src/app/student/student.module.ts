@@ -1,20 +1,33 @@
+import { StudentProjectsService } from './student-projects/student-projects.service';
+import { StudentProjectsTableComponent } from './student-projects/student-projects-table/student-projects-table.component';
+import { FormsModule } from '@angular/forms';
 import { AuthModule } from './../auth/auth.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentComponent } from './student.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
 import { StudentHeaderComponent } from './student-header/student-header.component';
-import { MatListModule } from '@angular/material';
 import { StudentProjectsComponent } from './student-projects/student-projects.component';
 import { StudentStaffComponent } from './student-staff/student-staff.component';
 import { StudentRoutingModule } from 'app/student/student.routing';
+import { StudentProjectsListComponent } from './student-projects/student-projects-list/student-projects-list.component';
+import { MatListModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     MatListModule,
     StudentRoutingModule,
-    AuthModule
+    AuthModule,
+    MatIconModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    FormsModule
   ],
   exports: [
     StudentHeaderComponent
@@ -24,7 +37,12 @@ import { StudentRoutingModule } from 'app/student/student.routing';
     StudentHomeComponent,
     StudentHeaderComponent,
     StudentProjectsComponent,
-    StudentStaffComponent
-]
+    StudentStaffComponent,
+    StudentProjectsListComponent,
+    StudentProjectsTableComponent
+  ],
+  providers: [
+    StudentProjectsService
+  ]
 })
 export class StudentModule { }

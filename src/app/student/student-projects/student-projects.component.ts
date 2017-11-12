@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-projects.component.css']
 })
 export class StudentProjectsComponent implements OnInit {
+  values = [
+    { value: 'Staff', viewValue: 'Staff' },
+    { value: 'Area', viewValue: 'Area'}
+  ];
+  browseBy: String = null;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onChange() {
+
   }
 
 }

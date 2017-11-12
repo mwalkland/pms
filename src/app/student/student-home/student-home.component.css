@@ -1,3 +1,7 @@
+:host {
+  width: 100%;
+}
+
 img {
   width: 300px;
 }
@@ -10,8 +14,69 @@ img {
 }
 
 h1 {
-  font-weight: 300;
-  font-size: 44px;
-  color: #0355A6;
-  margin-top: 10px;
+  text-align: center;
 }
+
+h3 {
+  margin-top: 0px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.contents {
+  margin-top: 30px;
+}
+
+.contents p {
+  color: #1872cc;
+  font-weight: 300;
+  font-size: 20px;
+  text-align: center;
+}
+
+.inner-contents {
+  margin-top: 50px;
+  display: flex;
+  flex: 1;
+}
+
+.detail {
+  width: 170px;
+  margin: auto;
+  text-align: start;
+  font-size: 16px !important;
+  color: grey !important;
+}
+
+.in p {
+  font-size: 22px;
+}
+
+.in {
+  flex: 1;
+}
+
+@media(max-width: 568px) {
+  .inner-contents {
+    display: block;
+    margin-top: 30px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+
+  .contents p {
+    font-size: 16px;
+  }
+
+  .in {
+    margin-top: 40px;
+  }
+
+  .in p {
+    font-size: 16px;
+  }
+}
+
+
+

@@ -60,7 +60,8 @@ router.post('/login', (req, res) => {
             message: 'User logged in',
             token: token,
             userId: user._id,
-            type: user.type
+            type: user.type,
+            name: user.firstname
           });
         } else {
           return res.status(401).json({
@@ -85,6 +86,22 @@ router.post('/verify', (req, res) => {
     }
     return res.status(200).json({
       valid: false
+    });
+  });
+});
+
+router.get('/getStaff', (req, res) => {
+  User.find({ type: 'staff' }, (err, staff) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured retrieving staff members',
+        error: err
+      });
+    }
+    console.log(staff);
+    res.status(200).json({
+      message: 'Success',
+      staff: staff
     });
   });
 });

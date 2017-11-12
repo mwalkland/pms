@@ -12,6 +12,7 @@ export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
   type: String;
+  signedUp: Boolean = false;
 
   constructor(private builder: FormBuilder, private authService: AuthService) { }
 
@@ -36,8 +37,11 @@ export class SignupComponent implements OnInit {
     );
     this.authService.signup(user)
       .subscribe(
-        data => console.log(data),
-        error => console.log(error)
+      data => {
+        console.log(data)
+        this.signedUp = true;
+      },
+      error => console.log(error)
       );
     this.signupForm.reset();
   }

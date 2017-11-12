@@ -1,0 +1,13 @@
+ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
+li {
+  padding: 0px 10px 25px 10px;
+}
+
+li:hover {
+  cursor: pointer;
+  color: #0355A6;
+}

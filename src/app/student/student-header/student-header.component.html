@@ -1,12 +1,17 @@
 <div class="nav-wrap">
-  <mat-nav-list class="nav nav-left">
-    <a mat-list-item routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-    <a mat-list-item routerLink="/projects" routerLinkActive="active">Projects</a>
-    <a mat-list-item routerLink="/stafflist" routerLinkActive="active">Staff</a>
-  </mat-nav-list>
-  <mat-nav-list class="nav nav-right">
-    <a mat-list-item routerLink="/profile" routerLinkActive="active">Profile</a>
-    <app-logout></app-logout>
-    <!-- <a mat-list-item (click)="onLogOut()" routerLinkActive="active">Sign Out</a> -->
-  </mat-nav-list>
+  <div class="nav-button">
+      <i class="material-icons" style="color:white;font-size:30px;" (click)="show()">menu</i>
+  </div>
+  <div class="nav-list" style="display:none" #navlist>
+    <mat-nav-list class="nav nav-left">
+      <a mat-list-item (click)="show()" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a mat-list-item (click)="show()" routerLink="/projects" routerLinkActive="active">Projects</a>
+      <a mat-list-item (click)="show()" routerLink="/stafflist" routerLinkActive="active">Staff</a>
+    </mat-nav-list>
+    <mat-nav-list class="nav nav-right">
+      <a mat-list-item routerLink="/profile" routerLinkActive="active">Profile</a>
+      <app-logout></app-logout>
+      <!-- <a mat-list-item (click)="onLogOut()" routerLinkActive="active">Sign Out</a> -->
+    </mat-nav-list>
+  </div>
 </div>

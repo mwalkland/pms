@@ -15,11 +15,13 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   getCurrentUser() {
+    console.log(this.user)
     return this.user;
   }
 
   setCurrentUser(user: User) {
     this.user = user;
+    console.log(this.user)
   }
 
   signup(user: User) {

@@ -1,13 +1,13 @@
+import { StudentComponent } from './student/student.component';
 import { AuthGuard } from './auth/auth-guard.service';
 import { AuthComponent } from './auth/auth.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { StudentHomeComponent } from 'app/student/student-home/student-home.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: StudentHomeComponent,
+    component: StudentComponent,
     canActivate: [AuthGuard]
   }
 ]

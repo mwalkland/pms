@@ -5,7 +5,6 @@ import { AuthModule } from './../auth/auth.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentComponent } from './student.component';
-import { StudentHomeComponent } from './student-home/student-home.component';
 import { StudentHeaderComponent } from './student-header/student-header.component';
 import { StudentProjectsComponent } from './student-projects/student-projects.component';
 import { StudentStaffComponent } from './student-staff/student-staff.component';
@@ -34,7 +33,6 @@ import { MatFormFieldModule } from '@angular/material';
   ],
   declarations: [
     StudentComponent,
-    StudentHomeComponent,
     StudentHeaderComponent,
     StudentProjectsComponent,
     StudentStaffComponent,

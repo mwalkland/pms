@@ -54,6 +54,8 @@ h3 {
 
 .in {
   flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 @media(max-width: 568px) {
@@ -76,6 +78,10 @@ h3 {
   .in p {
     font-size: 16px;
   }
+}
+
+.button-div:hover {
+  cursor: pointer;
 }
 
 

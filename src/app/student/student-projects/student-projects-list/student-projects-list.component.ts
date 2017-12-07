@@ -11,8 +11,9 @@ export class StudentProjectsListComponent implements OnInit {
 
   @Input() browse: String;
   staffList: User[];
+  browseBy: String;
 
-  constructor(private studentService: StudentProjectsService) { }
+  constructor(private studentService: StudentProjectsService, private projectService: StudentProjectsService) { }
 
   ngOnInit() {
     this.studentService.getStaff()
@@ -20,6 +21,10 @@ export class StudentProjectsListComponent implements OnInit {
         this.staffList = staff;
         console.log(this.staffList);
       });
+    this.browseBy = this.projectService.getBrowseBy();
+    this.projectService.browseByChanged.subscribe(browse => {
+      this.browseBy = browse;
+    });
   }
 
   getStaff() {
@@ -27,7 +32,6 @@ export class StudentProjectsListComponent implements OnInit {
       .subscribe((staff: User[]) => {
         this.staffList = staff;
       });
-
   }
 
 }

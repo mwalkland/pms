@@ -1,4 +1,6 @@
+import { Subject } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
+import { StudentProjectsService } from 'app/student/student-projects/student-projects.service';
 
 @Component({
   selector: 'app-student-projects',
@@ -7,18 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentProjectsComponent implements OnInit {
   values = [
-    { value: 'Staff', viewValue: 'Staff' },
-    { value: 'Area', viewValue: 'Area'}
+    { value: 'Staff'},
+    { value: 'Area'}
   ];
-  browseBy: String = null;
+  browseBy: String = 'Staff';
 
-  constructor() { }
+  constructor(private projectService: StudentProjectsService) { }
 
   ngOnInit() {
+    this.browseBy = this.projectService.getBrowseBy();
+    console.log(this.browseBy)
+    this.projectService.browseByChanged.subscribe(browseBy => {
+      this.browseBy = browseBy;
+    })
   }
 
   onChange() {
-
+    this.projectService.changeBrowseBy(this.browseBy);
   }
 
 }

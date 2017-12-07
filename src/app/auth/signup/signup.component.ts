@@ -13,6 +13,7 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   type: String;
   signedUp: Boolean = false;
+  error: Boolean = false;
 
   constructor(private builder: FormBuilder, private authService: AuthService) { }
 
@@ -41,7 +42,10 @@ export class SignupComponent implements OnInit {
         console.log(data)
         this.signedUp = true;
       },
-      error => console.log(error)
+      error => {
+        console.log(error)
+        this.error = true;
+      }
       );
     this.signupForm.reset();
   }

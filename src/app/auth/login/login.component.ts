@@ -32,8 +32,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('userId', data['userId']);
         localStorage.setItem('type', data['type']);
         localStorage.setItem('name', data['name']);
+        user.type = data['type'];
         this.authService.setCurrentUser(user);
-        this.router.navigate(['/']);
+        this.router.navigate(['/' + data['type']]);
       },
       error => {
         console.log(error)

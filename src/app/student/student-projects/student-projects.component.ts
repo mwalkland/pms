@@ -1,6 +1,7 @@
 import { Subject } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
 import { StudentProjectsService } from 'app/student/student-projects/student-projects.service';
+import { AuthService } from 'app/auth/auth.service';
 
 @Component({
   selector: 'app-student-projects',
@@ -14,7 +15,7 @@ export class StudentProjectsComponent implements OnInit {
   ];
   browseBy: String = 'Staff';
 
-  constructor(private projectService: StudentProjectsService) { }
+  constructor(private projectService: StudentProjectsService, private authService: AuthService) { }
 
   ngOnInit() {
     this.browseBy = this.projectService.getBrowseBy();
@@ -26,6 +27,7 @@ export class StudentProjectsComponent implements OnInit {
 
   onChange() {
     this.projectService.changeBrowseBy(this.browseBy);
+    console.log(this.authService.getCurrentUser())
   }
 
 }

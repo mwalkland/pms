@@ -1,5 +1,5 @@
 import { LogoutDialogComponent } from './logout/logout-dialog/logout-dialog.component';
-import { AuthGuard } from './auth-guard.service';
+import { AuthGuard } from './guards/auth-guard.service';
 import { AuthRoutingModule } from './auth.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './../core/core.module';

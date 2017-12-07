@@ -14,6 +14,7 @@ import { MatListModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material';
+import { StudentHomeComponent } from './student-home/student-home.component';
 
 
 
@@ -37,8 +38,9 @@ import { MatFormFieldModule } from '@angular/material';
     StudentProjectsComponent,
     StudentStaffComponent,
     StudentProjectsListComponent,
-    StudentProjectsTableComponent
-  ],
+    StudentProjectsTableComponent,
+    StudentHomeComponent
+],
   providers: [
     StudentProjectsService
   ]

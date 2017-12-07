@@ -1,0 +1,32 @@
+<div class="logo">
+    <img src="images/exeter-logo.jpg" alt="">
+</div>
+
+<div class="title">
+    <h1>Project Management System</h1>
+    <h3>Welcome back, {{name}}</h3>
+</div>
+
+<div class="contents">
+    <p>This tool has been created in order to help you choose your dissertation project</p>
+    <div class="inner-contents">
+        <div class="in left">
+            <div class="button-div" (click)="goToProjects('Area')">
+                <p>Browse by Area</p>
+                <p class='detail'>Filter the projects you see based on the area of research, for example 'Computer Vision' or 'Networking'.</p>
+            </div>
+        </div>
+        <div class="in center">
+            <div class="button-div" (click)="goToProjects('Staff')">
+                <p>Browse by Staff member</p>
+                <p class='detail'>Filter the projects you see by the staff member who suggested it.</p>
+            </div>
+        </div>
+        <div class="in right">
+            <div class="button-div" (click)="goToProjects()">
+                <p>Propose your own</p>
+                <p class='detail'>Propose your own project idea. You may propose a staff member to supervise, or have one suggested for you.</p>
+            </div>
+        </div>
+    </div>
+</div>

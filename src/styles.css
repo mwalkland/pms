@@ -37,4 +37,8 @@ h3 {
   img {
     width: 175px !important;
   }
+
+  h3 {
+    font-size: 18px;
+  }
 }

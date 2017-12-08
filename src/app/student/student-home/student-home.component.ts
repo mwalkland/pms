@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentProjectsService } from '../student-projects/student-projects.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class StudentHomeComponent implements OnInit {
   name: string;
 
-  constructor(private projectService: StudentProjectsService, private router: Router) { }
+  constructor(
+    private projectService: StudentProjectsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.name = localStorage.getItem('name');
@@ -18,7 +22,7 @@ export class StudentHomeComponent implements OnInit {
 
   goToProjects(browseBy: String) {
     this.projectService.changeBrowseBy(browseBy);
-    this.router.navigate(['/projects']);
+    this.router.navigate(['projects'], { relativeTo: this.route });
   }
 
 }

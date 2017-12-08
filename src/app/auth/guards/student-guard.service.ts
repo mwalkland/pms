@@ -4,21 +4,18 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 @Injectable()
-/**
- * This is a guard for not being able to access a page unless the user is logged in
- */
-export class TypeGuard implements CanActivate {
+
+export class StudentGuard implements CanActivate {
 
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     console.log(route)
     if (localStorage.getItem('type') === 'student') {
-        this.router.navigate(['/student']);
+        return true;
+    } else {
+        this.router.navigate(['/']);
+        return false;
     }
-    if (localStorage.getItem('type') === 'staff') {
-        this.router.navigate(['/staff']);
-    }
-    return true;
   }
 }

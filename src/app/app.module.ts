@@ -20,9 +20,7 @@ import { StaffModule } from 'app/staff/staff.module';
     CoreModule,
     AuthModule,
     FormsModule,
-    AppRoutingModule,
-    StudentModule,
-    StaffModule
+    AppRoutingModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

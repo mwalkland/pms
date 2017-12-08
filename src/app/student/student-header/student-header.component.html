@@ -4,9 +4,9 @@
   </div>
   <div class="nav-list" style="display:none" #navlist>
     <mat-nav-list class="nav nav-left">
-      <a mat-list-item (click)="show()" [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a mat-list-item (click)="show()" routerLink="projects" routerLinkActive="active">Projects</a>
-      <a mat-list-item (click)="show()" routerLink="stafflist" routerLinkActive="active">Staff</a>
+      <a mat-list-item (click)="show()" [routerLink]="['/student']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a mat-list-item (click)="show()" routerLink="/student/projects" routerLinkActive="active">Projects</a>
+      <a mat-list-item (click)="show()" routerLink="/student/stafflist" routerLinkActive="active">Staff</a>
     </mat-nav-list>
     <mat-nav-list class="nav nav-right">
       <a mat-list-item routerLink="/profile" routerLinkActive="active">Profile</a>

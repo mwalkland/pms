@@ -8,7 +8,7 @@ import { StudentStaffComponent } from 'app/student/student-staff/student-staff.c
 
 const studentRoutes: Routes = [
   {
-    path: 'student',
+    path: '',
     component: StudentComponent,
     children: [
       {

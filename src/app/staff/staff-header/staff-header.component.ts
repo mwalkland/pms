@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-staff-header',
   templateUrl: './staff-header.component.html',
-  styleUrls: ['./staff-header.component.css']
+  styleUrls: ['./staff-header.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class StaffHeaderComponent implements OnInit {
 

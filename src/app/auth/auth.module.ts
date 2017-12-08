@@ -17,7 +17,6 @@ import {
   MatDialogModule,
   MatListModule
 } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LogoutComponent } from './logout/logout.component';
 
 
@@ -28,7 +27,6 @@ import { LogoutComponent } from './logout/logout.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatRadioModule,
     HttpClientModule,

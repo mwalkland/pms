@@ -1,3 +1,4 @@
+import { CoreModule } from '../core/core.module';
 import { StudentProjectsService } from './student-projects/student-projects.service';
 import { StudentProjectsTableComponent } from './student-projects/student-projects-table/student-projects-table.component';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +28,8 @@ import { StudentHomeComponent } from './student-home/student-home.component';
     MatIconModule,
     MatSelectModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    CoreModule
   ],
   exports: [
     StudentHeaderComponent

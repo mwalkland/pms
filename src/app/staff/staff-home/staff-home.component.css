@@ -1,0 +1,28 @@
+:host {
+  width: 100%;
+}
+
+img {
+  width: 300px;
+}
+
+.logo {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+h3 {
+  margin-top: 0px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+@media(max-width: 568px) {
+
+}

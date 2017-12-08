@@ -34,7 +34,7 @@ i:hover {
     margin-right: auto;
     display: flex;
   }
-  a {
+  .nav-list a {
     width: 100px !important;
   }
 
@@ -56,16 +56,16 @@ i:hover {
   flex: 1;
 }
 
-a {
+.nav-list a {
   color: white !important;
   font-size: 14px !important;
 }
 
-a:focus {
+.nav-list a:focus {
   background-color: #0355A6 !important;
 }
 
-a > div {
+.nav-list a > div {
   height: 60px !important;
   justify-content: center;
 }

@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(user)
       .subscribe(data => {
         localStorage.setItem('token', data['token']);
-        localStorage.setItem('userId', data['userId']);
         localStorage.setItem('type', data['type']);
         localStorage.setItem('name', data['name']);
         user.type = data['type'];

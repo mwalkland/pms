@@ -1,4 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operator/map';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
+import { Component, OnInit, state, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { MatAutocomplete, MatAutocompleteTrigger, MatDialog } from '@angular/material';
+import { startWith } from 'rxjs/operator/startWith';
+import { Project } from 'app/staff/project.model';
+import { StaffService } from 'app/staff/staff.service';
+import {
+  StaffConfirmProjectDialogComponent
+} from 'app/staff/staff-new-project/staff-confirm-project-dialog/staff-confirm-project-dialog.component';
 
 @Component({
   selector: 'app-staff-new-project',
@@ -7,9 +17,83 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StaffNewProjectComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+  filteredAreas: Observable<string[]>;
+  areaCtrl: FormControl;
+  @ViewChild(MatAutocompleteTrigger) autoComplete: MatAutocompleteTrigger;
+  @ViewChild(FormGroupDirective) myForm;
+  areaList = [
+    'Artificial Intelligence',
+    'Networking',
+    'Web Development',
+    'Neural Networks'
+  ];
+  duplicate = false;
+  authError = false;
+  submitted = false;
+
+  constructor(private builder: FormBuilder, public dialog: MatDialog, private staffService: StaffService) {
+    this.form = this.builder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      maxStudents: [''],
+      areas: this.builder.array([])
+    });
+    this.areaCtrl = new FormControl();
+    this.filteredAreas = this.areaCtrl.valueChanges.startWith('').map(area => area ? this.filterAreas(area) : this.areaList.slice());
+  }
 
   ngOnInit() {
+    this.staffService.resetForm.subscribe(() => {
+      if (this.myForm) {
+        this.myForm.resetForm();
+        const areaArray = (<FormArray>this.form.get('areas'));
+        length = areaArray.length;
+        for (const area in areaArray) {
+          if (areaArray.hasOwnProperty(area)) {
+            areaArray.removeAt(0);
+          }
+        }
+      }
+    })
   }
+
+  get areas(): FormArray {
+    return this.form.get('areas') as FormArray;
+  }
+
+  filterAreas(name: string) {
+    return this.areaList.filter(
+      area => area.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+
+  addArea(name: string) {
+    if (!(<string[]>this.areas.value).includes(name) && name !== '') {
+      this.areas.push(new FormControl(name));
+      this.areaCtrl.reset();
+    }
+  }
+
+  onSubmit() {
+    const values = this.form.value;
+    console.log(values);
+    const project = new Project(
+      values.name,
+      values.description,
+      values.maxStudents,
+      values.areas
+    );
+    this.dialog.open(StaffConfirmProjectDialogComponent, {
+      data: { project: project }
+    });
+
+  }
+
+  removeArea(index: number) {
+    (<FormArray>this.form.get('areas')).removeAt(index);
+  }
+
+
 
 }

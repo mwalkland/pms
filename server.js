@@ -8,7 +8,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // Get our API routes
+const authRoutes = require('./server/routes/auth');
 const userRoutes = require('./server/routes/user');
+const projectRoutes = require('./server/routes/project');
 
 const app = express();
 
@@ -23,7 +25,9 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set our api routes
+app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
+app.use('/project', projectRoutes);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

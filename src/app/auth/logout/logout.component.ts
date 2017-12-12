@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private authService: AuthService, public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }

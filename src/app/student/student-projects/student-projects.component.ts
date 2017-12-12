@@ -19,7 +19,6 @@ export class StudentProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.browseBy = this.projectService.getBrowseBy();
-    console.log(this.browseBy)
     this.projectService.browseByChanged.subscribe(browseBy => {
       this.browseBy = browseBy;
     })
@@ -27,7 +26,6 @@ export class StudentProjectsComponent implements OnInit {
 
   onChange() {
     this.projectService.changeBrowseBy(this.browseBy);
-    console.log(this.authService.getCurrentUser())
   }
 
 }

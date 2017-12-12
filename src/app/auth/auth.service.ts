@@ -27,20 +27,20 @@ export class AuthService {
   signup(user: User) {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/user/signup', body, { headers: headers });
+    return this.http.post('http://localhost:3000/auth/signup', body, { headers: headers });
   }
 
   login(user: User) {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/user/login', body, { headers: headers });
+    return this.http.post('http://localhost:3000/auth/login', body, { headers: headers });
   }
 
   isLoggedIn() {
     const token = localStorage.getItem('token');
     const body = { token: token };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/user/verify', body, { headers: headers });
+    return this.http.post('http://localhost:3000/auth/verify', body, { headers: headers });
   }
 
   notifyLogoutEvent() {

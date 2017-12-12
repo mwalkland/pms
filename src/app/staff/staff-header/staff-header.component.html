@@ -1,15 +1,15 @@
 <div class="nav-wrap">
-    <div class="nav-button">
-        <i class="material-icons" style="color:white;font-size:30px;" (click)="show()">menu</i>
-    </div>
-    <div class="nav-list" style="display:none" #navlist>
-      <mat-nav-list class="nav nav-left">
-        <a mat-list-item (click)="show()" routerLink="/staff" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-        <a mat-list-item (click)="show()" routerLink="/staff/new" routerLinkActive="active">New</a>
-      </mat-nav-list>
-      <mat-nav-list class="nav nav-right">
-        <a mat-list-item routerLink="/profile" routerLinkActive="active">Profile</a>
-        <app-logout></app-logout>
-      </mat-nav-list>
-    </div>
+  <div class="nav-button">
+    <i class="material-icons" style="color:white;font-size:30px;" (click)="show()">menu</i>
   </div>
+  <div class="nav-list" style="display:none" #navlist>
+    <mat-nav-list class="nav nav-left">
+      <a mat-list-item (click)="show()" routerLink="/staff" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a mat-list-item (click)="show()" routerLink="/staff/new" routerLinkActive="active">New</a>
+    </mat-nav-list>
+    <mat-nav-list class="nav nav-right">
+      <a mat-list-item routerLink="/profile" routerLinkActive="active">Profile</a>
+      <app-logout></app-logout>
+    </mat-nav-list>
+  </div>
+</div>

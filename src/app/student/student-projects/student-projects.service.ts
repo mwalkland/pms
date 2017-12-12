@@ -22,7 +22,8 @@ export class StudentProjectsService {
   }
 
   getStaff() {
-    return this.http.get('http://localhost:3000/user/getStaff')
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/user/getStaff' + token)
       .map((response: Response) => {
         const staffList = response['staff'];
         const sList: User[] = [];

@@ -1,5 +1,5 @@
+import { StudentService } from '../../student.service';
 import { User } from './../../../auth/user.model';
-import { StudentProjectsService } from './../student-projects.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -13,7 +13,7 @@ export class StudentProjectsListComponent implements OnInit {
   staffList: User[];
   browseBy: String;
 
-  constructor(private studentService: StudentProjectsService, private projectService: StudentProjectsService) { }
+  constructor(private studentService: StudentService) { }
 
   ngOnInit() {
     this.studentService.getStaff()
@@ -21,8 +21,8 @@ export class StudentProjectsListComponent implements OnInit {
         this.staffList = staff;
         console.log(this.staffList);
       });
-    this.browseBy = this.projectService.getBrowseBy();
-    this.projectService.browseByChanged.subscribe(browse => {
+    this.browseBy = this.studentService.getBrowseBy();
+    this.studentService.browseByChanged.subscribe(browse => {
       this.browseBy = browse;
     });
   }

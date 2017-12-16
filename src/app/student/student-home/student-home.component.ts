@@ -1,5 +1,5 @@
+import { StudentService } from '../student.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudentProjectsService } from '../student-projects/student-projects.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,7 +11,7 @@ export class StudentHomeComponent implements OnInit {
   name: string;
 
   constructor(
-    private projectService: StudentProjectsService,
+    private projectService: StudentService,
     private router: Router,
     private route: ActivatedRoute
   ) { }

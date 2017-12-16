@@ -1,11 +1,11 @@
+import { User } from '../auth/user.model';
 import { Observable, Subject } from 'rxjs/Rx';
-import { User } from './../../auth/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 
 @Injectable()
-export class StudentProjectsService {
+export class StudentService {
   private staff: User[];
   browseBy: String;
   browseByChanged = new Subject<String>();

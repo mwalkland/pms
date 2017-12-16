@@ -26,11 +26,16 @@ export class StaffNewProjectComponent implements OnInit {
     'Artificial Intelligence',
     'Networking',
     'Web Development',
-    'Neural Networks'
+    'Neural Networks',
+    'Machine Learning',
+    'Social Media',
+    'Natural Language',
+    'Data Mining',
+    'Mobile App Development',
+    'Computer Vision',
+    'Pattern Recognition'
   ];
-  duplicate = false;
-  authError = false;
-  submitted = false;
+  projectCreated = false;
 
   constructor(private builder: FormBuilder, public dialog: MatDialog, private staffService: StaffService) {
     this.form = this.builder.group({
@@ -55,6 +60,7 @@ export class StaffNewProjectComponent implements OnInit {
           }
         }
       }
+      this.projectCreated = true;
     })
   }
 
@@ -70,7 +76,7 @@ export class StaffNewProjectComponent implements OnInit {
 
   addArea(name: string) {
     if (!(<string[]>this.areas.value).includes(name) && name !== '') {
-      this.areas.push(new FormControl(name));
+      this.areas.insert(0, new FormControl(name));
       this.areaCtrl.reset();
     }
   }

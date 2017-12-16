@@ -11,7 +11,7 @@ export class StudentHomeComponent implements OnInit {
   name: string;
 
   constructor(
-    private projectService: StudentService,
+    private studentService: StudentService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -21,7 +21,7 @@ export class StudentHomeComponent implements OnInit {
   }
 
   goToProjects(browseBy: String) {
-    this.projectService.changeBrowseBy(browseBy);
+    this.studentService.changeBrowseBy(browseBy);
     this.router.navigate(['projects'], { relativeTo: this.route });
   }
 

@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { LogoutComponent } from './logout.component';
+import { MatDialogModule } from '@angular/material';
 
 describe('LogoutComponent', () => {
   let component: LogoutComponent;
@@ -11,7 +12,10 @@ describe('LogoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogoutComponent ]
+      declarations: [ LogoutComponent ],
+      imports: [
+        MatDialogModule
+      ]
     })
     .compileComponents();
   }));

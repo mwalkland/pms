@@ -12,6 +12,9 @@ module.exports = function (config) {
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
     ],
+    files: [
+      {pattern: './src/angular-material-colour-scheme.css', included: true, watched: true},
+    ],
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },

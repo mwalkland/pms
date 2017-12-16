@@ -21,7 +21,7 @@ img {
 
 .content {
   display: flex;
-  margin-top: 60px;
+  margin-top: 50px;
   flex-direction: column;
   align-items: center;
 }
@@ -55,6 +55,24 @@ img {
 
 .submit-messages p {
   text-align: center;
+}
+
+.area-wrap {
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.area-list-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.success-div p {
+  text-align: center;
+}
+
+.delete-button {
+  margin-left: 20px;
 }
 
 @media(max-width: 868px) {

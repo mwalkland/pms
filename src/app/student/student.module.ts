@@ -1,5 +1,5 @@
+import { StudentService } from './student.service';
 import { CoreModule } from '../core/core.module';
-import { StudentProjectsService } from './student-projects/student-projects.service';
 import { StudentProjectsTableComponent } from './student-projects/student-projects-table/student-projects-table.component';
 import { FormsModule } from '@angular/forms';
 import { AuthModule } from './../auth/auth.module';
@@ -44,7 +44,7 @@ import { StudentHomeComponent } from './student-home/student-home.component';
     StudentHomeComponent
 ],
   providers: [
-    StudentProjectsService
+    StudentService
   ]
 })
 export class StudentModule { }

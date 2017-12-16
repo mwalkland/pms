@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { StudentHomeComponent } from './student-home.component';
+import { StudentService } from 'app/student/student.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('StudentHomeComponent', () => {
   let component: StudentHomeComponent;
@@ -11,7 +14,14 @@ describe('StudentHomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentHomeComponent ]
+      declarations: [ StudentHomeComponent ],
+      imports: [
+        HttpClientModule,
+        RouterTestingModule
+      ],
+      providers: [
+        StudentService
+      ]
     })
     .compileComponents();
   }));

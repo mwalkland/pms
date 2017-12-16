@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class StudentService {
-  private staff: User[];
+  private _staff: User[];
   browseBy: String;
   browseByChanged = new Subject<String>();
 
@@ -19,6 +19,16 @@ export class StudentService {
 
   getBrowseBy(): String {
     return this.browseBy;
+  }
+
+
+  public get staff(): User[] {
+    return this._staff;
+  }
+
+
+  public set staff(staff: User[]) {
+    this._staff = staff;
   }
 
   getStaff() {

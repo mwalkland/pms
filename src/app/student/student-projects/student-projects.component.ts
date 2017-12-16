@@ -15,17 +15,17 @@ export class StudentProjectsComponent implements OnInit {
   ];
   browseBy: String = 'Staff';
 
-  constructor(private projectService: StudentService, private authService: AuthService) { }
+  constructor(private studentService: StudentService) { }
 
   ngOnInit() {
-    this.browseBy = this.projectService.getBrowseBy();
-    this.projectService.browseByChanged.subscribe(browseBy => {
+    this.browseBy = this.studentService.getBrowseBy();
+    this.studentService.browseByChanged.subscribe(browseBy => {
       this.browseBy = browseBy;
     })
   }
 
   onChange() {
-    this.projectService.changeBrowseBy(this.browseBy);
+    this.studentService.changeBrowseBy(this.browseBy);
   }
 
 }

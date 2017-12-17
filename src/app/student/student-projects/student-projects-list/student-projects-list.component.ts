@@ -47,4 +47,15 @@ export class StudentProjectsListComponent implements OnInit {
     });
   }
 
+  selectArea(area: string) {
+    this.studentService.changeFilter({
+      type: 'Area',
+      filter: area
+    });
+  }
+
+  selectStaff(staff: User) {
+    this.studentService.getStaffProjects(staff).subscribe();
+  }
+
 }

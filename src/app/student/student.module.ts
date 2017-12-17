@@ -11,13 +11,11 @@ import { StudentProjectsComponent } from './student-projects/student-projects.co
 import { StudentStaffComponent } from './student-staff/student-staff.component';
 import { StudentRoutingModule } from 'app/student/student.routing';
 import { StudentProjectsListComponent } from './student-projects/student-projects-list/student-projects-list.component';
-import { MatListModule } from '@angular/material';
+import { MatListModule, MatTableModule, MatExpansionModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material';
 import { StudentHomeComponent } from './student-home/student-home.component';
-
-
 
 @NgModule({
   imports: [
@@ -29,7 +27,9 @@ import { StudentHomeComponent } from './student-home/student-home.component';
     MatSelectModule,
     MatFormFieldModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    MatTableModule,
+    MatExpansionModule
   ],
   exports: [
     StudentHeaderComponent

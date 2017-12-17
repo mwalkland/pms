@@ -1,3 +1,23 @@
-<p>
-  student-projects-table works!
-</p>
+<div class="table-wrap">
+  <mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="staff">
+      <mat-header-cell *matHeaderCellDef> Staff </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.staff.firstname}} {{row.staff.surname}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="areas">
+      <mat-header-cell *matHeaderCellDef> Areas </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.areaString}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+</div>

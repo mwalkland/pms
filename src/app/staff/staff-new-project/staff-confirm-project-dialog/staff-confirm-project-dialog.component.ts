@@ -1,8 +1,8 @@
+import { Project } from '../../../core/project.model';
 import { StaffService } from '../../staff.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StaffNewProjectComponent } from 'app/staff/staff-new-project/staff-new-project.component';
-import { Project } from 'app/staff/project.model';
 
 @Component({
   selector: 'app-staff-confirm-project-dialog',

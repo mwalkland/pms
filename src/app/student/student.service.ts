@@ -7,31 +7,31 @@ import 'rxjs/Rx';
 @Injectable()
 export class StudentService {
   private _staff: User[];
-  browseBy: String;
-  browseByChanged = new Subject<String>();
+  private _areas: string[];
+  browseBy = 'Staff';
+  browseByChanged = new Subject<string>();
 
   constructor(private http: HttpClient) { }
 
-  changeBrowseBy(browse: String) {
+  changeBrowseBy(browse: string) {
     this.browseBy = browse;
     this.browseByChanged.next(browse);
   }
 
-  getBrowseBy(): String {
+  getBrowseBy(): string {
     return this.browseBy;
   }
 
-
-  public get staff(): User[] {
+  get staff() {
     return this._staff;
   }
 
-
-  public set staff(staff: User[]) {
+  set staff(staff: User[]) {
     this._staff = staff;
   }
 
-  getStaff() {
+
+  getStaff(): Observable<User[]> {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     return this.http.get('http://localhost:3000/user/getStaff' + token)
       .map((response: Response) => {
@@ -46,8 +46,13 @@ export class StudentService {
       })
   }
 
-  getAreas() {
-
+  getAreas(): Observable<string[]> {
+    console.log('gdfggdf');
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/project/getAreas' + token)
+      .map((response: Response) => {
+        return response['obj'];
+      });
   }
 
 }

@@ -1,5 +1,10 @@
 <div class="container">
   <ul class="browse-list">
-    <li *ngFor="let item of staffList">{{ item.firstname }} {{ item.surname }}</li>
+    <ng-container *ngIf="browseBy === 'Area'; else Staff">
+      <li *ngFor="let item of areaList">{{ item }}</li>
+    </ng-container>
+    <ng-template #Staff>
+      <li *ngFor="let item of staffList">{{ item.firstname }} {{ item.surname }}</li>
+    </ng-template>
   </ul>
 </div>

@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 
 router.use('/', (req, res, next) => {
-  console.log(req.query.token);
   jwt.verify(req.query.token, 'WO3V%oIBK5c2', (err) => {
     if (err) {
       return res.status(401).json({

@@ -9,22 +9,29 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StudentProjectsListComponent implements OnInit {
 
-  @Input() browse: String;
+  @Input() browse: string;
   staffList: User[];
-  browseBy: String;
+  areaList: string[];
+  browseBy: string;
 
   constructor(private studentService: StudentService) { }
 
   ngOnInit() {
-    this.studentService.getStaff()
-      .subscribe((staff: User[]) => {
-        this.staffList = staff;
-        console.log(this.staffList);
-      });
     this.browseBy = this.studentService.getBrowseBy();
+    this.getItems();
     this.studentService.browseByChanged.subscribe(browse => {
       this.browseBy = browse;
+      this.getItems();
     });
+  }
+
+  getItems() {
+    if (this.browseBy === 'Staff' && this.staffList == null) {
+      this.getStaff();
+    }
+    if (this.browseBy === 'Area' && this.areaList == null) {
+      this.getAreas();
+    }
   }
 
   getStaff() {
@@ -32,6 +39,12 @@ export class StudentProjectsListComponent implements OnInit {
       .subscribe((staff: User[]) => {
         this.staffList = staff;
       });
+  }
+
+  getAreas() {
+    this.studentService.getAreas().subscribe((areas) => {
+      this.areaList = areas
+    });
   }
 
 }

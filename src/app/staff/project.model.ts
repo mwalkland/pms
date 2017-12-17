@@ -1,8 +1,8 @@
 export class Project {
   constructor(
-    public name: String,
-    public description: String,
+    public name: string,
+    public description: string,
     public maxStudents?: Number,
-    public areas?: [String],
+    public areas?: [string],
   ) { }
 }

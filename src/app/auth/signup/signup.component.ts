@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
-  type: String;
+  type: string;
   signedUp: Boolean = false;
   error: Boolean = false;
 

@@ -4,11 +4,11 @@ import { Component, OnInit, state, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MatAutocomplete, MatAutocompleteTrigger, MatDialog } from '@angular/material';
 import { startWith } from 'rxjs/operator/startWith';
-import { Project } from 'app/staff/project.model';
 import { StaffService } from 'app/staff/staff.service';
 import {
   StaffConfirmProjectDialogComponent
 } from 'app/staff/staff-new-project/staff-confirm-project-dialog/staff-confirm-project-dialog.component';
+import { Project } from 'app/core/project.model';
 
 @Component({
   selector: 'app-staff-new-project',

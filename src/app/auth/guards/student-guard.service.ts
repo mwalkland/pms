@@ -10,7 +10,6 @@ export class StudentGuard implements CanActivate {
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log(route)
     if (localStorage.getItem('type') === 'student') {
         return true;
     } else {

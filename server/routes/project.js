@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
-
 const Project = require('../../models/project');
 const User = require('../../models/user');
 
@@ -62,6 +61,21 @@ router.post('/new', (req, res) => {
           obj: result
         });
       });
+    });
+  });
+});
+
+router.get('/getAreas', (req, res) => {
+  Project.find().distinct('areas', (err, areas) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured retrieving staff members',
+        error: err
+      });
+    }
+    res.status(200).json({
+      message: 'Success',
+      obj: areas
     });
   });
 });

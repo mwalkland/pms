@@ -20,7 +20,7 @@ export class StudentHomeComponent implements OnInit {
     this.name = localStorage.getItem('name');
   }
 
-  goToProjects(browseBy: String) {
+  goToProjects(browseBy: string) {
     this.studentService.changeBrowseBy(browseBy);
     this.router.navigate(['projects'], { relativeTo: this.route });
   }

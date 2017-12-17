@@ -13,7 +13,7 @@ export class StudentProjectsComponent implements OnInit {
     { value: 'Staff'},
     { value: 'Area'}
   ];
-  browseBy: String = 'Staff';
+  browseBy = 'Staff';
 
   constructor(private studentService: StudentService) { }
 

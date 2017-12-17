@@ -53,6 +53,9 @@ h3 {
   .bar {
     height: 60px;
   }
+  .app-container {
+    height: 100%;
+  }
 }
 
 .footer {

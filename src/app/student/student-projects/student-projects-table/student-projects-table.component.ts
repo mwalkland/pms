@@ -1,18 +1,20 @@
 import { Project } from '../../../core/project.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { StudentService } from 'app/student/student.service';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-student-projects-table',
   templateUrl: './student-projects-table.component.html',
   styleUrls: ['./student-projects-table.component.css']
 })
-export class StudentProjectsTableComponent implements OnInit {
+export class StudentProjectsTableComponent implements OnInit, AfterViewInit {
 
   projects: Project[];
-  dataSource: MatTableDataSource<Project>;
-  displayedColumns = ['name', 'staff', 'areas'];
+  dataSource = new MatTableDataSource<Project>();
+  displayedColumns = ['name', 'type', 'staff', 'areas'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private studentService: StudentService) { }
 
@@ -27,10 +29,17 @@ export class StudentProjectsTableComponent implements OnInit {
         }
         stringBuilder = stringBuilder.replace(/,\s*$/, '');
         project.areaString = stringBuilder;
+        project.staffName = project.staff.firstname + ' ' + project.staff.surname;
       }
       this.projects = projects;
-      this.dataSource = new MatTableDataSource(this.projects);
-    });
+      this.dataSource.data = projects;
+    })
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.filter = '';
+    this.dataSource.sort = this.sort;
+    this.studentService.filterSelected.subscribe(filter => this.dataSource.filter = filter);
   }
 
 }

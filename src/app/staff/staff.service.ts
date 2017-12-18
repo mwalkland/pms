@@ -10,6 +10,7 @@ export class StaffService {
   constructor(private http: HttpClient) { }
 
   newProject(project) {
+    console.log(project);
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

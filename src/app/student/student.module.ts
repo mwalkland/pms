@@ -11,7 +11,7 @@ import { StudentProjectsComponent } from './student-projects/student-projects.co
 import { StudentStaffComponent } from './student-staff/student-staff.component';
 import { StudentRoutingModule } from 'app/student/student.routing';
 import { StudentProjectsListComponent } from './student-projects/student-projects-list/student-projects-list.component';
-import { MatListModule, MatTableModule, MatExpansionModule } from '@angular/material';
+import { MatListModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material';
@@ -29,7 +29,8 @@ import { StudentHomeComponent } from './student-home/student-home.component';
     FormsModule,
     CoreModule,
     MatTableModule,
-    MatExpansionModule
+    MatPaginatorModule,
+    MatSortModule
   ],
   exports: [
     StudentHeaderComponent

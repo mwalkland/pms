@@ -38,6 +38,7 @@ router.post('/new', (req, res) => {
       const project = new Project({
         name: body.name,
         description: body.description,
+        type: body.type,
         maxStudents: body.maxStudents,
         areas: body.areas,
         staff: user

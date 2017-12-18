@@ -11,3 +11,20 @@ li:hover {
   cursor: pointer;
   color: #0355A6;
 }
+
+li:active {
+  color: #0355A6;
+}
+
+.list-dropdown-wrap {
+  display: none;
+}
+
+@media(max-width: 868px) {
+  .browse-list {
+    display: none;
+  }
+  .list-dropdown-wrap {
+    display: block;
+  }
+}

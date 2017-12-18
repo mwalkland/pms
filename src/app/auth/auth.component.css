@@ -55,13 +55,7 @@ h1 {
   }
 }
 
-.main {
-  display: flex;
-  max-width: 1260px;
-  margin-left: auto;
-  margin-right: auto;
-  height: calc(100% - 120px);
-  padding-bottom: 70px;
+.app-main {
   flex-direction: column;
+  justify-content: initial;
 }
-

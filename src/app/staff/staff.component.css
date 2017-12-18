@@ -1,9 +1,6 @@
-.main {
-  display: flex;
-  justify-content: center;
-  max-width: 1260px;
-  margin-left: auto;
-  margin-right: auto;
-  height: calc(100% - 120px);
-  padding-bottom: 70px;
+@media(max-width: 568px) {
+  .app-main {
+    flex: 1;
+    margin-bottom: 20px;
+  }
 }

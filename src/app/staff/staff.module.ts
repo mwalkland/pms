@@ -6,7 +6,7 @@ import { StaffComponent } from './staff.component';
 import { StaffHeaderComponent } from './staff-header/staff-header.component';
 import {
   MatListModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule,
-  MatButtonModule, MatIconModule, MatDialogModule
+  MatButtonModule, MatIconModule, MatDialogModule, MatCheckboxModule
 } from '@angular/material';
 import { StaffRoutingModule } from 'app/staff/staff.routing';
 import { CoreModule } from 'app/core/core.module';
@@ -31,7 +31,8 @@ import {
     MatAutocompleteModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   declarations: [StaffComponent,
     StaffHeaderComponent,

@@ -10,6 +10,14 @@
 
   <div class="content">
     <form [formGroup]="form" class="form">
+
+      <div class="control type" formArrayName="type">
+        <mat-checkbox #software (change)="onChangeCheckbox('Software Engineering', $event.checked)">Software Engineering</mat-checkbox>
+        <mat-checkbox #research (change)="onChangeCheckbox('Research-based', $event.checked)">Research-based</mat-checkbox>
+      </div>
+
+      <br>
+
       <mat-form-field class="control name">
         <input matInput placeholder="Project Name" formControlName="name" (keydown.enter)="$event.preventDefault()">
         <mat-error *ngIf="form.controls['name'].hasError('required')">The project name is required.</mat-error>
@@ -35,7 +43,7 @@
         <mat-form-field class="control area">
           <input matInput placeholder="Areas of Research" id="autocomplete" [matAutocomplete]="auto" #areaName id="areaInput" (keydown.enter)="$event.preventDefault()"
             (keyup.enter)="addArea(areaName.value)" [formControl]="areaCtrl">
-          <mat-error *ngIf="1===1">This area has already been added.</mat-error>
+          <mat-hint>At least one area is required.</mat-hint>
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let a of filteredAreas | async" [value]="a">
               <span>{{ a }}</span>

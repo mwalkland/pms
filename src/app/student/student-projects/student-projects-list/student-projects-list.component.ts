@@ -26,10 +26,10 @@ export class StudentProjectsListComponent implements OnInit {
   }
 
   getItems() {
-    if (this.browseBy === 'Staff' && this.staffList == null) {
+    if (this.browseBy === 'Staff') {
       this.getStaff();
     }
-    if (this.browseBy === 'Area' && this.areaList == null) {
+    if (this.browseBy === 'Area') {
       this.getAreas();
     }
   }
@@ -48,14 +48,17 @@ export class StudentProjectsListComponent implements OnInit {
   }
 
   selectArea(area: string) {
-    this.studentService.changeFilter({
-      type: 'Area',
-      filter: area
-    });
-  }
+    this.studentService.changeFilter(area);
+  };
+
 
   selectStaff(staff: User) {
-    this.studentService.getStaffProjects(staff).subscribe();
+    const filter = staff.firstname + ' ' + staff.surname;
+    this.studentService.changeFilter(filter);
+  }
+
+  clearFilter() {
+    this.studentService.changeFilter('');
   }
 
 }

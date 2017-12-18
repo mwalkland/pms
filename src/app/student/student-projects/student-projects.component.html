@@ -10,7 +10,7 @@
 
   <div class="content">
 
-    <div class="dropdown">
+    <div class="left">
       <mat-form-field>
         <mat-select placeholder="Browse by..." [(value)]="browseBy">
           <mat-option *ngFor="let item of values" [value]="item.value" (click)="onChange()">
@@ -18,12 +18,12 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
-
-    <div class="main">
       <div class="projects-list">
         <app-student-projects-list></app-student-projects-list>
       </div>
+    </div>
+
+    <div class="main">
       <div class="projects-table">
         <app-student-projects-table></app-student-projects-table>
       </div>

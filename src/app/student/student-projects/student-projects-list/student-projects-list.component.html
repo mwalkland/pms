@@ -1,10 +1,28 @@
 <div class="container">
   <ul class="browse-list">
-    <ng-container *ngIf="browseBy === 'Area'; else Staff">
-      <li *ngFor="let item of areaList" (click)="selectArea(item)">{{ item }}</li>
-    </ng-container>
-    <ng-template #Staff>
-      <li *ngFor="let item of staffList" (click)="selectStaff(item)">{{ item.firstname }} {{ item.surname }}</li>
-    </ng-template>
+    <div class="list-wrap">
+      <li value="showAll" (click)="clearFilter()">Show all</li>
+      <ng-container *ngIf="browseBy === 'Area'; else Staff">
+        <li *ngFor="let item of areaList" (click)="selectArea(item)">{{ item }}</li>
+      </ng-container>
+      <ng-template #Staff>
+        <li *ngFor="let item of staffList" (click)="selectStaff(item)">{{ item.firstname }} {{ item.surname }}</li>
+      </ng-template>
+    </div>
   </ul>
+  <div class="list-dropdown-wrap">
+    <mat-form-field>
+      <mat-placeholder *ngIf="browseBy === 'Staff'">Select Staff</mat-placeholder>
+      <mat-placeholder *ngIf="browseBy === 'Area'">Select Area</mat-placeholder>
+      <mat-select>
+        <mat-option value="showAll" (click)="clearFilter()">Show All</mat-option>
+        <ng-container *ngIf="browseBy === 'Area'; else StaffDrop">
+          <mat-option *ngFor="let item of areaList" [value]="item" (click)="selectArea(item)">{{ item }}</mat-option>
+        </ng-container>
+        <ng-template #StaffDrop>
+          <mat-option *ngFor="let item of staffList" [value]="item.firstname + item.surname" (click)="selectStaff(item)">{{ item.firstname }} {{ item.surname }}</mat-option>
+        </ng-template>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>

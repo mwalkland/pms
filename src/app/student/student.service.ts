@@ -1,6 +1,6 @@
+import { Subject, Observable } from 'rxjs/Rx';
 import { Project } from '../core/project.model';
 import { User } from '../auth/user.model';
-import { Observable, Subject } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
@@ -12,7 +12,7 @@ export class StudentService {
   private _projects: Project[];
   browseBy = 'Staff';
   browseByChanged = new Subject<string>();
-  filterSelected = new Subject<Object>();
+  filterSelected = new Subject<string>();
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +25,7 @@ export class StudentService {
     return this.browseBy;
   }
 
-  get staff() {
+  get staff(): User[] {
     return this._staff;
   }
 
@@ -33,7 +33,7 @@ export class StudentService {
     this._staff = staff;
   }
 
-  get projects() {
+  get projects(): Project[] {
     return this._projects;
   }
 
@@ -41,51 +41,69 @@ export class StudentService {
     this._projects = projects;
   }
 
-  changeFilter(filterObj: { type: string, filter: any }) {
-    if (filterObj.type === 'Area') {
-      this.getAreaProjects(filterObj.filter);
-    } else {
-      this.getStaffProjects(filterObj.filter);
-    }
+  get areas(): string[] {
+    return this._areas
+  }
+
+  set areas(areas: string[]) {
+    this._areas = areas;
+  }
+
+  changeFilter(filter: string) {
+    this.filterSelected.next(filter);
   }
 
   getStaff(): Observable<User[]> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/user/getStaff' + token)
-      .map((response: Response) => {
-        const staffList = response['staff'];
-        const sList: User[] = [];
-        for (const staff of staffList) {
-          const newStaff = new User(staff.email, staff.password, staff.firstname, staff.surname, staff.type);
-          sList.push(newStaff);
-        }
-        this.staff = sList;
-        return sList;
-      })
+    if (this.staff == null) {
+      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+      return this.http.get('http://localhost:3000/user/getStaff' + token)
+        .map((response: Response) => {
+          const staffList = response['staff'];
+          const sList: User[] = [];
+          for (const staff of staffList) {
+            const newStaff = new User(staff.email, staff.password, staff.firstname, staff.surname, staff.type);
+            sList.push(newStaff);
+          }
+          this.staff = sList;
+          return sList;
+        })
+    } else {
+      return Observable.of(this.staff);
+    }
   }
 
   getAreas(): Observable<string[]> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/project/getAreas' + token)
-      .map((response: Response) => {
-        return response['obj'];
-      });
+    if (this.areas == null) {
+      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+      return this.http.get('http://localhost:3000/project/getAreas' + token)
+        .map((response: Response) => {
+          this.areas = response['obj'];
+          return response['obj'];
+        });
+    } else {
+      return Observable.of(this.areas);
+    }
   }
 
   getAllProjects(): Observable<Project[]> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/project/getAllProjects' + token)
-      .map((response: Response) => {
-        const projects = response['projects'];
-        const projectList: Project[] = [];
-        for (const project of projects) {
-          const newProject = new Project(project.name, project.description, project.maxStudents, project.areas, project.staff);
-          projectList.push(newProject);
-        }
-        this.projects = projectList;
-        console.log(projectList);
-        return projectList;
-      });
+    if (this.projects == null) {
+      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+      return this.http.get('http://localhost:3000/project/getAllProjects' + token)
+        .map((response: Response) => {
+          const projects = response['projects'];
+          const projectList: Project[] = [];
+          for (const project of projects) {
+            const newProject = new Project(
+              project.name, project.description, project.type, project.maxStudents, project.areas, project.staff
+            );
+            projectList.push(newProject);
+          }
+          this.projects = projectList;
+          return projectList;
+        });
+    } else {
+      return Observable.of(this.projects);
+    }
   }
 
   getStaffProjects(user: User): Observable<Project[]> {

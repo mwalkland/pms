@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  isError = false;
 
   constructor(private builder: FormBuilder, private authService: AuthService,
     private router: Router) { }
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/' + data['type']]);
       },
       error => {
-        console.log(error)
+        this.isError = true;
       });
   }
 

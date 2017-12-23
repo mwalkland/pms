@@ -10,4 +10,6 @@
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit" (click)="onLogin()" [disabled]="!loginForm.valid">Submit</button>
   </form>
+  <br>
+  <mat-error *ngIf="isError">Login failed. Your email or password is incorrect.</mat-error>
 </div>

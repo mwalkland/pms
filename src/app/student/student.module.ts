@@ -1,3 +1,7 @@
+import { StudentRoutingModule } from './student.routing';
+import {
+  StudentProjectsDialogComponent,
+} from './student-projects/student-projects-table/student-projects-dialog/student-projects-dialog.component';
 import { StudentService } from './student.service';
 import { CoreModule } from '../core/core.module';
 import { StudentProjectsTableComponent } from './student-projects/student-projects-table/student-projects-table.component';
@@ -9,9 +13,15 @@ import { StudentComponent } from './student.component';
 import { StudentHeaderComponent } from './student-header/student-header.component';
 import { StudentProjectsComponent } from './student-projects/student-projects.component';
 import { StudentStaffComponent } from './student-staff/student-staff.component';
-import { StudentRoutingModule } from 'app/student/student.routing';
 import { StudentProjectsListComponent } from './student-projects/student-projects-list/student-projects-list.component';
-import { MatListModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {
+  MatListModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatDialogModule,
+  MatButtonModule
+} from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material';
@@ -30,7 +40,9 @@ import { StudentHomeComponent } from './student-home/student-home.component';
     CoreModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   exports: [
     StudentHeaderComponent
@@ -42,10 +54,14 @@ import { StudentHomeComponent } from './student-home/student-home.component';
     StudentStaffComponent,
     StudentProjectsListComponent,
     StudentProjectsTableComponent,
-    StudentHomeComponent
-],
+    StudentHomeComponent,
+    StudentProjectsDialogComponent
+  ],
   providers: [
     StudentService
+  ],
+  entryComponents: [
+    StudentProjectsDialogComponent
   ]
 })
 export class StudentModule { }

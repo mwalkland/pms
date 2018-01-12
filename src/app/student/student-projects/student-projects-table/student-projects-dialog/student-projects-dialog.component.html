@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1 mat-dialog-title>Review your project</h1>
+  <h1 mat-dialog-title>Choose this Project?</h1>
 
   <div class="contents" mat-dialog-content>
     <div class="wrap">
@@ -11,27 +11,26 @@
       <p class="title">Project Name</p>
       <p class="content">{{ project.name }}</p>
     </div>
+    <div class="wrap">
+      <p class="title">Staff Member</p>
+      <p class="content">{{ project.staffName }}</p>
+    </div>
     <div class="wrap desc">
       <p class="title">Description</p>
       <p class="content">{{ project.description }}</p>
     </div>
     <div class="wrap">
-      <p class="title">Max Students</p>
-      <p class="content" *ngIf="project.maxStudents">{{ project.maxStudents }}</p>
-      <p class="content" *ngIf="!project.maxStudents">Unlimited</p>
-    </div>
-    <div class="wrap">
       <p class="title">Areas of Research</p>
       <p class="content areas" *ngIf="project.areas.length === 0;else elseBlock">None Specified</p>
       <ng-template #elseBlock>
-        <p class="content areas" *ngFor="let area of project.areas">{{area}}</p>
+        <p class="content areas" *ngFor="let area of project.areas">{{ area }}</p>
       </ng-template>
     </div>
 
   </div>
 
   <div class="buttons-wrap" mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="onSubmit()">Confirm</button>
+    <button mat-button (click)="onContinue()">Continue</button>
     <button mat-button mat-dialog-close>Back</button>
   </div>
 

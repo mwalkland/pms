@@ -10,6 +10,14 @@
   display: flex;
 }
 
+.mat-row:hover {
+  cursor: pointer;
+}
+
+.mat-row:hover > .mat-cell {
+  color: #0355A6;
+}
+
 @media(max-width: 868px) {
   .mat-table {
     overflow: initial;

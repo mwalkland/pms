@@ -14,7 +14,7 @@ const projectRoutes = require('./server/routes/project');
 
 const app = express();
 
-mongoose.connect('localhost:27017/pms');
+mongoose.connect('mongodb://localhost:27017/pms', { useMongoClient: true });
 
 // Parsers for POST data
 app.use(bodyParser.json());

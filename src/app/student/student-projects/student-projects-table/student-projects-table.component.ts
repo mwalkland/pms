@@ -1,7 +1,8 @@
 import { Project } from '../../../core/project.model';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { StudentService } from 'app/student/student.service';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { StudentProjectsDialogComponent } from './student-projects-dialog/student-projects-dialog.component';
 
 @Component({
   selector: 'app-student-projects-table',
@@ -16,7 +17,7 @@ export class StudentProjectsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.studentService.getAllProjects().subscribe((projects: Project[]) => {
@@ -40,6 +41,12 @@ export class StudentProjectsTableComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = '';
     this.dataSource.sort = this.sort;
     this.studentService.filterSelected.subscribe(filter => this.dataSource.filter = filter);
+  }
+
+  openDialog(project: Project) {
+    this.dialog.open(StudentProjectsDialogComponent, {
+      data: { project: project }
+    });
   }
 
 }

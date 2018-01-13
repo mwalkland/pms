@@ -106,6 +106,7 @@ export class StaffNewProjectComponent implements OnInit {
     }
     console.log(type);
     const project = new Project(
+      null,
       values.name,
       values.description,
       type,

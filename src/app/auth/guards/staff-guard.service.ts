@@ -10,7 +10,8 @@ export class StaffGuard implements CanActivate {
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (localStorage.getItem('type') === 'staff') {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user.type === 'staff') {
         return true;
     } else {
         this.router.navigate(['/']);

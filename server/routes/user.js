@@ -42,14 +42,20 @@ router.patch('/addStudentProject', (req, res) => {
       });
     }
 
-    Project.findById(body.id, (err, project) => {
+    const updateObj = {
+      $set: { status: 'pending' },
+      $push: { pendingStudents: decoded.user._id }
+    };
+
+    Project.findByIdAndUpdate(body.id, updateObj, { new: true }, (err, project) => {
       if (err) {
         return res.status(500).json({
           title: 'An error occured finding the project',
           error: err
         });
       }
-      User.findOneAndUpdate({ _id: decoded.user._id }, { $set: { 'studentInfo.chosenProject': project } }, (err) => {
+
+      User.findByIdAndUpdate(decoded.user._id, { $set: { 'studentInfo.chosenProject': project } }, (err) => {
         if (err) {
           return res.status(500).json({
             title: 'An error occured updating the user',
@@ -58,14 +64,10 @@ router.patch('/addStudentProject', (req, res) => {
         }
       });
 
-      res.status(201).json({
+      res.status(200).json({
         message: 'Student has been updated',
       });
     });
-
-
-
-
   });
 });
 

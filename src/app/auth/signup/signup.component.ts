@@ -46,6 +46,7 @@ export class SignupComponent implements OnInit {
       }
       );
     this.signupForm.reset();
+    this.error = false;
   }
 
 }

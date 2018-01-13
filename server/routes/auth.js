@@ -64,6 +64,7 @@ router.post('/login', (req, res) => {
             userId: user._id,
             type: user.type,
             name: user.firstname,
+            email: user.email,
             projectChosen: projectChosen
           });
         } else {

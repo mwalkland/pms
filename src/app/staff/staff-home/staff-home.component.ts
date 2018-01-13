@@ -10,7 +10,7 @@ export class StaffHomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.name = localStorage.getItem('name');
+    this.name = JSON.parse(localStorage.getItem('user')).name;
   }
 
 }

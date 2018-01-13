@@ -12,11 +12,13 @@ export class TypeGuard implements CanActivate {
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (localStorage.getItem('type') === 'student') {
-        this.router.navigate(['/student']);
-    }
-    if (localStorage.getItem('type') === 'staff') {
-        this.router.navigate(['/staff']);
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      this.router.navigate(['/auth']);
+    } else if (user.type === 'student') {
+      this.router.navigate(['/student']);
+    } else if (user.type === 'staff') {
+      this.router.navigate(['/staff']);
     }
     return true;
   }

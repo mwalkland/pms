@@ -17,6 +17,7 @@ import {
 import { StaffRoutingModule } from './staff.routing';
 import { CoreModule } from '../core/core.module';
 import { StaffService } from './staff.service';
+import { StaffProfileComponent } from './staff-profile/staff-profile.component';
 
 @NgModule({
   imports: [
@@ -38,8 +39,9 @@ import { StaffService } from './staff.service';
     StaffHeaderComponent,
     StaffHomeComponent,
     StaffNewProjectComponent,
-    StaffConfirmProjectDialogComponent
-  ],
+    StaffConfirmProjectDialogComponent,
+    StaffProfileComponent
+],
   providers: [
     StaffService
   ],

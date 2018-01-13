@@ -9,21 +9,16 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class AuthService {
 
-  private user: User;
   notifyLogout = new Subject<any>();
 
   constructor(private http: HttpClient) { }
 
   getCurrentUser() {
-    return this.user;
-  }
-
-  setCurrentUser(user: User) {
-    this.user = user;
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   hasProjectChosen(): boolean {
-    return this.user.projectChosen;
+    return JSON.parse(localStorage.getItem('user')).projectChosen;
   }
 
   signup(user: User) {

@@ -29,13 +29,14 @@ export class LoginComponent implements OnInit {
     const user = new User(values.email, values.password);
     this.authService.login(user)
       .subscribe(data => {
+        const currentUser = {
+          email: data['email'],
+          name: data['name'],
+          type: data['type'],
+          projectChosen: data['projectChosen']
+        };
         localStorage.setItem('token', data['token']);
-        localStorage.setItem('type', data['type']);
-        localStorage.setItem('name', data['name']);
-        user.type = data['type'];
-        user.firstname = data['name'];
-        user.projectChosen = data['projectChosen'];
-        this.authService.setCurrentUser(user);
+        localStorage.setItem('user', JSON.stringify(currentUser));
         this.router.navigate(['/' + data['type']]);
       },
       error => {

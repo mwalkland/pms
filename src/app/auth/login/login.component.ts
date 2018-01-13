@@ -1,8 +1,8 @@
 import { AuthService } from './../auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'app/auth/user.model';
 import { Router } from '@angular/router';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('type', data['type']);
         localStorage.setItem('name', data['name']);
         user.type = data['type'];
+        user.firstname = data['name'];
+        user.projectChosen = data['projectChosen'];
         this.authService.setCurrentUser(user);
         this.router.navigate(['/' + data['type']]);
       },

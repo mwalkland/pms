@@ -41,7 +41,8 @@ router.post('/new', (req, res) => {
         type: body.type,
         maxStudents: body.maxStudents,
         areas: body.areas,
-        staff: user
+        staff: user,
+        students: []
       });
 
       project.save((err, result) => {

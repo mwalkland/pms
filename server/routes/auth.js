@@ -51,6 +51,8 @@ router.post('/login', (req, res) => {
         error: { message: 'Login failed. Invalid email or password.' }
       });
     }
+    const projectChosen = user.studentInfo.chosenProject != null ? true : false;
+
     // verify whether the entered password is correct
     bcrypt.compare(req.body.password, user.password)
       .then((response) => {
@@ -61,7 +63,8 @@ router.post('/login', (req, res) => {
             token: token,
             userId: user._id,
             type: user.type,
-            name: user.firstname
+            name: user.firstname,
+            projectChosen: projectChosen
           });
         } else {
           return res.status(401).json({

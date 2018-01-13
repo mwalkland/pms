@@ -1,0 +1,26 @@
+img {
+  width: 300px;
+  float: left;
+}
+
+.container {
+  margin: 60px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+h2, h3 {
+  text-align: center;
+}

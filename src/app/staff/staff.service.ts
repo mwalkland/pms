@@ -1,6 +1,7 @@
 import { Subject } from 'rxjs/Rx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Project } from '../core/project.model';
 
 @Injectable()
 export class StaffService {
@@ -9,7 +10,7 @@ export class StaffService {
 
   constructor(private http: HttpClient) { }
 
-  newProject(project) {
+  newProject(project: Project) {
     console.log(project);
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = JSON.stringify(project);

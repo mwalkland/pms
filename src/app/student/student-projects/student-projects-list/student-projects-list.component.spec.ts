@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { StudentProjectsListComponent } from './student-projects-list.component';
-import { StudentService } from 'app/student/student.service';
+import { StudentService } from '../../student.service';
 
 describe('StudentProjectsListComponent', () => {
   let component: StudentProjectsListComponent;

@@ -8,15 +8,15 @@ import {
   MatListModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule,
   MatButtonModule, MatIconModule, MatDialogModule, MatCheckboxModule
 } from '@angular/material';
-import { StaffRoutingModule } from 'app/staff/staff.routing';
-import { CoreModule } from 'app/core/core.module';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { StaffNewProjectComponent } from './staff-new-project/staff-new-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { StaffService } from 'app/staff/staff.service';
 import {
   StaffConfirmProjectDialogComponent,
 } from './staff-new-project/staff-confirm-project-dialog/staff-confirm-project-dialog.component';
+import { StaffRoutingModule } from './staff.routing';
+import { CoreModule } from '../core/core.module';
+import { StaffService } from './staff.service';
 
 @NgModule({
   imports: [

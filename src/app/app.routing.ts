@@ -4,9 +4,9 @@ import { StudentComponent } from './student/student.component';
 import { AuthComponent } from './auth/auth.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AuthGuard } from 'app/auth/guards/auth-guard.service';
-import { TypeGuard } from 'app/auth/guards/type-guard.service';
-import { StaffGuard } from 'app/auth/guards/staff-guard.service';
+import { AuthGuard } from './auth/guards/auth-guard.service';
+import { TypeGuard } from './auth/guards/type-guard.service';
+import { StaffGuard } from './auth/guards/staff-guard.service';
 
 const appRoutes: Routes = [
   {

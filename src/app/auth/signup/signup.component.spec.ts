@@ -8,7 +8,7 @@ import { DebugElement } from '@angular/core';
 
 import { SignupComponent } from './signup.component';
 import { MatFormFieldModule, MatRadioModule, MatButtonModule, MatInputModule } from '@angular/material';
-import { AuthService } from 'app/auth/auth.service';
+import { AuthService } from '../auth.service';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;

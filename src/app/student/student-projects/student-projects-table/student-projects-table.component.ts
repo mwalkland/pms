@@ -1,8 +1,8 @@
 import { Project } from '../../../core/project.model';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { StudentService } from 'app/student/student.service';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { StudentProjectsDialogComponent } from './student-projects-dialog/student-projects-dialog.component';
+import { StudentService } from '../../student.service';
 
 @Component({
   selector: 'app-student-projects-table',

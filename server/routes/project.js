@@ -42,7 +42,8 @@ router.post('/new', (req, res) => {
         maxStudents: body.maxStudents,
         areas: body.areas,
         staff: user,
-        students: []
+        students: [],
+        status: 'available'
       });
 
       project.save((err, result) => {
@@ -103,6 +104,33 @@ router.get('/getAllProjects', (req, res) => {
           projects: projects
         });
       });
+  });
+});
+
+router.get('/getProjectRequests', (req, res) => {
+  jwt.verify(req.query.token, 'WO3V%oIBK5c2', (err, decoded) => {
+    if (err) {
+      return res.status(401).json({
+        title: 'Not Authentication',
+        error: err
+      });
+    }
+    User.findById(decoded.user._id, (err, user) => {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured getting the user',
+          error: err
+        });
+      }
+      Project.find({ staff: user, status: 'pending' })
+        .populate({path: 'pendingStudents', select:  'firstname surname email'})
+        .exec((err, projects) => {
+          res.status(200).json({
+            message: 'Success',
+            projects: projects
+          });
+        });
+    });
   });
 });
 

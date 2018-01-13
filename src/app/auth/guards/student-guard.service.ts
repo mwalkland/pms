@@ -10,7 +10,8 @@ export class StudentGuard implements CanActivate {
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (localStorage.getItem('type') === 'student') {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user.type === 'student') {
         return true;
     } else {
         this.router.navigate(['/']);

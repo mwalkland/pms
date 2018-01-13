@@ -17,7 +17,7 @@ export class StudentHomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.name = localStorage.getItem('name');
+    this.name = JSON.parse(localStorage.getItem('user')).name;
   }
 
   goToProjects(browseBy: string) {

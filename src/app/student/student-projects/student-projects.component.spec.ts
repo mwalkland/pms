@@ -8,8 +8,8 @@ import { DebugElement } from '@angular/core';
 
 import { StudentProjectsComponent } from './student-projects.component';
 import { MatFormFieldModule, MatSelectModule } from '@angular/material';
-import { StudentService } from 'app/student/student.service';
-import { StudentProjectsTableComponent } from 'app/student/student-projects/student-projects-table/student-projects-table.component';
+import { StudentProjectsTableComponent } from './student-projects-table/student-projects-table.component';
+import { StudentService } from '../student.service';
 
 describe('StudentProjectsComponent', () => {
   let component: StudentProjectsComponent;

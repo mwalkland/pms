@@ -4,9 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { StudentHomeComponent } from './student-home.component';
-import { StudentService } from 'app/student/student.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { StudentService } from '../student.service';
 
 describe('StudentHomeComponent', () => {
   let component: StudentHomeComponent;

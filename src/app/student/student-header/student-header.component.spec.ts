@@ -6,8 +6,8 @@ import { DebugElement } from '@angular/core';
 import { StudentHeaderComponent } from './student-header.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatListModule } from '@angular/material';
-import { AuthModule } from 'app/auth/auth.module';
-import { AuthService } from 'app/auth/auth.service';
+import { AuthModule } from '../../auth/auth.module';
+import { AuthService } from '../../auth/auth.service';
 
 describe('StudentHeaderComponent', () => {
   let component: StudentHeaderComponent;

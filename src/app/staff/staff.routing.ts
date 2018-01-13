@@ -2,8 +2,8 @@ import { StaffNewProjectComponent } from './staff-new-project/staff-new-project.
 import { AuthGuard } from '../auth/guards/auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { StaffComponent } from 'app/staff/staff.component';
-import { StaffHomeComponent } from 'app/staff/staff-home/staff-home.component';
+import { StaffComponent } from './staff.component';
+import { StaffHomeComponent } from './staff-home/staff-home.component';
 
 const staffRoutes: Routes = [
   {

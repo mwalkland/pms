@@ -8,7 +8,7 @@ import { DebugElement } from '@angular/core';
 import { StaffNewProjectComponent } from './staff-new-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule, MatAutocompleteModule, MatDialogModule } from '@angular/material';
-import { StaffService } from 'app/staff/staff.service';
+import { StaffService } from '../staff.service';
 
 describe('StaffNewProjectComponent', () => {
   let component: StaffNewProjectComponent;

@@ -18,6 +18,9 @@ import { StaffRoutingModule } from './staff.routing';
 import { CoreModule } from '../core/core.module';
 import { StaffService } from './staff.service';
 import { StaffProfileComponent } from './staff-profile/staff-profile.component';
+import { StaffProfileDetailsComponent } from './staff-profile/staff-profile-details/staff-profile-details.component';
+import { StaffProfileRequestsComponent } from './staff-profile/staff-profile-requests/staff-profile-requests.component';
+import { StaffProfileConfirmedComponent } from './staff-profile/staff-profile-confirmed/staff-profile-confirmed.component';
 
 @NgModule({
   imports: [
@@ -40,7 +43,10 @@ import { StaffProfileComponent } from './staff-profile/staff-profile.component';
     StaffHomeComponent,
     StaffNewProjectComponent,
     StaffConfirmProjectDialogComponent,
-    StaffProfileComponent
+    StaffProfileComponent,
+    StaffProfileDetailsComponent,
+    StaffProfileRequestsComponent,
+    StaffProfileConfirmedComponent
 ],
   providers: [
     StaffService

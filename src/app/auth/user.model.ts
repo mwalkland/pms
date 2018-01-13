@@ -4,6 +4,7 @@ export class User {
     public password: string,
     public firstname?: string,
     public surname?: string,
-    public type?: string
+    public type?: string,
+    public projectChosen?: boolean
   ) { }
 }

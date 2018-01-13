@@ -1,3 +1,7 @@
+import {
+  StudentProjectsDialogConfirmComponent,
+  // tslint:disable-next-line:max-line-length
+} from './student-projects/student-projects-table/student-projects-dialog/student-projects-dialog-confirm/student-projects-dialog-confirm.component';
 import { StudentRoutingModule } from './student.routing';
 import {
   StudentProjectsDialogComponent,
@@ -26,6 +30,9 @@ import { MatIconModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material';
 import { StudentHomeComponent } from './student-home/student-home.component';
+import {
+  StudentProjectsConfirmationComponent
+} from './student-projects/student-projects-confirmation/student-projects-confirmation.component';
 
 @NgModule({
   imports: [
@@ -55,13 +62,16 @@ import { StudentHomeComponent } from './student-home/student-home.component';
     StudentProjectsListComponent,
     StudentProjectsTableComponent,
     StudentHomeComponent,
-    StudentProjectsDialogComponent
+    StudentProjectsDialogComponent,
+    StudentProjectsDialogConfirmComponent,
+    StudentProjectsConfirmationComponent
   ],
   providers: [
     StudentService
   ],
   entryComponents: [
-    StudentProjectsDialogComponent
+    StudentProjectsDialogComponent,
+    StudentProjectsDialogConfirmComponent
   ]
 })
 export class StudentModule { }

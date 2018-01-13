@@ -9,19 +9,26 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+h1, h2, h3 {
+  font-weight: 300;
+  color: #0355A6;
+}
+
 
 h1 {
-  font-weight: 300;
   font-size: 44px;
-  color: #0355A6;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-size: 30px;
   margin-top: 10px;
   margin-bottom: 5px;
 }
 
 h3 {
-  font-weight: 300;
   font-size: 20px;
-  color: #0355A6;
 }
 
 @media(max-width: 568px) {

@@ -1,7 +1,7 @@
 import { Subject, Observable } from 'rxjs/Rx';
 import { Project } from '../core/project.model';
 import { User } from '../auth/user.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 
@@ -94,7 +94,7 @@ export class StudentService {
           const projectList: Project[] = [];
           for (const project of projects) {
             const newProject = new Project(
-              project.name, project.description, project.type, project.maxStudents, project.areas, project.staff
+              project._id, project.name, project.description, project.type, project.maxStudents, project.areas, project.staff
             );
             projectList.push(newProject);
           }
@@ -106,27 +106,11 @@ export class StudentService {
     }
   }
 
-  getStaffProjects(user: User): Observable<Project[]> {
+  updateStudentProject(project: Project) {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    const first = '&first=' + user.firstname;
-    const surname = '&surname=' + user.surname;
-    return this.http.get('http://localhost:3000/project/getStaffProjects' + token + first + surname)
-      .map((response: Response) => {
-        const projects = response['projects'];
-        const projectList: Project[] = [];
-        for (const project of projects) {
-          const newProject = new Project(project.name, project.description, project.maxStudents, project.areas);
-          projectList.push(newProject);
-        }
-        this.projects = projectList;
-        return projectList;
-      });
-  }
-
-  getAreaProjects(filter: string): Observable<Project[]> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-
-    return null;
+    const body = JSON.stringify(project);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.patch('http://localhost:3000/user/addStudentProject' + token, body, { headers: headers })
   }
 
 }

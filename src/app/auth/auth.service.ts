@@ -22,6 +22,10 @@ export class AuthService {
     this.user = user;
   }
 
+  hasProjectChosen(): boolean {
+    return this.user.projectChosen;
+  }
+
   signup(user: User) {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

@@ -4,11 +4,12 @@ const Schema = mongoose.Schema;
 const schema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  type: {type: String, required: true},
+  type: { type: String, required: true },
   maxStudents: { type: Number },
   areas: [{ type: String }],
   staff: { type: Schema.Types.ObjectId, ref: 'User' },
-  students: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+  students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  confirmed: { type: Boolean }
 });
 
 module.exports = mongoose.model('Project', schema);

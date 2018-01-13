@@ -19,6 +19,10 @@ img {
   float: left;
 }
 
+.container {
+  height: 100%;
+}
+
 .content {
   display: flex;
   margin-top: 70px;

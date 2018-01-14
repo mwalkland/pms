@@ -55,6 +55,19 @@ img {
   margin-right: 25px;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.left {
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 25px;
+}
+
 @media(max-width: 868px) {
   .title {
     display: block;

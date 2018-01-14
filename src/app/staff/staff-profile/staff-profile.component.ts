@@ -8,14 +8,10 @@ import { Project } from '../../core/project.model';
   styleUrls: ['./staff-profile.component.css']
 })
 export class StaffProfileComponent implements OnInit {
-  projects: Project[];
 
-  constructor(private staffService: StaffService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.staffService.getProjectRequests().subscribe(
-      projects => this.projects = projects
-    );
   }
 
 }

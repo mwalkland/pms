@@ -1,0 +1,27 @@
+:host {
+  width: 70%;
+  flex: 1;
+  margin-bottom: 40px;
+}
+
+p {
+  white-space: pre-line;
+}
+
+.max-students {
+  font-weight: bold;
+}
+
+.buttons-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+h3 {
+  text-align: center;
+}

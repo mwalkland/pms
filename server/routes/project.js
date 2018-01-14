@@ -122,8 +122,8 @@ router.get('/getProjectRequests', (req, res) => {
           error: err
         });
       }
-      Project.find({ staff: user, status: 'pending' })
-        .populate({path: 'pendingStudents', select:  'firstname surname email'})
+      Project.find({ staff: user, pendingStudents: { $exists: true, $ne: [] } })
+        .populate({ path: 'pendingStudents', select: 'firstname surname email' })
         .exec((err, projects) => {
           res.status(200).json({
             message: 'Success',
@@ -132,6 +132,81 @@ router.get('/getProjectRequests', (req, res) => {
         });
     });
   });
+});
+
+router.patch('/confirmProject', (req, res) => {
+  const body = req.body;
+  const project = body.project;
+  const student = body.student;
+  jwt.verify(req.query.token, 'WO3V%oIBK5c2', (err) => {
+    if (err) {
+      return res.status(401).json({
+        title: 'Not Authentication',
+        error: err
+      });
+    }
+
+    // note the different in id and _id
+    Project.findByIdAndUpdate(project.id, {
+      $pull: { pendingStudents: student._id },
+      $push: { students: student._id }
+    }, { new: true }, (err, project) => {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured updating the project information',
+          error: err
+        });
+      }
+      if (project.maxStudents === project.students.length) {
+        project.full = true;
+        project.save();
+      }
+    });
+    res.status(200).json({
+      message: 'Successfully updated the projects',
+    });
+  });
+});
+
+router.patch('/rejectProject', (req, res) => {
+  const body = req.body;
+  const project = body.project;
+  const student = body.student;
+  jwt.verify(req.query.token, 'WO3V%oIBK5c2', (err) => {
+    if (err) {
+      return res.status(401).json({
+        title: 'Not Authentication',
+        error: err
+      });
+    }
+
+    User.findById(student._id, (err, student) => {
+      if (err) {
+        return res.status(500).json({
+          title: 'Could not find student',
+          error: err
+        });
+      }
+      Project.findById(project.id, (err, project) => {
+        if (err) {
+          return res.status(500).json({
+            title: 'Could not find project',
+            error: err
+          });
+        }
+        student.studentInfo.chosenProject = undefined;
+        project.pendingStudents.pull(student._id);
+
+        student.save();
+        project.save();
+      });
+    });
+
+    res.status(200).json({
+      message: 'Successfully rejected the project'
+    });
+  });
+
 });
 
 module.exports = router;

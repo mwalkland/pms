@@ -6,7 +6,7 @@ import { StaffComponent } from './staff.component';
 import { StaffHeaderComponent } from './staff-header/staff-header.component';
 import {
   MatListModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule,
-  MatButtonModule, MatIconModule, MatDialogModule, MatCheckboxModule
+  MatButtonModule, MatIconModule, MatDialogModule, MatCheckboxModule, MatExpansionModule
 } from '@angular/material';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { StaffNewProjectComponent } from './staff-new-project/staff-new-project.component';
@@ -21,6 +21,9 @@ import { StaffProfileComponent } from './staff-profile/staff-profile.component';
 import { StaffProfileDetailsComponent } from './staff-profile/staff-profile-details/staff-profile-details.component';
 import { StaffProfileRequestsComponent } from './staff-profile/staff-profile-requests/staff-profile-requests.component';
 import { StaffProfileConfirmedComponent } from './staff-profile/staff-profile-confirmed/staff-profile-confirmed.component';
+import {
+  StaffProfileRequestsConfirmComponent
+} from './staff-profile/staff-profile-requests/staff-profile-requests-confirm/staff-profile-requests-confirm.component';
 
 @NgModule({
   imports: [
@@ -36,7 +39,8 @@ import { StaffProfileConfirmedComponent } from './staff-profile/staff-profile-co
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule
   ],
   declarations: [StaffComponent,
     StaffHeaderComponent,
@@ -46,13 +50,15 @@ import { StaffProfileConfirmedComponent } from './staff-profile/staff-profile-co
     StaffProfileComponent,
     StaffProfileDetailsComponent,
     StaffProfileRequestsComponent,
-    StaffProfileConfirmedComponent
-],
+    StaffProfileConfirmedComponent,
+    StaffProfileRequestsConfirmComponent
+  ],
   providers: [
     StaffService
   ],
   entryComponents: [
-    StaffConfirmProjectDialogComponent
+    StaffConfirmProjectDialogComponent,
+    StaffProfileRequestsConfirmComponent
   ]
 })
 export class StaffModule { }

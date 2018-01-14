@@ -1,0 +1,11 @@
+<h4 *ngIf="confirm">Are you sure you want to confirm this project?</h4>
+<h4 *ngIf="!confirm">Are you sure you want to reject this project?</h4>
+
+<div *ngIf="confirm" class="buttons-wrap" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onConfirm()">Yes</button>
+  <button mat-button mat-dialog-close>No</button>
+</div>
+<div *ngIf="!confirm" class="buttons-wrap" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onReject()">Yes</button>
+  <button mat-button mat-dialog-close>No</button>
+</div>

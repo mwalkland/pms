@@ -1,3 +1,31 @@
-<p>
-  staff-profile-requests works!
-</p>
+<div class="content">
+
+  <h2 *ngIf="projects">Student Requests ({{projects.length}})</h2>
+
+  <h3 *ngIf="projects && projects.length === 0">You current have no outstanding requests.</h3>
+
+  <mat-accordion>
+    <ng-container *ngFor="let project of projects; let i = index">
+      <mat-expansion-panel *ngFor="let student of project.pendingStudents">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{student.firstname}} {{student.surname}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{project.name}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <p *ngIf="project.maxStudents" class="max-students">Max Students: {{project.maxStudents}}</p>
+        <p *ngIf="!project.maxStudents" class="max-students">Max Students: Unlimited</p>
+        <p>{{project.description}}</p>
+
+        <div class="buttons-wrap">
+          <button mat-button color="primary" (click)="confirm(project, student)">Confirm</button>
+          <button mat-button (click)="reject(project, student)">Reject</button>
+        </div>
+
+      </mat-expansion-panel>
+    </ng-container>
+  </mat-accordion>
+</div>

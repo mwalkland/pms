@@ -3,16 +3,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Project } from '../core/project.model';
 import { Observable } from 'rxjs/Observable';
+import { User } from '../auth/user.model';
 
 @Injectable()
 export class StaffService {
 
   resetForm = new Subject<void>();
+  removeProject = new Subject<Project>();
 
   constructor(private http: HttpClient) { }
 
-  newProject(project: Project) {
-    console.log(project);
+  newProject(project: Project): Observable<Object> {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -34,6 +35,26 @@ export class StaffService {
         }
         return projectList;
       });
+  }
+
+  confirmProject(project: Project, student: User): Observable<Object> {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const body = {
+      project: project,
+      student: student
+    };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.patch('http://localhost:3000/project/confirmProject' + token, body, { headers: headers });
+  }
+
+  rejectProject(project: Project, student: User): Observable<Object> {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const body = {
+      project: project,
+      student: student
+    };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.patch('http://localhost:3000/project/rejectProject' + token, body, { headers: headers });
   }
 
 }

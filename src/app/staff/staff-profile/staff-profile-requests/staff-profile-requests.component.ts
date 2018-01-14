@@ -12,12 +12,16 @@ import { StaffProfileRequestsConfirmComponent } from './staff-profile-requests-c
 })
 export class StaffProfileRequestsComponent implements OnInit {
   projects: Project[];
+  noOfProjects = 0;
 
   constructor(private staffService: StaffService, private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.staffService.getProjectRequests().subscribe((projects) => {
+    this.staffService.getProjectRequests().subscribe(projects => {
       this.projects = projects;
+      for (const project of projects) {
+        this.noOfProjects += project.pendingStudents.length;
+      }
     });
     this.staffService.removeProject.subscribe((project) => {
       this.projects.splice(this.projects.indexOf(project), 1);

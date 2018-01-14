@@ -37,6 +37,23 @@ export class StaffService {
       });
   }
 
+  getConfirmedProjects() {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/project/getConfirmedProjects' + token)
+      .map((response) => {
+        const projects = response['projects'];
+        const projectList: Project[] = [];
+        for (const project of projects) {
+          const newProject = new Project(
+            project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
+            project.staff, null, null, null, project.students
+          );
+          projectList.push(newProject);
+        }
+        return projectList;
+      });
+  }
+
   confirmProject(project: Project, student: User): Observable<Object> {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = {

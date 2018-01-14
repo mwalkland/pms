@@ -27,7 +27,7 @@ img {
 
 .content {
   display: flex;
-  margin-top: 70px;
+  margin-top: 30px;
   flex-direction: column;
   align-items: center;
   flex: 1;

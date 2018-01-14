@@ -112,7 +112,23 @@ router.get('/getProjectRequests', (req, res) => {
 });
 
 router.get('/getConfirmedProjects', (req, res) => {
-
+  const decoded = jwt.decode(req.query.token);
+  User.findById(decoded.user._id, (err, user) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured getting the user',
+        error: err
+      });
+    }
+    Project.find({ staff: user, students: { $exists: true, $ne: [] } })
+      .populate({ path: 'students', select: 'firstname surname email' })
+      .exec((err, projects) => {
+        res.status(200).json({
+          message: 'Success',
+          projects: projects
+        });
+      });
+  });
 });
 
 router.patch('/confirmProject', (req, res) => {

@@ -1,6 +1,7 @@
 :host {
   flex: 1;
   margin-bottom: 40px;
+  width: 70%;
 }
 
 h2 {

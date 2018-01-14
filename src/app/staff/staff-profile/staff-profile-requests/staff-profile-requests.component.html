@@ -1,8 +1,8 @@
 <div class="content">
 
-  <h2 *ngIf="projects">Student Requests ({{projects.length}})</h2>
+  <h2 *ngIf="projects">Student Requests ({{noOfProjects}})</h2>
 
-  <h3 *ngIf="projects && projects.length === 0">You current have no outstanding requests.</h3>
+  <h3 *ngIf="projects && projects.length === 0">You currently have no outstanding requests.</h3>
 
   <mat-accordion>
     <ng-container *ngFor="let project of projects; let i = index">
@@ -20,10 +20,10 @@
         <p *ngIf="!project.maxStudents" class="max-students">Max Students: Unlimited</p>
         <p>{{project.description}}</p>
 
-        <div class="buttons-wrap">
+        <mat-action-row>
           <button mat-button color="primary" (click)="confirm(project, student)">Confirm</button>
           <button mat-button (click)="reject(project, student)">Reject</button>
-        </div>
+        </mat-action-row>
 
       </mat-expansion-panel>
     </ng-container>

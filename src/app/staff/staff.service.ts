@@ -9,7 +9,8 @@ import { User } from '../auth/user.model';
 export class StaffService {
 
   resetForm = new Subject<void>();
-  removeProject = new Subject<Project>();
+  removeProjectFromRequests = new Subject<Project>();
+  addProjectToConfirmed = new Subject<{ project: Project, student: User }>();
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +30,7 @@ export class StaffService {
         for (const project of projects) {
           const newProject = new Project(
             project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-            project.staff, project.pendingStudents
+            project.staff, project.pendingStudents, null, null, project.students
           );
           projectList.push(newProject);
         }

@@ -20,7 +20,24 @@ export class StaffProfileConfirmedComponent implements OnInit {
       for (const project of projects) {
         this.noOfProjects += project.students.length;
       }
-    })
+    });
+    this.staffService.addProjectToConfirmed.subscribe(response => {
+      const project = response.project;
+      console.log(project);
+      const student = response.student;
+
+      const currentProject = this.projects.find((element) => {
+        return element.id === project.id;
+      });
+
+      if (currentProject) {
+        currentProject.students.push(student);
+      } else {
+        project.students.push(student);
+        this.projects.push(project);
+      }
+      this.noOfProjects += 1;
+    });
   }
 
 }

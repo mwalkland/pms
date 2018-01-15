@@ -102,6 +102,7 @@ router.get('/getProjectRequests', (req, res) => {
     }
     Project.find({ staff: user, pendingStudents: { $exists: true, $ne: [] } })
       .populate({ path: 'pendingStudents', select: 'firstname surname email' })
+      .populate('students')
       .exec((err, projects) => {
         res.status(200).json({
           message: 'Success',

@@ -30,7 +30,8 @@ export class StaffProfileRequestsConfirmComponent implements OnInit {
   onConfirm() {
     this.staffService.confirmProject(this.project, this.student).subscribe(response => {
       if (!response['error']) {
-        this.staffService.removeProject.next(this.project);
+        this.staffService.removeProjectFromRequests.next(this.project);
+        this.staffService.addProjectToConfirmed.next({ project: this.project, student: this.student });
       }
     });
   }
@@ -38,7 +39,7 @@ export class StaffProfileRequestsConfirmComponent implements OnInit {
   onReject() {
     this.staffService.rejectProject(this.project, this.student).subscribe(response => {
       if (!response['error']) {
-        this.staffService.removeProject.next(this.project);
+        this.staffService.removeProjectFromRequests.next(this.project);
       }
     })
   }

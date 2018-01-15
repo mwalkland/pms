@@ -23,8 +23,9 @@ export class StaffProfileRequestsComponent implements OnInit {
         this.noOfProjects += project.pendingStudents.length;
       }
     });
-    this.staffService.removeProject.subscribe((project) => {
+    this.staffService.removeProjectFromRequests.subscribe((project) => {
       this.projects.splice(this.projects.indexOf(project), 1);
+      this.noOfProjects -= 1;
     })
   }
 

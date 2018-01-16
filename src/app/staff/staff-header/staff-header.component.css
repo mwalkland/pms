@@ -46,6 +46,10 @@ i:hover {
     display: none;
   }
 
+  .mat-list-item {
+    height: 100% !important;
+  }
+
   .active {
     height: 56px !important;
     border-bottom: 4px solid white;

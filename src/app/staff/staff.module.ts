@@ -6,11 +6,11 @@ import { StaffComponent } from './staff.component';
 import { StaffHeaderComponent } from './staff-header/staff-header.component';
 import {
   MatListModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule,
-  MatButtonModule, MatIconModule, MatDialogModule, MatCheckboxModule, MatExpansionModule
+  MatButtonModule, MatIconModule, MatDialogModule, MatCheckboxModule, MatExpansionModule, MatTooltipModule
 } from '@angular/material';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { StaffNewProjectComponent } from './staff-new-project/staff-new-project.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   StaffConfirmProjectDialogComponent,
 } from './staff-new-project/staff-confirm-project-dialog/staff-confirm-project-dialog.component';
@@ -24,6 +24,9 @@ import { StaffProfileConfirmedComponent } from './staff-profile/staff-profile-co
 import {
   StaffProfileRequestsConfirmComponent
 } from './staff-profile/staff-profile-requests/staff-profile-requests-confirm/staff-profile-requests-confirm.component';
+import {
+  StaffProfileDetailsEditComponent
+} from './staff-profile/staff-profile-details/staff-profile-details-edit/staff-profile-details-edit.component';
 
 @NgModule({
   imports: [
@@ -40,9 +43,12 @@ import {
     MatIconModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule,
+    MatTooltipModule
   ],
-  declarations: [StaffComponent,
+  declarations: [
+    StaffComponent,
     StaffHeaderComponent,
     StaffHomeComponent,
     StaffNewProjectComponent,
@@ -51,14 +57,16 @@ import {
     StaffProfileDetailsComponent,
     StaffProfileRequestsComponent,
     StaffProfileConfirmedComponent,
-    StaffProfileRequestsConfirmComponent
+    StaffProfileRequestsConfirmComponent,
+    StaffProfileDetailsEditComponent
   ],
   providers: [
     StaffService
   ],
   entryComponents: [
     StaffConfirmProjectDialogComponent,
-    StaffProfileRequestsConfirmComponent
+    StaffProfileRequestsConfirmComponent,
+    StaffProfileDetailsEditComponent
   ]
 })
 export class StaffModule { }

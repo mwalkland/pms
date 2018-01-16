@@ -52,6 +52,7 @@ h1 {
   .auth-wrap {
     display: flex;
     justify-content: center;
+    margin-top: 40px;
   }
 }
 

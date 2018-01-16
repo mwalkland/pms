@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Project } from '../core/project.model';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../auth/user.model';
+import { Areas } from './staff-profile/staff-profile-details/areas.model';
 
 @Injectable()
 export class StaffService {
@@ -19,6 +20,36 @@ export class StaffService {
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post('http://localhost:3000/project/new' + token, body, { headers: headers });
+  }
+
+  getStaffAreas(): Observable<Areas> {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/user/getStaffAreas' + token)
+      .map((response: {
+        message: string,
+        areas: {
+          _id: string,
+          staffInfo: {
+            areas: {
+              first: string,
+              second: string,
+              third: string,
+              fourth: string,
+              fifth: string
+            }
+          }
+        }
+      }) => {
+        const areas = response.areas.staffInfo.areas;
+        return new Areas(areas.first, areas.second, areas.third, areas.fourth, areas.fifth);
+      });
+  }
+
+  updateStaffAreas(areas: Areas) {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = JSON.stringify(areas);
+    return this.http.patch('http://localhost:3000/user/updateStaffAreas' + token, body, { headers: headers });
   }
 
   getProjectRequests(): Observable<Project[]> {
@@ -73,6 +104,14 @@ export class StaffService {
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.patch('http://localhost:3000/project/rejectProject' + token, body, { headers: headers });
+  }
+
+  getSuggestedAreas(): Observable<string[]> {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/project/getSuggestedAreas' + token)
+      .map((response: { areas: string[] }) => {
+        return response.areas;
+      });
   }
 
 }

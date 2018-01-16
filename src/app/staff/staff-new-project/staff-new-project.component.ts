@@ -22,19 +22,7 @@ export class StaffNewProjectComponent implements OnInit {
   @ViewChild(FormGroupDirective) myForm;
   @ViewChild('software') softwareCheckbox: MatCheckbox;
   @ViewChild('research') researchCheckbox: MatCheckbox;
-  areaList = [
-    'Artificial Intelligence',
-    'Networking',
-    'Web Development',
-    'Neural Networks',
-    'Machine Learning',
-    'Social Media',
-    'Natural Language',
-    'Data Mining',
-    'Mobile App Development',
-    'Computer Vision',
-    'Pattern Recognition'
-  ];
+  areaList: string[];
   projectCreated = false;
 
   constructor(private builder: FormBuilder, public dialog: MatDialog, private staffService: StaffService) {
@@ -46,10 +34,14 @@ export class StaffNewProjectComponent implements OnInit {
       type: this.builder.array([], Validators.required)
     });
     this.areaCtrl = new FormControl();
-    this.filteredAreas = this.areaCtrl.valueChanges.startWith('').map(area => area ? this.filterAreas(area) : this.areaList.slice());
+    this.staffService.getSuggestedAreas().subscribe((areas: string[]) => {
+      this.areaList = areas;
+      this.filteredAreas = this.areaCtrl.valueChanges.startWith('').map(area => area ? this.filterAreas(area) : this.areaList.slice());
+    });
   }
 
   ngOnInit() {
+
     this.staffService.resetForm.subscribe(() => {
       if (this.myForm) {
         this.myForm.resetForm();
@@ -75,7 +67,7 @@ export class StaffNewProjectComponent implements OnInit {
       if (this.researchCheckbox.checked) {
         this.researchCheckbox.toggle();
       }
-    })
+    });
   }
 
   get areas(): FormArray {

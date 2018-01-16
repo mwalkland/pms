@@ -1,7 +1,10 @@
 :host {
   flex: 1;
   margin-bottom: 40px;
-  width: 70%;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
 }
 
 h2 {
@@ -15,4 +18,22 @@ p {
 
 h3 {
   text-align: center;
+}
+
+.content {
+  width: 80%;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+@media(max-width: 668px) {
+  .mat-expansion-panel-header-description {
+    display: none;
+  }
+  .mat-expansion-panel-header-title p {
+    width: 100%;
+    text-align: center;
+  }
 }

@@ -36,7 +36,6 @@ i:hover {
   .nav-list a {
     width: 100px !important;
   }
-
   .nav-list {
     display: flex !important;
     flex: 1;
@@ -44,7 +43,9 @@ i:hover {
   .nav-button {
     display: none;
   }
-
+  .mat-list-item {
+    height: 100% !important;
+  }
   .active {
     height: 56px !important;
     border-bottom: 4px solid white;
@@ -64,7 +65,7 @@ i:hover {
   background-color: #0355A6 !important;
 }
 
-.nav-list a > div {
+.nav-list a>div {
   height: 60px !important;
   justify-content: center;
 }

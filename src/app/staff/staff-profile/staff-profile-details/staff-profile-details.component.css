@@ -1,9 +1,58 @@
 :host {
   flex: 1;
-  margin-bottom: 40px;
+  padding: 20px 0px 20px 0px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  border-bottom: solid 1px #0355A6;
+  border-top: solid 1px #0355A6;
 }
 
 h2 {
   text-align: center;
   margin-bottom: 10px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+.add-input {
+  width: 400px;
+}
+
+.mat-form-field {
+  width: 300px;
+}
+
+.area-wrap {
+  width: 400px;
+}
+
+ol {
+  margin-top: 0px;
+  padding-left: 25px;
+  font-weight: 300;
+}
+
+li {
+  font-size: 20px;
+  padding: 3px;
+}
+
+.mat-icon:hover {
+  cursor: pointer;
+}
+
+@media(max-width: 568px) {
+  .edit-button {
+    display: block !important;
+  }
+  .mat-icon {
+    display: none
+  }
 }

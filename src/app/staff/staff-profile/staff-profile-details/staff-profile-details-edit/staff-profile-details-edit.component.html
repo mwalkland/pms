@@ -1,0 +1,52 @@
+<div class="add-input">
+  <mat-form-field>
+    <input #first matInput placeholder="First" type="text" [ngModel]="areas.first" [matAutocomplete]="auto" [formControl]="areaCtrl1"
+      (focus)="changeFocus(1)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let a of filteredAreas | async" [value]="a">
+        <span>{{ a }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <input #second matInput placeholder="Second" type="text" [ngModel]="areas.second" [matAutocomplete]="auto" [formControl]="areaCtrl2"
+      (focus)="changeFocus(2)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let a of filteredAreas | async" [value]="a">
+        <span>{{ a }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <input #third matInput placeholder="Third" type="text" [ngModel]="areas.third" [matAutocomplete]="auto" [formControl]="areaCtrl3"
+      (focus)="changeFocus(3)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let a of filteredAreas | async" [value]="a">
+        <span>{{ a }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <input #fourth matInput placeholder="Fourth" type="text" [ngModel]="areas.fourth" [matAutocomplete]="auto" [formControl]="areaCtrl4"
+      (focus)="changeFocus(4)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let a of filteredAreas | async" [value]="a">
+        <span>{{ a }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <input #fifth matInput placeholder="Fifth" type="text" [ngModel]="areas.fifth" [matAutocomplete]="auto" [formControl]="areaCtrl5"
+      (focus)="changeFocus(5)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let a of filteredAreas | async" [value]="a">
+        <span>{{ a }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close color="primary" (click)="save(first.value, second.value, third.value, fourth.value, fifth.value)">Save</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

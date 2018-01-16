@@ -36,12 +36,16 @@ h3 {
     font-size: 30px;
   }
 
-  img {
-    width: 175px !important;
+  h2 {
+    font-size: 25px;
   }
 
   h3 {
     font-size: 18px;
+  }
+
+  img {
+    width: 175px !important;
   }
 
   .app-container {

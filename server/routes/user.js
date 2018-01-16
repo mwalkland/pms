@@ -32,6 +32,38 @@ router.get('/getStaff', (req, res) => {
   });
 });
 
+router.get('/getStaffAreas', (req, res) => {
+  const decoded = jwt.decode(req.query.token);
+  User.findById(decoded.user._id, 'staffInfo.areas', (err, areas) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured retrieving staff areas',
+        error: err
+      });
+    }
+    res.status(200).json({
+      message: 'Success',
+      areas: areas
+    });
+  });
+});
+
+router.patch('/updateStaffAreas', (req, res) => {
+  const areas = req.body;
+  const decoded = jwt.decode(req.query.token);
+  User.findByIdAndUpdate(decoded.user._id, { $set: { 'staffInfo.areas': areas } }, (err) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured retrieving staff areas',
+        error: err
+      });
+    }
+    res.status(200).json({
+      message: 'Updated Staff Areas',
+    });
+  });
+});
+
 router.patch('/addStudentProject', (req, res) => {
   const body = req.body;
   const decoded = jwt.decode(req.query.token);

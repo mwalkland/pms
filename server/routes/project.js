@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
 const Project = require('../../models/project');
 const User = require('../../models/user');
 
@@ -187,6 +190,28 @@ router.patch('/rejectProject', (req, res) => {
 
   res.status(200).json({
     message: 'Successfully rejected the project'
+  });
+});
+
+
+/*
+NOTE - This is accessing the 'areas' collection which is NOT a Mongoose Schema
+so is being accessed natively through MongoDB. This is because this is a 
+'read-only' collection (we would never want to write to it)
+so creating a Schema for it would be pointless.
+*/
+router.get('/getSuggestedAreas', (req, res) => {
+  const Areas = mongoose.connection.db.collection('areas');
+  Areas.findOne({}, (err, response) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'Could not get suggested areas',
+        error: err
+      });
+    }
+    res.status(200).json({
+      areas: response.areas
+    });
   });
 });
 

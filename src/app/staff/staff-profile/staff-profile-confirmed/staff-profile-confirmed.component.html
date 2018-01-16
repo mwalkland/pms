@@ -1,6 +1,6 @@
 <div class="content">
 
-  <h2 *ngIf="projects">Confirmed Students ({{ noOfProjects }})</h2>
+  <h2 *ngIf="projects">Confirmed Projects ({{ noOfProjects }})</h2>
 
   <h3 *ngIf="projects && projects.length === 0">You currently have no projects to supervise.</h3>
 
@@ -9,15 +9,20 @@
       <mat-expansion-panel *ngFor="let student of project.students">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ student.firstname }} {{ student.surname }}
+            <p>{{ student.firstname }} {{ student.surname }}</p>
           </mat-panel-title>
           <mat-panel-description>
-            {{ project.name }}
+            <p>{{ project.name }}</p>
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <p *ngIf="project.maxStudents" class="max-students">Max Students: {{ project.maxStudents }}</p>
-        <p *ngIf="!project.maxStudents" class="max-students">Max Students: Unlimited</p>
+        <p *ngIf="project.maxStudents" class="max-students">
+          <span class="bold-text">Max Students:</span> {{ project.maxStudents }}
+        </p>
+        <p *ngIf="!project.maxStudents" class="max-students">
+          <span class="bold-text">Max Students:</span> Unlimited
+        </p>
+        <p class="bold-text">{{project.name}}</p>
         <p>{{project.description}}</p>
 
         <!-- <div class="buttons-wrap">

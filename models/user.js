@@ -14,7 +14,13 @@ const schema = new Schema({
   },
   staffInfo: {
     suggestedProjects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
-    areas: [{ type: String }]
+    areas: {
+      first: { type: String, default: '' },
+      second: { type: String, default: '' },
+      third: { type: String, default: '' },
+      fourth: { type: String, default: '' },
+      fifth: { type: String, default: '' }
+    }
   }
 });
 

@@ -1,5 +1,19 @@
 <div class="content">
 
-  <h2>Your Details</h2>
+  <h2>Main Research Areas
+    <mat-icon matTooltip="Edit" (click)="onEdit()">edit</mat-icon>
+  </h2>
 
+
+  <div class="areas-wrap">
+    <ol>
+      <li *ngIf="areas && areas.first.length !== 0">{{areas.first}}</li>
+      <li *ngIf="areas && areas.second.length !== 0">{{areas.second}}</li>
+      <li *ngIf="areas && areas.third.length !== 0">{{areas.third}}</li>
+      <li *ngIf="areas && areas.fourth.length !== 0">{{areas.fourth}}</li>
+      <li *ngIf="areas && areas.fifth.length !== 0">{{areas.fifth}}</li>
+    </ol>
+  </div>
+
+  <button mat-button color="primary" (click)="onEdit()" style="display:none" class="edit-button">Edit</button>
 </div>

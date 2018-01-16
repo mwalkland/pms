@@ -11,21 +11,21 @@
   <p>This tool has been created in order to help you choose your dissertation project</p>
   <div class="inner-contents">
     <div class="in left">
-      <div class="button-div" (click)="goToProjects('Area')">
+      <div class="button-div" (click)="goToProjects('Area')" routerLink="./projects">
         <p>Browse by Area</p>
         <p class='detail'>Filter the projects you see based on the area of research, for example 'Computer Vision' or 'Networking'.</p>
       </div>
     </div>
     <div class="in center">
-      <div class="button-div" (click)="goToProjects('Staff')">
+      <div class="button-div" (click)="goToProjects('Staff')" routerLink="./projects">
         <p>Browse by Staff member</p>
         <p class='detail'>Filter the projects you see by the staff member who suggested it.</p>
       </div>
     </div>
     <div class="in right">
-      <div class="button-div" (click)="goToProjects()">
+      <div class="button-div" routerLink="./create">
         <p>Propose your own</p>
-        <p class='detail'>Propose your own project idea. You may propose a staff member to supervise, or have one suggested for you.</p>
+        <p class='detail'>Propose your own project idea. You may choose a staff member to supervise you, or have one suggested for you.</p>
       </div>
     </div>
   </div>

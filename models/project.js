@@ -10,7 +10,8 @@ const schema = new Schema({
   staff: { type: Schema.Types.ObjectId, ref: 'User' },
   students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   pendingStudents: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  full: { type: Boolean, default: false }
+  full: { type: Boolean, default: false },
+  isStudentProject: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model('Project', schema);

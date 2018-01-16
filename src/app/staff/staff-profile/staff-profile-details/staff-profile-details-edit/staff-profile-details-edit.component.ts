@@ -1,4 +1,6 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import {
+  Component, OnInit, Inject, ViewChild
+} from '@angular/core';
 import { StaffService } from '../../../staff.service';
 import { MAT_DIALOG_DATA, MatAutocompleteTrigger } from '@angular/material';
 import { Areas } from '../areas.model';

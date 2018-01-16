@@ -8,6 +8,7 @@ import { StudentStaffComponent } from './student-staff/student-staff.component';
 import {
   StudentProjectsConfirmationComponent
 } from './student-projects/student-projects-confirmation/student-projects-confirmation.component';
+import { StudentCreateComponent } from './student-create/student-create.component';
 
 const studentRoutes: Routes = [
   {
@@ -32,6 +33,10 @@ const studentRoutes: Routes = [
       {
         path: 'confirmation',
         component: StudentProjectsConfirmationComponent
+      },
+      {
+        path: 'create',
+        component: StudentCreateComponent
       }
     ]
   }

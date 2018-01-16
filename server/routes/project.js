@@ -72,7 +72,6 @@ router.get('/getAreas', (req, res) => {
       });
     }
     res.status(200).json({
-      message: 'Success',
       obj: areas
     });
   });
@@ -88,7 +87,6 @@ router.get('/getAllProjects', (req, res) => {
         });
       }
       res.status(200).json({
-        message: 'Success',
         projects: projects
       });
     });
@@ -108,7 +106,6 @@ router.get('/getProjectRequests', (req, res) => {
       .populate('students')
       .exec((err, projects) => {
         res.status(200).json({
-          message: 'Success',
           projects: projects
         });
       });
@@ -128,7 +125,6 @@ router.get('/getConfirmedProjects', (req, res) => {
       .populate({ path: 'students', select: 'firstname surname email' })
       .exec((err, projects) => {
         res.status(200).json({
-          message: 'Success',
           projects: projects
         });
       });

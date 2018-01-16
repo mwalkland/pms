@@ -6,11 +6,11 @@ export class Project {
     public description: string,
     public type: string,
     public maxStudents?: number,
-    public areas?: [string],
+    public areas?: string[],
     public staff?: User,
-    public pendingStudents?: [User],
+    public pendingStudents?: User[],
     public areaString?: string,
     public staffName?: string,
-    public students?: [User],
+    public students?: User[],
   ) { }
 }

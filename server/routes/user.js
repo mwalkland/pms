@@ -26,7 +26,6 @@ router.get('/getStaff', (req, res) => {
       });
     }
     res.status(200).json({
-      message: 'Success',
       staff: staff
     });
   });
@@ -42,7 +41,6 @@ router.get('/getStaffAreas', (req, res) => {
       });
     }
     res.status(200).json({
-      message: 'Success',
       areas: areas
     });
   });

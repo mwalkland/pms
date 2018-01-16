@@ -1,12 +1,13 @@
 <div class="nav-wrap">
   <div class="nav-button">
-      <i class="material-icons" style="color:white;font-size:30px;" (click)="show()">menu</i>
+    <i class="material-icons" style="color:white;font-size:30px;" (click)="show()">menu</i>
   </div>
   <div class="nav-list" style="display:none" #navlist>
     <mat-nav-list class="nav nav-left">
       <a mat-list-item (click)="show()" [routerLink]="['/student']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a mat-list-item (click)="show()" routerLink="/student/projects" routerLinkActive="active">Projects</a>
-      <a mat-list-item (click)="show()" routerLink="/student/stafflist" routerLinkActive="active">Staff</a>
+      <a mat-list-item (click)="show()" routerLink="./projects" routerLinkActive="active">Projects</a>
+      <a mat-list-item (click)="show()" routerLink="./create" routerLinkActive="active">Create</a>
+      <a mat-list-item (click)="show()" routerLink="./stafflist" routerLinkActive="active">Staff</a>
     </mat-nav-list>
     <mat-nav-list class="nav nav-right">
       <app-logout></app-logout>

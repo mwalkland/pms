@@ -113,4 +113,12 @@ export class StudentService {
     return this.http.patch('http://localhost:3000/user/addStudentProject' + token, body, { headers: headers })
   }
 
+  getSuggestedAreas(): Observable<string[]> {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/project/getSuggestedAreas' + token)
+      .map((response: { areas: string[] }) => {
+        return response.areas;
+      });
+  }
+
 }

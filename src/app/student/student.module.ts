@@ -9,7 +9,7 @@ import {
 import { StudentService } from './student.service';
 import { CoreModule } from '../core/core.module';
 import { StudentProjectsTableComponent } from './student-projects/student-projects-table/student-projects-table.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './../auth/auth.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,7 +24,10 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatDialogModule,
-  MatButtonModule
+  MatButtonModule,
+  MatCheckboxModule,
+  MatAutocompleteModule,
+  MatInputModule
 } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
@@ -33,6 +36,7 @@ import { StudentHomeComponent } from './student-home/student-home.component';
 import {
   StudentProjectsConfirmationComponent
 } from './student-projects/student-projects-confirmation/student-projects-confirmation.component';
+import { StudentCreateComponent } from './student-create/student-create.component';
 
 @NgModule({
   imports: [
@@ -40,6 +44,7 @@ import {
     MatListModule,
     StudentRoutingModule,
     AuthModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -49,7 +54,10 @@ import {
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   exports: [
     StudentHeaderComponent
@@ -64,7 +72,8 @@ import {
     StudentHomeComponent,
     StudentProjectsDialogComponent,
     StudentProjectsDialogConfirmComponent,
-    StudentProjectsConfirmationComponent
+    StudentProjectsConfirmationComponent,
+    StudentCreateComponent
   ],
   providers: [
     StudentService

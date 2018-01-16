@@ -22,7 +22,6 @@ export class StudentHomeComponent implements OnInit {
 
   goToProjects(browseBy: string) {
     this.studentService.changeBrowseBy(browseBy);
-    this.router.navigate(['projects'], { relativeTo: this.route });
   }
 
 }

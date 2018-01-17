@@ -13,6 +13,7 @@ export class StudentService {
   browseBy = 'Staff';
   browseByChanged = new Subject<string>();
   filterSelected = new Subject<string>();
+  selectStaffMember = new Subject<User>();
 
   constructor(private http: HttpClient) { }
 
@@ -61,7 +62,7 @@ export class StudentService {
           const staffList = response['staff'];
           const sList: User[] = [];
           for (const staff of staffList) {
-            const newStaff = new User(staff.email, staff.password, staff.firstname, staff.surname, staff.type);
+            const newStaff = new User(staff.email, staff.password, staff.firstname, staff.surname, staff.type, null, staff.staffInfo.areas);
             sList.push(newStaff);
           }
           this.staff = sList;

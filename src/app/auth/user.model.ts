@@ -5,6 +5,7 @@ export class User {
     public firstname?: string,
     public surname?: string,
     public type?: string,
-    public projectChosen?: boolean
+    public projectChosen?: boolean,
+    public areas?: { first: string, second: string, third: string, fourth: string, fifth: string }
   ) { }
 }

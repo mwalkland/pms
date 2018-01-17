@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { MatAutocompleteTrigger, MatCheckbox, MatDialog } from '@angular/material';
+import { MatAutocompleteTrigger, MatCheckbox, MatDialog, MatSelect } from '@angular/material';
 import { StudentService } from '../student.service';
 import { Project } from '../../core/project.model';
 import { User } from '../../auth/user.model';
+import { StudentCreateSuggestedStaffComponent } from './student-create-suggested-staff/student-create-suggested-staff.component';
 
 @Component({
   selector: 'app-student-create',
@@ -20,11 +21,16 @@ export class StudentCreateComponent implements OnInit {
   @ViewChild(FormGroupDirective) myForm;
   @ViewChild('software') softwareCheckbox: MatCheckbox;
   @ViewChild('research') researchCheckbox: MatCheckbox;
+  @ViewChild('staffSelectBox') staffSelectBox: MatSelect;
   areaList: string[];
   projectCreated = false;
   staffList: User[];
 
-  constructor(private builder: FormBuilder, public dialog: MatDialog, private studentService: StudentService) {
+  constructor(private builder: FormBuilder,
+    public dialog: MatDialog,
+    private studentService: StudentService,
+  ) {
+
     this.form = this.builder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -32,18 +38,22 @@ export class StudentCreateComponent implements OnInit {
       type: this.builder.array([], Validators.required),
       staffEmail: ['', Validators.required]
     });
+
     this.areaCtrl = new FormControl();
     this.studentService.getSuggestedAreas().subscribe((areas: string[]) => {
       this.areaList = areas;
       this.filteredAreas = this.areaCtrl.valueChanges.startWith('').map(area => area ? this.filterAreas(area) : this.areaList.slice());
     });
-    this.studentService.getStaff().subscribe((staffList: User[]) => {
-      this.staffList = staffList;
-    });
+
   }
 
   ngOnInit() {
-
+    this.studentService.getStaff().subscribe((staffList: User[]) => {
+      this.staffList = staffList;
+    });
+    this.studentService.selectStaffMember.subscribe((staff: User) => {
+      this.form.patchValue({ staffEmail: staff.email });
+    });
   }
 
   get areas(): FormArray {
@@ -57,7 +67,6 @@ export class StudentCreateComponent implements OnInit {
   }
 
   addArea(name: string) {
-    console.log(this.form.get('areas'));
     if (!(<string[]>this.areas.value).includes(name) && name !== '') {
       this.areas.insert(0, new FormControl(name));
       this.areaCtrl.reset();
@@ -103,6 +112,15 @@ export class StudentCreateComponent implements OnInit {
       const index = typeArray.controls.findIndex(x => x.value === type);
       typeArray.removeAt(index);
     }
+  }
+
+  getStaffSuggestions() {
+    this.dialog.open(StudentCreateSuggestedStaffComponent, {
+      data: {
+        areas: this.form.get('areas').value,
+        staff: this.staffList
+      }
+    })
   }
 
 }

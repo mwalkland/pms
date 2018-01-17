@@ -27,7 +27,9 @@ import {
   MatButtonModule,
   MatCheckboxModule,
   MatAutocompleteModule,
-  MatInputModule
+  MatInputModule,
+  MatTooltipModule,
+  MatExpansionModule
 } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
@@ -37,6 +39,9 @@ import {
   StudentProjectsConfirmationComponent
 } from './student-projects/student-projects-confirmation/student-projects-confirmation.component';
 import { StudentCreateComponent } from './student-create/student-create.component';
+import {
+  StudentCreateSuggestedStaffComponent
+} from './student-create/student-create-suggested-staff/student-create-suggested-staff.component';
 
 @NgModule({
   imports: [
@@ -57,7 +62,9 @@ import { StudentCreateComponent } from './student-create/student-create.componen
     MatButtonModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    MatTooltipModule,
+    MatExpansionModule
   ],
   exports: [
     StudentHeaderComponent
@@ -73,14 +80,16 @@ import { StudentCreateComponent } from './student-create/student-create.componen
     StudentProjectsDialogComponent,
     StudentProjectsDialogConfirmComponent,
     StudentProjectsConfirmationComponent,
-    StudentCreateComponent
+    StudentCreateComponent,
+    StudentCreateSuggestedStaffComponent
   ],
   providers: [
     StudentService
   ],
   entryComponents: [
     StudentProjectsDialogComponent,
-    StudentProjectsDialogConfirmComponent
+    StudentProjectsDialogConfirmComponent,
+    StudentCreateSuggestedStaffComponent
   ]
 })
 export class StudentModule { }

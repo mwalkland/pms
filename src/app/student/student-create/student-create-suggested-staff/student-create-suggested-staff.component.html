@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Suggested Staff</h2>
+<h4>Recommendations made based on the project's research areas.</h4>
+
+<mat-dialog-content>
+
+  <p *ngIf="suggestedStaff.length === 0; else displayStaff">Sorry, no suitable staff members were found.</p>
+  <ng-template #displayStaff>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let staff of suggestedStaff">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{staff.firstname}} {{staff.surname}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        Main research areas in order of speciality
+        <ol>
+          <li *ngIf="staff.areas.first">{{staff.areas.first}}</li>
+          <li *ngIf="staff.areas.second">{{staff.areas.second}}</li>
+          <li *ngIf="staff.areas.third">{{staff.areas.third}}</li>
+          <li *ngIf="staff.areas.fourth">{{staff.areas.fourth}}</li>
+          <li *ngIf="staff.areas.fifth">{{staff.areas.fifth}}</li>
+        </ol>
+        <mat-action-row>
+          <button mat-button color="primary" type="button" (click)="selectStaffMember(staff)" matDialogClose>Select Staff</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-template>
+
+</mat-dialog-content>

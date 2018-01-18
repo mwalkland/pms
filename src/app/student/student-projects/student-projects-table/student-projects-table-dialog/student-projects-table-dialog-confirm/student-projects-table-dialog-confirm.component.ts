@@ -2,18 +2,18 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { Project } from '../../../../../core/project.model';
 import { StudentService } from '../../../../student.service';
-import { StudentProjectsDialogComponent } from '../student-projects-dialog.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { StudentProjectsTableDialogComponent } from '../student-projects-table-dialog.component';
 
 @Component({
-  selector: 'app-student-projects-dialog-confirm',
-  templateUrl: './student-projects-dialog-confirm.component.html',
-  styleUrls: ['./student-projects-dialog-confirm.component.css']
+  selector: 'app-student-projects-table-dialog-confirm',
+  templateUrl: './student-projects-table-dialog-confirm.component.html',
+  styleUrls: ['./student-projects-table-dialog-confirm.component.css']
 })
-export class StudentProjectsDialogConfirmComponent implements OnInit {
+export class StudentProjectsTableDialogConfirmComponent implements OnInit {
   project: Project;
 
-  constructor(public dialogRef: MatDialogRef<StudentProjectsDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<StudentProjectsTableDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { project: Project },
     private studentService: StudentService,
     private router: Router,

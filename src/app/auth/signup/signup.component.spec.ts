@@ -9,6 +9,7 @@ import { DebugElement } from '@angular/core';
 import { SignupComponent } from './signup.component';
 import { MatFormFieldModule, MatRadioModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { AuthService } from '../auth.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -22,7 +23,7 @@ describe('SignupComponent', () => {
         MatFormFieldModule,
         MatRadioModule,
         MatButtonModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         MatInputModule,
         BrowserAnimationsModule
       ],

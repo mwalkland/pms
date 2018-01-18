@@ -30,14 +30,20 @@ describe('Service: StudentProjects', () => {
             password: 'password1',
             firstname: 'john',
             surname: 'smith',
-            type: 'Staff'
+            type: 'Staff',
+            staffInfo: {
+              areas: ['']
+            }
           },
           {
             email: 'test2@test.com',
             password: 'password2',
             firstname: 'bob',
             surname: 'smith',
-            type: 'Staff'
+            type: 'Staff',
+            staffInfo: {
+              areas: ['']
+            }
           }
         ]
       };

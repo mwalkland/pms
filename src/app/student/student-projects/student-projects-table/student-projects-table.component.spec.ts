@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { StudentProjectsTableComponent } from './student-projects-table.component';
+import { MatDialogModule, MatTableModule } from '@angular/material';
+import { StudentService } from '../../student.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('StudentProjectsTableComponent', () => {
   let component: StudentProjectsTableComponent;
@@ -11,9 +14,17 @@ describe('StudentProjectsTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentProjectsTableComponent ]
+      declarations: [StudentProjectsTableComponent],
+      imports: [
+        MatTableModule,
+        HttpClientTestingModule,
+        MatDialogModule
+      ],
+      providers: [
+        StudentService
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -10,6 +10,7 @@ import { DebugElement } from '@angular/core';
 import { LoginComponent } from './login.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -21,7 +22,7 @@ describe('LoginComponent', () => {
       imports: [
         ReactiveFormsModule,
         MatFormFieldModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         MatInputModule,
         BrowserAnimationsModule

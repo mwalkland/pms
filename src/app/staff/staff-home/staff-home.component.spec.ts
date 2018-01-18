@@ -11,9 +11,15 @@ describe('StaffHomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StaffHomeComponent ]
+      declarations: [StaffHomeComponent]
     })
-    .compileComponents();
+      .compileComponents();
+
+    const store = { user: JSON.stringify({ name: 'name' }) };
+
+    spyOn(localStorage, 'getItem').and.callFake((key: string) => {
+      return store[key] || null;
+    });
   }));
 
   beforeEach(() => {

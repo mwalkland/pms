@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { StaffProfileRequestsComponent } from './staff-profile-requests.component';
+import { StaffService } from '../../staff.service';
+import { MatExpansionModule, MatDialogModule } from '@angular/material';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('StaffProfileRequestsComponent', () => {
   let component: StaffProfileRequestsComponent;
@@ -11,7 +14,15 @@ describe('StaffProfileRequestsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StaffProfileRequestsComponent ]
+      declarations: [ StaffProfileRequestsComponent ],
+      imports: [
+        MatExpansionModule,
+        HttpClientTestingModule,
+        MatDialogModule
+      ],
+      providers: [
+        StaffService
+      ]
     })
     .compileComponents();
   }));

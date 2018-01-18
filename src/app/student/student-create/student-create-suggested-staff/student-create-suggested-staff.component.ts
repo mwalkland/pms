@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { StaffMatcher } from '../StaffMatcher';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../../../auth/user.model';
 import { StudentService } from '../../student.service';
+import { StaffMatcher } from '../staff-matcher';
 
 @Component({
   selector: 'app-student-create-suggested-staff',

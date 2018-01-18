@@ -7,8 +7,9 @@ import { DebugElement } from '@angular/core';
 
 import { StaffNewProjectComponent } from './staff-new-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule, MatAutocompleteModule, MatDialogModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatAutocompleteModule, MatDialogModule, MatCheckboxModule } from '@angular/material';
 import { StaffService } from '../staff.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('StaffNewProjectComponent', () => {
   let component: StaffNewProjectComponent;
@@ -23,8 +24,9 @@ describe('StaffNewProjectComponent', () => {
         MatInputModule,
         MatAutocompleteModule,
         MatDialogModule,
-        HttpClientModule,
-        BrowserAnimationsModule
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+        MatCheckboxModule
       ],
       providers: [
         StaffService

@@ -1,11 +1,14 @@
 import { HttpClientModule } from '@angular/common/http';
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { StudentProjectsListComponent } from './student-projects-list.component';
 import { StudentService } from '../../student.service';
+import { MatSelectModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('StudentProjectsListComponent', () => {
   let component: StudentProjectsListComponent;
@@ -13,15 +16,17 @@ describe('StudentProjectsListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentProjectsListComponent ],
+      declarations: [StudentProjectsListComponent],
       imports: [
-        HttpClientModule
+        HttpClientTestingModule,
+        MatSelectModule,
+        BrowserAnimationsModule
       ],
       providers: [
         StudentService
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

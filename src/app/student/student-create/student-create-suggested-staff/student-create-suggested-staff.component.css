@@ -5,3 +5,7 @@
 .mat-expansion-panel-content {
   font-size: 15px !important;
 }
+
+.matched {
+  font-weight: bold;
+}

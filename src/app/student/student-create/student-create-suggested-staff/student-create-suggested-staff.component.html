@@ -14,11 +14,11 @@
         </mat-expansion-panel-header>
         Main research areas in order of speciality
         <ol>
-          <li *ngIf="staff.areas.first">{{staff.areas.first}}</li>
-          <li *ngIf="staff.areas.second">{{staff.areas.second}}</li>
-          <li *ngIf="staff.areas.third">{{staff.areas.third}}</li>
-          <li *ngIf="staff.areas.fourth">{{staff.areas.fourth}}</li>
-          <li *ngIf="staff.areas.fifth">{{staff.areas.fifth}}</li>
+          <li *ngIf="staff.areas.first" [class.matched]="areas.includes(staff.areas.first)">{{staff.areas.first}}</li>
+          <li *ngIf="staff.areas.second" [class.matched]="areas.includes(staff.areas.second)">{{staff.areas.second}}</li>
+          <li *ngIf="staff.areas.third" [class.matched]="areas.includes(staff.areas.third)">{{staff.areas.third}}</li>
+          <li *ngIf="staff.areas.fourth" [class.matched]="areas.includes(staff.areas.fourth)">{{staff.areas.fourth}}</li>
+          <li *ngIf="staff.areas.fifth" [class.matched]="areas.includes(staff.areas.fifth)">{{staff.areas.fifth}}</li>
         </ol>
         <mat-action-row>
           <button mat-button color="primary" type="button" (click)="selectStaffMember(staff)" matDialogClose>Select Staff</button>

@@ -2,15 +2,17 @@ import { StudentProjectsTableComponent } from '../student-projects-table.compone
 import { Project } from '../../../../core/project.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { StudentProjectsDialogConfirmComponent } from './student-projects-dialog-confirm/student-projects-dialog-confirm.component';
 import { AuthService } from '../../../../auth/auth.service';
+import {
+  StudentProjectsTableDialogConfirmComponent
+} from './student-projects-table-dialog-confirm/student-projects-table-dialog-confirm.component';
 
 @Component({
-  selector: 'app-student-projects-dialog',
-  templateUrl: './student-projects-dialog.component.html',
-  styleUrls: ['./student-projects-dialog.component.css']
+  selector: 'app-student-projects-table-dialog',
+  templateUrl: './student-projects-table-dialog.component.html',
+  styleUrls: ['./student-projects-table-dialog.component.css']
 })
-export class StudentProjectsDialogComponent implements OnInit {
+export class StudentProjectsTableDialogComponent implements OnInit {
   project: Project;
   projectChosen: boolean;
   constructor(public dialogRef: MatDialogRef<StudentProjectsTableComponent>,
@@ -25,7 +27,7 @@ export class StudentProjectsDialogComponent implements OnInit {
   }
 
   onContinue() {
-    this.dialog.open(StudentProjectsDialogConfirmComponent, {
+    this.dialog.open(StudentProjectsTableDialogConfirmComponent, {
       data: { project: this.project }
     });
   }

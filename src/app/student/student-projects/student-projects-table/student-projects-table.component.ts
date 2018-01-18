@@ -1,8 +1,8 @@
 import { Project } from '../../../core/project.model';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
-import { StudentProjectsDialogComponent } from './student-projects-dialog/student-projects-dialog.component';
 import { StudentService } from '../../student.service';
+import { StudentProjectsTableDialogComponent } from './student-projects-table-dialog/student-projects-table-dialog.component';
 
 @Component({
   selector: 'app-student-projects-table',
@@ -44,7 +44,7 @@ export class StudentProjectsTableComponent implements OnInit, AfterViewInit {
   }
 
   openDialog(project: Project) {
-    this.dialog.open(StudentProjectsDialogComponent, {
+    this.dialog.open(StudentProjectsTableDialogComponent, {
       data: { project: project }
     });
   }

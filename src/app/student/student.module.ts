@@ -1,11 +1,4 @@
-import {
-  StudentProjectsDialogConfirmComponent,
-  // tslint:disable-next-line:max-line-length
-} from './student-projects/student-projects-table/student-projects-dialog/student-projects-dialog-confirm/student-projects-dialog-confirm.component';
 import { StudentRoutingModule } from './student.routing';
-import {
-  StudentProjectsDialogComponent,
-} from './student-projects/student-projects-table/student-projects-dialog/student-projects-dialog.component';
 import { StudentService } from './student.service';
 import { CoreModule } from '../core/core.module';
 import { StudentProjectsTableComponent } from './student-projects/student-projects-table/student-projects-table.component';
@@ -42,6 +35,9 @@ import { StudentCreateComponent } from './student-create/student-create.componen
 import {
   StudentCreateSuggestedStaffComponent
 } from './student-create/student-create-suggested-staff/student-create-suggested-staff.component';
+import { StudentProjectsTableDialogComponent } from './student-projects/student-projects-table/student-projects-table-dialog/student-projects-table-dialog.component';
+import { StudentProjectsTableDialogConfirmComponent } from './student-projects/student-projects-table/student-projects-table-dialog/student-projects-table-dialog-confirm/student-projects-table-dialog-confirm.component';
+
 
 @NgModule({
   imports: [
@@ -77,8 +73,8 @@ import {
     StudentProjectsListComponent,
     StudentProjectsTableComponent,
     StudentHomeComponent,
-    StudentProjectsDialogComponent,
-    StudentProjectsDialogConfirmComponent,
+    StudentProjectsTableDialogComponent,
+    StudentProjectsTableDialogConfirmComponent,
     StudentProjectsConfirmationComponent,
     StudentCreateComponent,
     StudentCreateSuggestedStaffComponent
@@ -87,8 +83,8 @@ import {
     StudentService
   ],
   entryComponents: [
-    StudentProjectsDialogComponent,
-    StudentProjectsDialogConfirmComponent,
+    StudentProjectsTableDialogComponent,
+    StudentProjectsTableDialogConfirmComponent,
     StudentCreateSuggestedStaffComponent
   ]
 })

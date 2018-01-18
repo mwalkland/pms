@@ -4,6 +4,13 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { StaffProfileComponent } from './staff-profile.component';
+import { StaffService } from '../staff.service';
+import { StaffModule } from '../staff.module';
+import { StaffProfileConfirmedComponent } from './staff-profile-confirmed/staff-profile-confirmed.component';
+import { StaffProfileRequestsComponent } from './staff-profile-requests/staff-profile-requests.component';
+import { StaffProfileDetailsComponent } from './staff-profile-details/staff-profile-details.component';
+import { MatExpansionModule, MatIconModule, MatDialogModule } from '@angular/material';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('StaffProfileComponent', () => {
   let component: StaffProfileComponent;
@@ -11,7 +18,21 @@ describe('StaffProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StaffProfileComponent ]
+      declarations: [
+        StaffProfileComponent,
+        StaffProfileConfirmedComponent,
+        StaffProfileRequestsComponent,
+        StaffProfileDetailsComponent
+      ],
+      imports: [
+        MatExpansionModule,
+        MatIconModule,
+        HttpClientTestingModule,
+        MatDialogModule
+      ],
+      providers: [
+        StaffService
+      ]
     })
     .compileComponents();
   }));

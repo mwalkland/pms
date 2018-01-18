@@ -2,25 +2,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
-import { StaffProfileRequestsConfirmComponent } from './staff-profile-requests-confirm.component';
-import { StaffService } from '../../../staff.service';
+import { StudentProjectsTableDialogConfirmComponent } from './student-projects-table-dialog-confirm.component';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material';
+import { StudentService } from '../../../../student.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('StaffProfileRequestsConfirmComponent', () => {
-  let component: StaffProfileRequestsConfirmComponent;
-  let fixture: ComponentFixture<StaffProfileRequestsConfirmComponent>;
+describe('StudentProjectsTableDialogConfirmComponent', () => {
+  let component: StudentProjectsTableDialogConfirmComponent;
+  let fixture: ComponentFixture<StudentProjectsTableDialogConfirmComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [StaffProfileRequestsConfirmComponent],
+      declarations: [StudentProjectsTableDialogConfirmComponent],
       imports: [
         HttpClientTestingModule,
+        RouterTestingModule,
         MatDialogModule
       ],
       providers: [
-        StaffService,
+        StudentService,
         {
           provide: MatDialogRef,
           useValue: {}
@@ -28,14 +29,14 @@ describe('StaffProfileRequestsConfirmComponent', () => {
         {
           provide: MAT_DIALOG_DATA,
           useValue: {}
-        },
+        }
       ]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StaffProfileRequestsConfirmComponent);
+    fixture = TestBed.createComponent(StudentProjectsTableDialogConfirmComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

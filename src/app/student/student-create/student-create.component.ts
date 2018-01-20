@@ -6,6 +6,7 @@ import { StudentService } from '../student.service';
 import { Project } from '../../core/project.model';
 import { User } from '../../auth/user.model';
 import { StudentCreateSuggestedStaffComponent } from './student-create-suggested-staff/student-create-suggested-staff.component';
+import { StudentCreateConfirmDialogComponent } from './student-create-confirm-dialog/student-create-confirm-dialog.component';
 
 @Component({
   selector: 'app-student-create',
@@ -86,18 +87,17 @@ export class StudentCreateComponent implements OnInit {
     })[0];
 
     const project = new Project(
-      null,
+      undefined,
       values.name,
       values.description,
       type,
-      null,
+      undefined,
       values.areas,
       staff
     );
-    console.log(project);
-    // this.dialog.open(StaffConfirmProjectDialogComponent, {
-    //   data: { project: project }
-    // });
+    this.dialog.open(StudentCreateConfirmDialogComponent, {
+      data: { project: project }
+    });
   }
 
   removeArea(index: number) {

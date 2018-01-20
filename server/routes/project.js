@@ -24,7 +24,6 @@ router.post('/new', (req, res) => {
   const body = req.body;
   const decoded = jwt.decode(req.query.token);
   User.findById(decoded.user._id, (err, user) => {
-
     if (err) {
       return res.status(500).json({
         title: 'An error occured getting the user',

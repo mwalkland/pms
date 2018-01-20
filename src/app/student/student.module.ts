@@ -35,8 +35,16 @@ import { StudentCreateComponent } from './student-create/student-create.componen
 import {
   StudentCreateSuggestedStaffComponent
 } from './student-create/student-create-suggested-staff/student-create-suggested-staff.component';
-import { StudentProjectsTableDialogComponent } from './student-projects/student-projects-table/student-projects-table-dialog/student-projects-table-dialog.component';
-import { StudentProjectsTableDialogConfirmComponent } from './student-projects/student-projects-table/student-projects-table-dialog/student-projects-table-dialog-confirm/student-projects-table-dialog-confirm.component';
+import {
+  StudentProjectsTableDialogComponent
+} from './student-projects/student-projects-table/student-projects-table-dialog/student-projects-table-dialog.component';
+import {
+  StudentProjectsTableDialogConfirmComponent
+// tslint:disable-next-line:max-line-length
+} from './student-projects/student-projects-table/student-projects-table-dialog/student-projects-table-dialog-confirm/student-projects-table-dialog-confirm.component';
+import {
+  StudentCreateConfirmDialogComponent
+} from './student-create/student-create-confirm-dialog/student-create-confirm-dialog.component';
 
 
 @NgModule({
@@ -77,7 +85,8 @@ import { StudentProjectsTableDialogConfirmComponent } from './student-projects/s
     StudentProjectsTableDialogConfirmComponent,
     StudentProjectsConfirmationComponent,
     StudentCreateComponent,
-    StudentCreateSuggestedStaffComponent
+    StudentCreateSuggestedStaffComponent,
+    StudentCreateConfirmDialogComponent
   ],
   providers: [
     StudentService
@@ -85,7 +94,8 @@ import { StudentProjectsTableDialogConfirmComponent } from './student-projects/s
   entryComponents: [
     StudentProjectsTableDialogComponent,
     StudentProjectsTableDialogConfirmComponent,
-    StudentCreateSuggestedStaffComponent
+    StudentCreateSuggestedStaffComponent,
+    StudentCreateConfirmDialogComponent
   ]
 })
 export class StudentModule { }

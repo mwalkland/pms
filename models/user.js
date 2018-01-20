@@ -9,8 +9,7 @@ const schema = new Schema({
   password: { type: String, required: true },
   type: { type: String, required: true },
   studentInfo: {
-    chosenProject: { type: Schema.Types.ObjectId, ref: 'Project' },
-    createdProject: { type: Schema.Types.ObjectId, ref: 'Project' }
+    chosenProject: { type: Schema.Types.ObjectId, ref: 'Project' }
   },
   staffInfo: {
     suggestedProjects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],

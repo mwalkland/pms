@@ -16,8 +16,13 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <p *ngIf="project.maxStudents" class="max-students">Max Students: {{project.maxStudents}}</p>
-        <p *ngIf="!project.maxStudents" class="max-students">Max Students: Unlimited</p>
+        <p *ngIf="project.maxStudents && !project.isStudentProject" class="max-students">
+          <span class="bold-text">Max Students:</span> {{project.maxStudents}}
+        </p>
+        <p *ngIf="!project.maxStudents && !project.isStudentProject" class="max-students">
+          <span class="bold-text">Max Students:</span> Unlimited
+        </p>
+        <p *ngIf="project.isStudentProject" class="bold-text">This is a student proposed project.</p>
         <p>{{project.description}}</p>
 
         <mat-action-row>

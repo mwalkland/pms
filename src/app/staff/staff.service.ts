@@ -61,7 +61,7 @@ export class StaffService {
         for (const project of projects) {
           const newProject = new Project(
             project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-            project.staff, project.pendingStudents, null, null, project.students
+            project.staff, project.pendingStudents, null, null, project.students, project.isStudentProject
           );
           projectList.push(newProject);
         }

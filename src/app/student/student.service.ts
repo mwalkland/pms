@@ -62,7 +62,9 @@ export class StudentService {
           const staffList = response['staff'];
           const sList: User[] = [];
           for (const staff of staffList) {
-            const newStaff = new User(staff.email, staff.password, staff.firstname, staff.surname, staff.type, null, staff.staffInfo.areas);
+            const newStaff = new User(
+              staff.email, staff.password, staff.firstname, staff.surname, staff.type, null, staff.staffInfo.areas, staff._id
+            );
             sList.push(newStaff);
           }
           this.staff = sList;
@@ -112,6 +114,13 @@ export class StudentService {
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.patch('http://localhost:3000/user/addStudentProject' + token, body, { headers: headers })
+  }
+
+  createStudentProject(project: Project) {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const body = JSON.stringify(project);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post('http://localhost:3000/user/createStudentProject' + token, body, { headers: headers })
   }
 
   getSuggestedAreas(): Observable<string[]> {

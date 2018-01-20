@@ -1,0 +1,32 @@
+.title {
+  font-size: 18px;
+  margin: 0px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px #0355A6 solid;
+}
+
+.content {
+  margin-top: 0px;
+}
+
+.desc {
+  white-space: pre-line;
+}
+
+.areas {
+  margin-bottom: 5px;
+}
+
+.buttons-wrap {
+  justify-content: center;
+  padding: 30px;
+}
+
+h1 {
+  font-size: 25px !important;
+}
+
+mat-dialog-container {
+  min-width: 40vw;
+}

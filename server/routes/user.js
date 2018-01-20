@@ -62,6 +62,7 @@ router.patch('/updateStaffAreas', (req, res) => {
   });
 });
 
+// for a staff suggested project
 router.patch('/addStudentProject', (req, res) => {
   const body = req.body;
   const decoded = jwt.decode(req.query.token);
@@ -89,6 +90,50 @@ router.patch('/addStudentProject', (req, res) => {
 
     res.status(200).json({
       message: 'Student has been updated',
+    });
+  });
+});
+
+// for a student created project
+router.post('/createStudentProject', (req, res) => {
+  const body = req.body;
+  const decoded = jwt.decode(req.query.token);
+
+  User.findById(decoded.user._id, (err, user) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured getting the user',
+        error: err
+      });
+    }
+    const project = new Project({
+      name: body.name,
+      description: body.description,
+      type: body.type,
+      staff: body.staff.id,
+      full: true,
+      pendingStudents: user,
+      areas: body.areas,
+      isStudentProject: true
+    });
+
+    project.save((err, result) => {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured creating Project',
+          error: err
+        });
+      }
+
+      User.update(
+        { _id: user._id },
+        { $set: { 'studentInfo.chosenProject': result } }
+      ).exec();
+
+      res.status(201).json({
+        message: 'Project created',
+        obj: result
+      });
     });
   });
 });

@@ -11,9 +11,6 @@ import {
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { StaffNewProjectComponent } from './staff-new-project/staff-new-project.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {
-  StaffConfirmProjectDialogComponent,
-} from './staff-new-project/staff-confirm-project-dialog/staff-confirm-project-dialog.component';
 import { StaffRoutingModule } from './staff.routing';
 import { CoreModule } from '../core/core.module';
 import { StaffService } from './staff.service';
@@ -27,6 +24,9 @@ import {
 import {
   StaffProfileDetailsEditComponent
 } from './staff-profile/staff-profile-details/staff-profile-details-edit/staff-profile-details-edit.component';
+import {
+  StaffNewProjectConfirmDialogComponent
+} from './staff-new-project/staff-new-project-confirm-dialog/staff-new-project-confirm-dialog.component';
 
 @NgModule({
   imports: [
@@ -52,7 +52,7 @@ import {
     StaffHeaderComponent,
     StaffHomeComponent,
     StaffNewProjectComponent,
-    StaffConfirmProjectDialogComponent,
+    StaffNewProjectConfirmDialogComponent,
     StaffProfileComponent,
     StaffProfileDetailsComponent,
     StaffProfileRequestsComponent,
@@ -64,7 +64,7 @@ import {
     StaffService
   ],
   entryComponents: [
-    StaffConfirmProjectDialogComponent,
+    StaffNewProjectConfirmDialogComponent,
     StaffProfileRequestsConfirmComponent,
     StaffProfileDetailsEditComponent
   ]

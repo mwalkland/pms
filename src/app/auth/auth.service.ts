@@ -17,10 +17,6 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user'));
   }
 
-  hasProjectChosen(): boolean {
-    return JSON.parse(localStorage.getItem('user')).projectChosen;
-  }
-
   signup(user: User) {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

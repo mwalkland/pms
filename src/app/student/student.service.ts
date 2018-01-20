@@ -26,6 +26,10 @@ export class StudentService {
     return this.browseBy;
   }
 
+  hasProjectChosen(): boolean {
+    return JSON.parse(localStorage.getItem('user')).projectChosen;
+  }
+
   get staff(): User[] {
     return this._staff;
   }

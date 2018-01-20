@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { MatAutocomplete, MatAutocompleteTrigger, MatDialog, MatCheckbox } from '@angular/material';
 import { startWith } from 'rxjs/operator/startWith';
 import { StaffService } from '../staff.service';
-import { StaffConfirmProjectDialogComponent } from './staff-confirm-project-dialog/staff-confirm-project-dialog.component';
 import { Project } from '../../core/project.model';
+import { StaffNewProjectConfirmDialogComponent } from './staff-new-project-confirm-dialog/staff-new-project-confirm-dialog.component';
 
 @Component({
   selector: 'app-staff-new-project',
@@ -105,7 +105,7 @@ export class StaffNewProjectComponent implements OnInit {
       values.maxStudents,
       values.areas
     );
-    this.dialog.open(StaffConfirmProjectDialogComponent, {
+    this.dialog.open(StaffNewProjectConfirmDialogComponent, {
       data: { project: project }
     });
 

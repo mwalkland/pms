@@ -3,19 +3,19 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { StaffConfirmProjectDialogComponent } from './staff-confirm-project-dialog.component';
 import { StaffService } from '../../staff.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Project } from '../../../core/project.model';
+import { StaffNewProjectConfirmDialogComponent } from './staff-new-project-confirm-dialog.component';
 
 describe('StaffConfirmProjectDialogComponent', () => {
-  let component: StaffConfirmProjectDialogComponent;
-  let fixture: ComponentFixture<StaffConfirmProjectDialogComponent>;
+  let component: StaffNewProjectConfirmDialogComponent;
+  let fixture: ComponentFixture<StaffNewProjectConfirmDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StaffConfirmProjectDialogComponent ],
+      declarations: [ StaffNewProjectConfirmDialogComponent ],
       imports: [
         HttpClientTestingModule
       ],
@@ -35,7 +35,7 @@ describe('StaffConfirmProjectDialogComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StaffConfirmProjectDialogComponent);
+    fixture = TestBed.createComponent(StaffNewProjectConfirmDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

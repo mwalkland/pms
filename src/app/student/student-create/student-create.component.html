@@ -66,11 +66,12 @@
           (click)="getStaffSuggestions()">Suggest
         </button>
       </div>
+
       <div class="submit-wrap">
-        <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" class="submit" [disabled]="!form.valid">Submit</button>
+        <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" class="submit" [disabled]="!form.valid || projectChosen">Submit</button>
       </div>
-      <div class="success-div" *ngIf="projectCreated">
-        <p>Project successfully created.</p>
+      <div *ngIf="projectChosen" class="error">
+        <mat-error>You have already chosen a project.</mat-error>
       </div>
     </form>
   </div>

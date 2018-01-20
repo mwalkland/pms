@@ -19,10 +19,17 @@
 }
 
 .buttons-wrap {
+  flex-direction: column;
   justify-content: center;
   padding: 30px;
+  align-items: center;
 }
 
 h1 {
   font-size: 25px !important;
+}
+
+.error {
+  text-align: center;
+  margin-top: 10px;
 }

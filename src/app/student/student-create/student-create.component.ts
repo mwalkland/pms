@@ -24,8 +24,8 @@ export class StudentCreateComponent implements OnInit {
   @ViewChild('research') researchCheckbox: MatCheckbox;
   @ViewChild('staffSelectBox') staffSelectBox: MatSelect;
   areaList: string[];
-  projectCreated = false;
   staffList: User[];
+  projectChosen = false;
 
   constructor(private builder: FormBuilder,
     public dialog: MatDialog,
@@ -49,6 +49,7 @@ export class StudentCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.projectChosen = this.studentService.hasProjectChosen();
     this.studentService.getStaff().subscribe((staffList: User[]) => {
       this.staffList = staffList;
     });

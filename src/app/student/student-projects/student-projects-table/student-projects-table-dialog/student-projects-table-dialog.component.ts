@@ -6,6 +6,7 @@ import { AuthService } from '../../../../auth/auth.service';
 import {
   StudentProjectsTableDialogConfirmComponent
 } from './student-projects-table-dialog-confirm/student-projects-table-dialog-confirm.component';
+import { StudentService } from '../../../student.service';
 
 @Component({
   selector: 'app-student-projects-table-dialog',
@@ -18,12 +19,12 @@ export class StudentProjectsTableDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<StudentProjectsTableComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { project: Project },
     private dialog: MatDialog,
-    private authService: AuthService) {
+    private studentService: StudentService) {
     this.project = data.project;
   }
 
   ngOnInit() {
-    this.projectChosen = this.authService.hasProjectChosen();
+    this.projectChosen = this.studentService.hasProjectChosen();
   }
 
   onContinue() {

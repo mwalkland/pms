@@ -21,7 +21,7 @@ export class StaffConfirmProjectDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.project);
+    
   }
 
   onSubmit() {

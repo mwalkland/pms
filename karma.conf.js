@@ -14,7 +14,7 @@ module.exports = function (config) {
     ],
     files: [
       {pattern: './src/angular-material-colour-scheme.css', included: true, watched: true},
-      {pattern: './public/images', included: true, watched: true},
+      {pattern: './public/images/*.jpg', included: true, watched: true},
     ],
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser

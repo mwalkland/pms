@@ -6,8 +6,8 @@ export class StaffMatcher {
 
   }
 
-  public findStaff() {
-    const scores = [], finalArray: { email: string, score: number }[] = [];
+  public findStaff(): { email: string, score: number }[] {
+    const scores: { email: string, score: number }[] = [], finalArray: { email: string, score: number }[] = [];
 
     for (const staff of this.staffList) {
       const score = this.getStaffScore(staff),
@@ -15,11 +15,16 @@ export class StaffMatcher {
       scores.push(object)
     }
 
+    const sorted = this.sortScores(scores);
+
+    return this.getMostRelevantStaff(sorted);
+  }
+
+  sortScores(scores: { email: string, score: number }[]) {
     const sorted: { email: string, score: number }[] = scores.sort((a, b) => {
       return b.score - a.score;
     });
-
-    return this.getMostRelevantStaff(sorted);
+    return sorted;
   }
 
   getStaffScore(staff: User): number {
@@ -47,22 +52,16 @@ export class StaffMatcher {
       resultArray.push(sorted[0]);
     }
 
-    let count = 0;
-    for (let i = 1; i < sorted.length - 1; i++) {
-
-      if (count === 3) {
-        break;
-      }
+    for (let i = 1; i < sorted.length; i++) {
 
       const element = sorted[i];
       const previous = sorted[i - 1];
 
-      if (element.score === 0) {
+      if (
+        element.score === 0 ||
+        (element.score !== previous.score && resultArray.length >= 3)
+      ) {
         break;
-      }
-
-      if (element.score !== previous.score) {
-        count++;
       }
 
       resultArray.push(element);

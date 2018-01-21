@@ -189,17 +189,19 @@ router.patch('/rejectProject', (req, res) => {
 
 router.get('/getStudentProject', (req, res) => {
   const decoded = jwt.decode(req.query.token);
-  Project.findOne({ students: decoded.user._id }, (err, project) => {
-    if (err) {
-      return res.status(500).json({
-        title: 'Could not get student project',
-        error: err
+  Project.findOne({ students: decoded.user._id })
+    .populate('staff')
+    .exec((err, project) => {
+      if (err) {
+        return res.status(500).json({
+          title: 'Could not get student project',
+          error: err
+        });
+      }
+      return res.status(200).json({
+        project: project
       });
-    }
-    return res.status(200).json({
-      project: project
     });
-  });
 });
 
 /*

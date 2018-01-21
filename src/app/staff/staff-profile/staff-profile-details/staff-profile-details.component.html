@@ -5,13 +5,13 @@
   </h2>
 
 
-  <div class="areas-wrap">
+  <div class="areas-wrap" *ngIf="areas">
     <ol>
-      <li *ngIf="areas && areas.first.length !== 0">{{areas.first}}</li>
-      <li *ngIf="areas && areas.second.length !== 0">{{areas.second}}</li>
-      <li *ngIf="areas && areas.third.length !== 0">{{areas.third}}</li>
-      <li *ngIf="areas && areas.fourth.length !== 0">{{areas.fourth}}</li>
-      <li *ngIf="areas && areas.fifth.length !== 0">{{areas.fifth}}</li>
+      <li *ngIf="areas.first">{{areas.first}}</li>
+      <li *ngIf="areas.second">{{areas.second}}</li>
+      <li *ngIf="areas.third">{{areas.third}}</li>
+      <li *ngIf="areas.fourth">{{areas.fourth}}</li>
+      <li *ngIf="areas.fifth">{{areas.fifth}}</li>
     </ol>
   </div>
 

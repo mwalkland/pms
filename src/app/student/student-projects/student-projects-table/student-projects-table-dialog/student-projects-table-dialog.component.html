@@ -32,7 +32,6 @@
   <div class="buttons-wrap" mat-dialog-actions>
     <div class="buttons">
       <button [disabled]="projectChosen" mat-button (click)="onContinue()">Continue</button>
-      <!-- <button mat-button (click)="onContinue()">Continue</button> -->
       <button mat-button mat-dialog-close>Back</button>
     </div>
     <div *ngIf="projectChosen" class="error">

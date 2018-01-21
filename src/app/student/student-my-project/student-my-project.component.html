@@ -2,7 +2,7 @@
 
   <app-title [header]="'My Project'"></app-title>
 
-  <div class="contents">
+  <div class="contents" *ngIf="project; else noProject">
 
     <div class="wrap">
       <p class="header">Project Name</p>
@@ -12,6 +12,11 @@
     <div class="wrap">
       <p class="header">Project Type</p>
       <p class="content">{{ project.type }}</p>
+    </div>
+    <br>
+    <div class="wrap">
+      <p class="header">Staff Member</p>
+      <p class="content">{{ project.staff.firstname }} {{ project.staff.surname }}</p>
     </div>
     <br>
     <div class="wrap desc">
@@ -28,5 +33,11 @@
     </div>
 
   </div>
+
+  <ng-template #noProject>
+    <div class="contents">
+      <h2>Your project has not yet been confirmed.</h2>
+    </div>
+  </ng-template>
 
 </div>

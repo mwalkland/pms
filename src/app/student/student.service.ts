@@ -137,15 +137,18 @@ export class StudentService {
       return this.http.get('http://localhost:3000/project/getStudentProject' + token)
         .map((response: Response) => {
           const project = response['project'];
-          const newProject = new Project(
-            project._id,
-            project.name,
-            project.description,
-            project.type,
-            project.maxStudents,
-            project.areas,
-            project.staff
-          );
+          let newProject: Project;
+          if (project) {
+            newProject = new Project(
+              project._id,
+              project.name,
+              project.description,
+              project.type,
+              project.maxStudents,
+              project.areas,
+              project.staff
+            );
+          }
           this.chosenProject = newProject;
           return newProject;
         });

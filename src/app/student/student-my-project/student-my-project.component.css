@@ -21,14 +21,19 @@
   margin-top: 70px;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .wrap {
   width: 80%;
 }
 
-.desc {
+.desc .content {
   white-space: pre-line;
+}
+
+.areas {
+ margin: 0px; 
 }
 
 @media(max-width: 568px) {

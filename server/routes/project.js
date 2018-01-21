@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
 const Project = require('../../models/project');
 const User = require('../../models/user');
@@ -188,6 +187,20 @@ router.patch('/rejectProject', (req, res) => {
   });
 });
 
+router.get('/getStudentProject', (req, res) => {
+  const decoded = jwt.decode(req.query.token);
+  Project.findOne({ students: decoded.user._id }, (err, project) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'Could not get student project',
+        error: err
+      });
+    }
+    return res.status(200).json({
+      project: project
+    });
+  });
+});
 
 /*
 NOTE - This is accessing the 'areas' collection which is NOT a Mongoose Schema
@@ -209,5 +222,6 @@ router.get('/getSuggestedAreas', (req, res) => {
     });
   });
 });
+
 
 module.exports = router;

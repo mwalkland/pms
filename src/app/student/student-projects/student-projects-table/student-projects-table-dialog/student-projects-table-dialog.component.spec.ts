@@ -3,10 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { StudentProjectsTableDialogComponent } from './student-projects-table-dialog.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material';
-import { AuthService } from '../../../../auth/auth.service';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule, MatFormFieldModule } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Project } from '../../../../core/project.model';
+import { StudentService } from '../../../student.service';
 
 
 describe('StudentProjectsTableDialogComponent', () => {
@@ -18,10 +18,11 @@ describe('StudentProjectsTableDialogComponent', () => {
       declarations: [StudentProjectsTableDialogComponent],
       imports: [
         MatDialogModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatFormFieldModule
       ],
       providers: [
-        AuthService,
+        StudentService,
         {
           provide: MatDialogRef,
           useValue: {}

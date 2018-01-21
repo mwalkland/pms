@@ -39,6 +39,12 @@ describe('StudentCreateComponent', () => {
       ]
     })
       .compileComponents();
+
+      const store = { user: JSON.stringify({ name: 'name', projectChosen: true }) };
+
+      spyOn(localStorage, 'getItem').and.callFake((key: string) => {
+        return store[key] || null;
+      });
   }));
 
   beforeEach(() => {

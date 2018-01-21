@@ -40,8 +40,9 @@ import {
 } from './student-projects/student-projects-table/student-projects-table-dialog/student-projects-table-dialog.component';
 import {
   StudentProjectsTableDialogConfirmComponent
-// tslint:disable-next-line:max-line-length
+  // tslint:disable-next-line:max-line-length
 } from './student-projects/student-projects-table/student-projects-table-dialog/student-projects-table-dialog-confirm/student-projects-table-dialog-confirm.component';
+import { StudentMyProjectComponent } from './student-my-project/student-my-project.component';
 import {
   StudentCreateConfirmDialogComponent
 } from './student-create/student-create-confirm-dialog/student-create-confirm-dialog.component';
@@ -86,7 +87,8 @@ import {
     StudentProjectsConfirmationComponent,
     StudentCreateComponent,
     StudentCreateSuggestedStaffComponent,
-    StudentCreateConfirmDialogComponent
+    StudentCreateConfirmDialogComponent,
+    StudentMyProjectComponent
   ],
   providers: [
     StudentService

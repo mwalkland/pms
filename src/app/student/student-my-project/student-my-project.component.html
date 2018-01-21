@@ -1,0 +1,38 @@
+<div class="container">
+
+  <div class="logo">
+    <img src="images/exeter-logo.jpg" alt="">
+  </div>
+
+  <div class="title">
+    <h1>My Project</h1>
+  </div>
+
+  <div class="contents">
+
+    <div class="wrap">
+      <p class="header">Project Name</p>
+      <p class="content">{{ project.name }}</p>
+    </div>
+    <br>
+    <div class="wrap">
+      <p class="header">Project Type</p>
+      <p class="content">{{ project.type }}</p>
+    </div>
+    <br>
+    <div class="wrap desc">
+      <p class="header">Description</p>
+      <p class="content">{{ project.description }}</p>
+    </div>
+    <br>
+    <div class="wrap">
+      <p class="header">Areas of Research</p>
+      <p class="content areas" *ngIf="project.areas.length === 0;else elseBlock">None Specified</p>
+      <ng-template #elseBlock>
+        <p class="content areas" *ngFor="let area of project.areas">{{area}}</p>
+      </ng-template>
+    </div>
+
+  </div>
+
+</div>

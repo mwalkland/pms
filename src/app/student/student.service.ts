@@ -10,6 +10,8 @@ export class StudentService {
   private _staff: User[];
   private _areas: string[];
   private _projects: Project[];
+  private _chosenProject: Project;
+  private _suggestedAreas: string[];
   browseBy = 'Staff';
   browseByChanged = new Subject<string>();
   filterSelected = new Subject<string>();
@@ -52,6 +54,22 @@ export class StudentService {
 
   set areas(areas: string[]) {
     this._areas = areas;
+  }
+
+  get chosenProject(): Project {
+    return this._chosenProject;
+  }
+
+  set chosenProject(project: Project) {
+    this._chosenProject = project;
+  }
+
+  get suggestedAreas(): string[] {
+    return this._suggestedAreas;
+  }
+
+  set suggestedAreas(areas: string[]) {
+    this._suggestedAreas = areas;
   }
 
   changeFilter(filter: string) {
@@ -113,6 +131,29 @@ export class StudentService {
     }
   }
 
+  getStudentProject(): Observable<Project> {
+    if (this.chosenProject == null) {
+      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+      return this.http.get('http://localhost:3000/project/getStudentProject' + token)
+        .map((response: Response) => {
+          const project = response['project'];
+          const newProject = new Project(
+            project._id,
+            project.name,
+            project.description,
+            project.type,
+            project.maxStudents,
+            project.areas,
+            project.staff
+          );
+          this.chosenProject = newProject;
+          return newProject;
+        });
+    } else {
+      return Observable.of(this.chosenProject);
+    }
+  }
+
   updateStudentProject(project: Project) {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = JSON.stringify(project);
@@ -128,11 +169,16 @@ export class StudentService {
   }
 
   getSuggestedAreas(): Observable<string[]> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/project/getSuggestedAreas' + token)
-      .map((response: { areas: string[] }) => {
-        return response.areas;
-      });
+    if (this.suggestedAreas == null) {
+      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+      return this.http.get('http://localhost:3000/project/getSuggestedAreas' + token)
+        .map((response: { areas: string[] }) => {
+          this.suggestedAreas = response.areas;
+          return response.areas;
+        });
+    } else {
+      return Observable.of(this.suggestedAreas);
+    }
   }
 
 }

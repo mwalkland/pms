@@ -9,6 +9,7 @@ import {
   StudentProjectsConfirmationComponent
 } from './student-projects/student-projects-confirmation/student-projects-confirmation.component';
 import { StudentCreateComponent } from './student-create/student-create.component';
+import { StudentMyProjectComponent } from './student-my-project/student-my-project.component';
 
 const studentRoutes: Routes = [
   {
@@ -37,6 +38,10 @@ const studentRoutes: Routes = [
       {
         path: 'create',
         component: StudentCreateComponent
+      },
+      {
+        path: 'my-project',
+        component: StudentMyProjectComponent
       }
     ]
   }

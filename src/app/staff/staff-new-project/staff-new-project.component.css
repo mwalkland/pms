@@ -2,23 +2,6 @@
   width: 100%;
 }
 
-.logo {
-  margin-top: 20px;
-  position: absolute;
-  float: left;
-  margin-left: 20px;
-}
-
-.title {
-  display: flex;
-  justify-content: center;
-}
-
-img {
-  width: 225px;
-  float: left;
-}
-
 .content {
   display: flex;
   margin-top: 70px;
@@ -130,14 +113,6 @@ img {
 }
 
 @media(max-width: 868px) {
-  .title {
-    display: block;
-    text-align: center;
-  }
-  .logo {
-    text-align: center;
-    position: relative;
-  }
   .container {
     display: flex;
     align-items: center;

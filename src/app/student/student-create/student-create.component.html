@@ -1,14 +1,8 @@
 <div class="container">
 
-  <div class="logo">
-    <img src="images/exeter-logo.jpg" alt="">
-  </div>
+  <app-title [header]="'Choose Your Own'"></app-title>
 
-  <div class="title">
-    <h1>Choose Your Own</h1>
-  </div>
-
-  <div class="content">
+  <div class="contents">
     <form [formGroup]="form" class="form">
 
       <div class="control type" formArrayName="type">

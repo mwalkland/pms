@@ -1,0 +1,37 @@
+.container {
+  display: block;
+}
+
+.logo {
+  margin-top: 20px;
+  position: absolute;
+  float: left;
+  margin-left: 20px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  width: 225px;
+  float: left;
+}
+
+@media(max-width: 868px) {
+  .container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .title {
+    display: block;
+    text-align: center;
+  }
+  .logo {
+    text-align: center;
+    position: relative;
+    margin-left: 0px;
+  }
+}

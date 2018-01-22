@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <style>
+    p {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body height="800px">
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <table align="center" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td>
+              <div class="header" style="text-align:center">
+                {{>header}}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td width="600">
+              <div class="body" style="margin-top:20px">
+                {{{body}}}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="footer">
+                {{>footer}}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+  </table>
+
+</body>
+
+</html>

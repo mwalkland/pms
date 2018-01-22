@@ -157,18 +157,18 @@ export class StudentService {
     }
   }
 
-  updateStudentProject(project: Project) {
+  addStudentProject(project: Project) {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.patch('http://localhost:3000/user/addStudentProject' + token, body, { headers: headers })
+    return this.http.patch('http://localhost:3000/project/addStudentProject' + token, body, { headers: headers })
   }
 
   createStudentProject(project: Project) {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/user/createStudentProject' + token, body, { headers: headers })
+    return this.http.post('http://localhost:3000/project/createStudentProject' + token, body, { headers: headers })
   }
 
   getSuggestedAreas(): Observable<string[]> {

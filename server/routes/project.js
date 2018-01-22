@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const Project = require('../../models/project');
 const User = require('../../models/user');
+const EmailController = require('../email');
 
 router.use('/', (req, res, next) => {
   jwt.verify(req.query.token, 'WO3V%oIBK5c2', (err) => {
@@ -170,6 +171,7 @@ router.patch('/confirmProject', (req, res) => {
   const body = req.body;
   const project = body.project;
   const student = body.student;
+  const decoded = jwt.decode(req.query.token);
 
   // note the different in id and _id
   Project.findByIdAndUpdate(project.id, {
@@ -186,6 +188,17 @@ router.patch('/confirmProject', (req, res) => {
       project.full = true;
       project.save();
     }
+
+    User.findById(decoded.user._id, (err, user) => {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured getting the user',
+          error: err
+        });
+      }
+      const email = new EmailController();
+      email.sendStudentEmail(user.firstname + ' ' + user.surname, project.name, true);
+    });
   });
   res.status(200).json({
     message: 'Successfully updated the projects',
@@ -196,6 +209,7 @@ router.patch('/rejectProject', (req, res) => {
   const body = req.body;
   const project = body.project;
   const student = body.student;
+  const decoded = jwt.decode(req.query.token);
 
   User.findById(student._id, (err, student) => {
     if (err) {
@@ -216,6 +230,16 @@ router.patch('/rejectProject', (req, res) => {
 
       student.save();
       project.save();
+    });
+    User.findById(decoded.user._id, (err, user) => {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured getting the user',
+          error: err
+        });
+      }
+      const email = new EmailController();
+      email.sendStudentEmail(user.firstname + ' ' + user.surname, project.name, false);
     });
   });
 
@@ -258,6 +282,87 @@ router.get('/getSuggestedAreas', (req, res) => {
     }
     res.status(200).json({
       areas: response.areas
+    });
+  });
+});
+
+// for a staff suggested project
+router.patch('/addStudentProject', (req, res) => {
+  const body = req.body;
+  const decoded = jwt.decode(req.query.token);
+  const updateObj = {
+    $set: { status: 'pending' },
+    $push: { pendingStudents: decoded.user._id }
+  };
+
+  Project.findByIdAndUpdate(body.id, updateObj, { new: true }, (err, project) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured finding the project',
+        error: err
+      });
+    }
+
+    User.findByIdAndUpdate(decoded.user._id, { $set: { 'studentInfo.chosenProject': project } }, (err, user) => {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured updating the user',
+          error: err
+        });
+      }
+      const email = new EmailController();
+      email.sendStaffEmail(user.firstname + ' ' + user.surname, project.name);
+    });
+
+    res.status(200).json({
+      message: 'Student has been updated',
+    });
+  });
+});
+
+// for a student created project
+router.post('/createStudentProject', (req, res) => {
+  const body = req.body;
+  const decoded = jwt.decode(req.query.token);
+
+  User.findById(decoded.user._id, (err, user) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured getting the user',
+        error: err
+      });
+    }
+    const project = new Project({
+      name: body.name,
+      description: body.description,
+      type: body.type,
+      staff: body.staff.id,
+      full: true,
+      pendingStudents: user,
+      areas: body.areas,
+      isStudentProject: true
+    });
+
+    project.save((err, result) => {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured creating Project',
+          error: err
+        });
+      }
+
+      User.update(
+        { _id: user._id },
+        { $set: { 'studentInfo.chosenProject': result } }
+      ).exec();
+
+      const email = new EmailController();
+      email.sendStaffEmail(user.firstname + ' ' + user.surname, project.name);
+
+      res.status(201).json({
+        message: 'Project created',
+        obj: result
+      });
     });
   });
 });

@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./server/routes/auth');
 const userRoutes = require('./server/routes/user');
 const projectRoutes = require('./server/routes/project');
+const emailRoutes = require('./server/routes/email');
 
 const app = express();
 
@@ -23,11 +24,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views')));
 
 // Set our api routes
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/project', projectRoutes);
+app.use('/email', emailRoutes);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

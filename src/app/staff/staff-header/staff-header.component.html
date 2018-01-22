@@ -5,7 +5,8 @@
   <div class="nav-list" style="display:none" #navlist>
     <mat-nav-list class="nav nav-left">
       <a mat-list-item (click)="show()" routerLink="/staff" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a mat-list-item (click)="show()" routerLink="/staff/new" routerLinkActive="active">New</a>
+      <a mat-list-item (click)="show()" routerLink="./new" routerLinkActive="active">New</a>
+      <a mat-list-item (click)="show()" routerLink="./projects" routerLinkActive="active">Projects</a>
     </mat-nav-list>
     <mat-nav-list class="nav nav-right">
       <a mat-list-item routerLink="/staff/profile" routerLinkActive="active">Profile</a>

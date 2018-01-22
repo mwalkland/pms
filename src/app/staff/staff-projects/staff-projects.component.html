@@ -1,0 +1,32 @@
+<div class="container">
+  <app-title [header]="'My Projects'"></app-title>
+
+  <div class="content">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let project of projects">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <p class="title">{{ project.name }}</p>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="body">
+          <div class="max-students">
+            <span class="bold-text">Max Students:</span>
+            <span *ngIf="project.maxStudents">{{project.maxStudents}}</span>
+            <span *ngIf="!project.maxStudents">Unlimited</span>
+          </div>
+          <div class="areas-wrap">
+            <p class="areas-title bold-text">Areas:</p>
+            <p class="areas" *ngFor="let area of project.areas">{{area}}</p>
+          </div>
+          <div class="description">
+            <p>{{project.description}}</p>
+          </div>
+        </div>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="onEdit(project)">Edit</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

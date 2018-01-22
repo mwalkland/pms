@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>Edit Project</h2>
+
+<mat-dialog-content class="content">
+  <form [formGroup]="form" class="form">
+
+    <div class="control type" formArrayName="type">
+      <mat-checkbox #software (change)="onChangeCheckbox('Software Engineering', $event.checked)">Software Engineering</mat-checkbox>
+      <mat-checkbox #research (change)="onChangeCheckbox('Research-based', $event.checked)">Research-based</mat-checkbox>
+    </div>
+
+    <br>
+
+    <mat-form-field class="control name">
+      <input matInput placeholder="Project Name" formControlName="name" (keydown.enter)="$event.preventDefault()">
+      <mat-error *ngIf="form.controls['name'].hasError('required')">The project name is required.</mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="control description">
+      <textarea matInput placeholder="Description" formControlName="description" matTextareaAutosize matAutosizeMinRows=6></textarea>
+      <mat-error *ngIf="form.controls['description'].hasError('required')">A description is required.</mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="control max-students">
+      <input matInput type="number" placeholder="Max number of students" formControlName="maxStudents" (keydown.enter)="$event.preventDefault()">
+      <mat-hint>Leave empty for unlimited.</mat-hint>
+    </mat-form-field>
+
+    <br>
+
+    <div class="areas" formArrayName="areas">
+      <mat-form-field class="control area">
+        <input matInput placeholder="Areas of Research" id="autocomplete" [matAutocomplete]="auto" #areaName id="areaInput" (keydown.enter)="$event.preventDefault()"
+          (keyup.enter)="addArea(areaName.value)" [formControl]="areaCtrl">
+        <mat-hint>At least one area is required.</mat-hint>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let a of filteredAreas | async" [value]="a">
+            <span>{{ a }}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button mat-button color="primary" type="button" (click)="addArea(areaName.value)">Add</button>
+      <div class="area-wrap">
+        <div class="area-list-wrap" *ngFor="let area of form.get('areas').value; let i = index">
+          {{area}}
+          <i class="material-icons delete-button" style="color:black;font-size:20px;" (click)="removeArea(i)">clear</i>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" type="submit" (click)="onSave()" class="submit" [disabled]="!form.valid" mat-dialog-close>Save</button>
+  <button mat-button class="submit" mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

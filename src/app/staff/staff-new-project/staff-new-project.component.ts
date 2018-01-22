@@ -85,7 +85,6 @@ export class StaffNewProjectComponent implements OnInit {
       this.areas.insert(0, new FormControl(name));
       this.areaCtrl.reset();
     }
-    console.log(this.form)
   }
 
   onSubmit() {
@@ -96,7 +95,6 @@ export class StaffNewProjectComponent implements OnInit {
     } else {
       type = values.type[0];
     }
-    console.log(type);
     const project = new Project(
       null,
       values.name,

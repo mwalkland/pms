@@ -1,0 +1,61 @@
+.area-wrap {
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.area-list-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.mat-checkbox {
+  color: rgba(0, 0, 0, .54);
+  padding: 2px 10px 2px 2px;
+}
+
+.control {
+  width: 100%;
+}
+
+.max-students, .area {
+  width: 90%;
+}
+
+.mat-dialog-actions {
+  justify-content: center;
+}
+
+/* @media(max-width: 1048px) {
+  .control {
+    width: 600px;
+  }
+  .area {
+    width: 350px;
+  }
+  .area-wrap {
+    max-width: 600px;
+  }
+}
+
+@media(max-width: 568px) {
+  .control {
+    width: 200px;
+  }
+  .area {
+    width: 200px;
+  }
+  .area-wrap {
+    max-width: 200px;
+  }
+}
+
+@media(max-width: 568px) {
+  .control {
+    width: 200px;
+  }
+  .area {
+    width: 200px;
+  }
+  .area-wrap {
+    max-width: 200px;
+  } */

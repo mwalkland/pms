@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { StaffComponent } from './staff.component';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { StaffProfileComponent } from './staff-profile/staff-profile.component';
+import { StaffProjectsComponent } from './staff-projects/staff-projects.component';
 
 const staffRoutes: Routes = [
   {
@@ -24,6 +25,11 @@ const staffRoutes: Routes = [
       {
         path: 'profile',
         component: StaffProfileComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'projects',
+        component: StaffProjectsComponent,
         canActivate: [AuthGuard]
       }
     ]

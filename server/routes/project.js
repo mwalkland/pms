@@ -61,6 +61,28 @@ router.post('/new', (req, res) => {
   });
 });
 
+router.patch('/updateStaffProject', (req, res) => {
+  const body = req.body;
+  Project.findByIdAndUpdate(body.id, {
+    name: body.name,
+    description: body.description,
+    type: body.type,
+    maxStudents: body.maxStudents,
+    areas: body.areas
+  }, { new: true }, (err, project) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured updating Project',
+        error: err
+      });
+    }
+    res.status(200).json({
+      message: 'Project updated',
+      project: project
+    });
+  });
+});
+
 router.get('/getAreas', (req, res) => {
   Project.find().distinct('areas', (err, areas) => {
     if (err) {
@@ -126,6 +148,21 @@ router.get('/getConfirmedProjects', (req, res) => {
           projects: projects
         });
       });
+  });
+});
+
+router.get('/getStaffProjects', (req, res) => {
+  const decoded = jwt.decode(req.query.token);
+  Project.find({ staff: decoded.user._id }, (err, projects) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured getting the projects',
+        error: err
+      });
+    }
+    res.status(200).json({
+      projects: projects
+    });
   });
 });
 

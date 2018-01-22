@@ -24,9 +24,12 @@ import {
 import {
   StaffProfileDetailsEditComponent
 } from './staff-profile/staff-profile-details/staff-profile-details-edit/staff-profile-details-edit.component';
+
+import { StaffProjectsComponent } from './staff-projects/staff-projects.component';
 import {
   StaffNewProjectConfirmDialogComponent
 } from './staff-new-project/staff-new-project-confirm-dialog/staff-new-project-confirm-dialog.component';
+import { StaffProjectsEditComponent } from './staff-projects/staff-projects-edit/staff-projects-edit.component';
 
 @NgModule({
   imports: [
@@ -58,7 +61,9 @@ import {
     StaffProfileRequestsComponent,
     StaffProfileConfirmedComponent,
     StaffProfileRequestsConfirmComponent,
-    StaffProfileDetailsEditComponent
+    StaffProfileDetailsEditComponent,
+    StaffProjectsComponent,
+    StaffProjectsEditComponent
   ],
   providers: [
     StaffService
@@ -66,7 +71,8 @@ import {
   entryComponents: [
     StaffNewProjectConfirmDialogComponent,
     StaffProfileRequestsConfirmComponent,
-    StaffProfileDetailsEditComponent
+    StaffProfileDetailsEditComponent,
+    StaffProjectsEditComponent
   ]
 })
 export class StaffModule { }

@@ -12,6 +12,7 @@ export class StaffService {
   resetForm = new Subject<void>();
   removeProjectFromRequests = new Subject<Project>();
   addProjectToConfirmed = new Subject<{ project: Project, student: User }>();
+  updateProjectInList = new Subject<Project>();
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +21,13 @@ export class StaffService {
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post('http://localhost:3000/project/new' + token, body, { headers: headers });
+  }
+
+  updateStaffProject(project: Project): Observable<Object> {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const body = JSON.stringify(project);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.patch('http://localhost:3000/project/updateStaffProject' + token, body, { headers: headers });
   }
 
   getStaffAreas(): Observable<Areas> {
@@ -52,6 +60,23 @@ export class StaffService {
     return this.http.patch('http://localhost:3000/user/updateStaffAreas' + token, body, { headers: headers });
   }
 
+  getStaffProjects(): Observable<Project[]> {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/project/getStaffProjects' + token)
+      .map(response => {
+        const projects = response['projects'];
+        const projectList: Project[] = [];
+        for (const project of projects) {
+          const newProject = new Project(
+            project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
+            project.staff, project.pendingStudents, null, null, project.students, project.isStudentProject
+          );
+          projectList.push(newProject);
+        }
+        return projectList;
+      });
+  }
+
   getProjectRequests(): Observable<Project[]> {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     return this.http.get('http://localhost:3000/project/getProjectRequests' + token)
@@ -69,7 +94,7 @@ export class StaffService {
       });
   }
 
-  getConfirmedProjects() {
+  getConfirmedProjects(): Observable<Project[]> {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     return this.http.get('http://localhost:3000/project/getConfirmedProjects' + token)
       .map((response) => {

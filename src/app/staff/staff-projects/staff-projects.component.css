@@ -1,0 +1,43 @@
+:host {
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  display: flex;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.mat-accordion {
+  width: 80%;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+}
+
+.description {
+  white-space: pre-line;
+}
+
+.areas {
+  margin: 0px;
+}
+
+.areas-title {
+  margin-bottom: 5px;
+}

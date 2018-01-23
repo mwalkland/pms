@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { StudentMyProjectComponent } from './student-my-project.component';
 import { StudentService } from '../student.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CoreModule } from '../../core/core.module';
 
 describe('StudentMyProjectComponent', () => {
   let component: StudentMyProjectComponent;
@@ -15,7 +16,8 @@ describe('StudentMyProjectComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ StudentMyProjectComponent ],
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        CoreModule
       ],
       providers: [
         StudentService

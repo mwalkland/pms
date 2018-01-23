@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule, MatAutocompleteModule, MatDialogModule, MatCheckboxModule } from '@angular/material';
 import { StaffService } from '../staff.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CoreModule } from '../../core/core.module';
 
 describe('StaffNewProjectComponent', () => {
   let component: StaffNewProjectComponent;
@@ -26,7 +27,8 @@ describe('StaffNewProjectComponent', () => {
         MatDialogModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        CoreModule
       ],
       providers: [
         StaffService

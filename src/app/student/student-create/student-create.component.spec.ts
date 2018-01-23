@@ -11,6 +11,7 @@ import {
 import { StudentService } from '../student.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from '../../core/core.module';
 
 describe('StudentCreateComponent', () => {
   let component: StudentCreateComponent;
@@ -28,7 +29,8 @@ describe('StudentCreateComponent', () => {
         MatDialogModule,
         HttpClientTestingModule,
         MatInputModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        CoreModule
       ],
       providers: [
         StudentService

@@ -11,6 +11,7 @@ import { StaffProfileRequestsComponent } from './staff-profile-requests/staff-pr
 import { StaffProfileDetailsComponent } from './staff-profile-details/staff-profile-details.component';
 import { MatExpansionModule, MatIconModule, MatDialogModule } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CoreModule } from '../../core/core.module';
 
 describe('StaffProfileComponent', () => {
   let component: StaffProfileComponent;
@@ -28,7 +29,8 @@ describe('StaffProfileComponent', () => {
         MatExpansionModule,
         MatIconModule,
         HttpClientTestingModule,
-        MatDialogModule
+        MatDialogModule,
+        CoreModule
       ],
       providers: [
         StaffService

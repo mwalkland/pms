@@ -4,6 +4,10 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { StaffProjectsComponent } from './staff-projects.component';
+import { CoreModule } from '../../core/core.module';
+import { MatExpansionModule, MatDialogModule } from '@angular/material';
+import { StaffService } from '../staff.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('StaffProjectsComponent', () => {
   let component: StaffProjectsComponent;
@@ -11,7 +15,16 @@ describe('StaffProjectsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StaffProjectsComponent ]
+      declarations: [ StaffProjectsComponent ],
+      imports: [
+        CoreModule,
+        MatExpansionModule,
+        HttpClientTestingModule,
+        MatDialogModule
+      ],
+      providers: [
+        StaffService
+      ]
     })
     .compileComponents();
   }));

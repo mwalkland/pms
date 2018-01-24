@@ -1,0 +1,40 @@
+<div class="radio-wrap">
+  <span>Show: </span>
+  <mat-radio-group>
+    <mat-radio-button (click)="changeFilter('')">All</mat-radio-button>
+    <mat-radio-button (click)="changeFilter('Yes')" value="Yes">Confirmed</mat-radio-button>
+    <mat-radio-button (click)="changeFilter('No')" value="No">Awaiting</mat-radio-button>
+  </mat-radio-group>
+</div>
+<br>
+<mat-table [dataSource]="dataSource" matSort>
+
+  <ng-container matColumnDef="firstname">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Firstname</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.firstname}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="surname">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Surname</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.surname}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="projectname">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.projectname}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="supervisor">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Supervisor</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.supervisor}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="confirmed">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Confirmed?</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.confirmed}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>

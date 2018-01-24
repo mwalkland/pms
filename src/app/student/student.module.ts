@@ -14,7 +14,6 @@ import { StudentProjectsListComponent } from './student-projects/student-project
 import {
   MatListModule,
   MatTableModule,
-  MatPaginatorModule,
   MatSortModule,
   MatDialogModule,
   MatButtonModule,
@@ -61,7 +60,6 @@ import {
     FormsModule,
     CoreModule,
     MatTableModule,
-    MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
     MatButtonModule,

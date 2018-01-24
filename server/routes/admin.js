@@ -37,4 +37,20 @@ router.get('/getAllStudents', (req, res) => {
     });
 });
 
+router.get('/getAllStaff', (req, res) => {
+  User.find({ type: 'staff' })
+    .populate('staffInfo.suggestedProjects')
+    .exec((err, staff) => {
+      if (err) {
+        return res.status(401).json({
+          title: 'Error',
+          error: err
+        });
+      }
+      res.status(200).json({
+        staff: staff
+      });
+    });
+});
+
 module.exports = router;

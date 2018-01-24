@@ -1,0 +1,29 @@
+.mat-table {
+  overflow: auto;
+  height: 100%;
+  min-width: 300px;
+  width: 100%;
+}
+
+.table-wrap {
+  height: 100%;
+  display: flex;
+}
+
+.mat-row:hover {
+  cursor: pointer;
+}
+
+.mat-row:hover > .mat-cell {
+  color: #0355A6;
+}
+
+@media(max-width: 868px) {
+  .mat-table {
+    overflow: initial;
+  }
+
+  .mat-cell {
+    font-size: 12px;
+  }
+}

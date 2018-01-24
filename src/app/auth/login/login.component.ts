@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
           email: data['email'],
           name: data['name'],
           type: data['type'],
-          projectChosen: data['projectChosen']
+          projectChosen: data['projectChosen'],
+          isLeader: data['leader']
         };
         localStorage.setItem('token', data['token']);
         localStorage.setItem('user', JSON.stringify(currentUser));

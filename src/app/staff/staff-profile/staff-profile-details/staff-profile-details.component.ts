@@ -11,12 +11,18 @@ import { Areas } from './areas.model';
 })
 export class StaffProfileDetailsComponent implements OnInit {
   areas: Areas;
+  isNotEmpty: boolean;
 
   constructor(private staffService: StaffService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.staffService.getStaffAreas().subscribe(areas => {
       this.areas = areas;
+      Object.keys(this.areas).forEach((key) => {
+        if (this.areas[key] !== '') {
+          this.isNotEmpty = true;
+        }
+      })
     });
   }
 

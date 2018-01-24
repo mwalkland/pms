@@ -9,7 +9,8 @@ const schema = new Schema({
   password: { type: String, required: true },
   type: { type: String, required: true },
   studentInfo: {
-    chosenProject: { type: Schema.Types.ObjectId, ref: 'Project' }
+    chosenProject: { type: Schema.Types.ObjectId, ref: 'Project' },
+    confirmed: { type: Boolean, default: false }
   },
   staffInfo: {
     suggestedProjects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
@@ -19,7 +20,8 @@ const schema = new Schema({
       third: { type: String, default: '' },
       fourth: { type: String, default: '' },
       fifth: { type: String, default: '' }
-    }
+    },
+    leader: { type: Boolean, default: false }
   }
 });
 

@@ -65,8 +65,3 @@ i:hover {
 .nav-list a:focus {
   background-color: #0355A6 !important;
 }
-
-.nav-list a>div {
-  height: 60px !important;
-  justify-content: center;
-}

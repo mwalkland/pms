@@ -189,16 +189,26 @@ router.patch('/confirmProject', (req, res) => {
       project.save();
     }
 
-    User.findById(decoded.user._id, (err, user) => {
+    User.findByIdAndUpdate(student._id, { $set: { 'studentInfo.confirmed': true } }, (err, student) => {
       if (err) {
         return res.status(500).json({
-          title: 'An error occured getting the user',
+          title: 'An error occured getting the student',
           error: err
         });
       }
-      const email = new EmailController();
-      email.sendStudentEmail(user.firstname + ' ' + user.surname, project.name, true);
+      User.findById(decoded.user._id, (err, user) => {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured getting the user',
+            error: err
+          });
+        }
+        const email = new EmailController();
+        email.sendStudentEmail(user.firstname + ' ' + user.surname, project.name, true);
+      });
     });
+
+
   });
   res.status(200).json({
     message: 'Successfully updated the projects',
@@ -263,27 +273,6 @@ router.get('/getStudentProject', (req, res) => {
         project: project
       });
     });
-});
-
-/*
-NOTE - This is accessing the 'areas' collection which is NOT a Mongoose Schema
-so is being accessed natively through MongoDB. This is because this is a 
-'read-only' collection (we would never want to write to it)
-so creating a Schema for it would be pointless.
-*/
-router.get('/getSuggestedAreas', (req, res) => {
-  const Areas = mongoose.connection.db.collection('areas');
-  Areas.findOne({}, (err, response) => {
-    if (err) {
-      return res.status(500).json({
-        title: 'Could not get suggested areas',
-        error: err
-      });
-    }
-    res.status(200).json({
-      areas: response.areas
-    });
-  });
 });
 
 // for a staff suggested project
@@ -363,6 +352,27 @@ router.post('/createStudentProject', (req, res) => {
         message: 'Project created',
         obj: result
       });
+    });
+  });
+});
+
+/*
+NOTE - This is accessing the 'areas' collection which is NOT a Mongoose Schema
+so is being accessed natively through MongoDB. This is because this is a 
+'read-only' collection (we would never want to write to it)
+so creating a Schema for it would be pointless.
+*/
+router.get('/getSuggestedAreas', (req, res) => {
+  const Areas = mongoose.connection.db.collection('areas');
+  Areas.findOne({}, (err, response) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'Could not get suggested areas',
+        error: err
+      });
+    }
+    res.status(200).json({
+      areas: response.areas
     });
   });
 });

@@ -2,7 +2,7 @@
   <app-title [header]="'My Projects'"></app-title>
 
   <div class="content">
-    <mat-accordion>
+    <mat-accordion *ngIf="projects && projects.length !== 0">
       <mat-expansion-panel *ngFor="let project of projects">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -28,5 +28,11 @@
         </mat-action-row>
       </mat-expansion-panel>
     </mat-accordion>
+    <div class="empty" *ngIf="projects && projects.length === 0">
+      <h2>You have not created any Project suggestions yet.</h2>
+    </div>
   </div>
+
+
+
 </div>

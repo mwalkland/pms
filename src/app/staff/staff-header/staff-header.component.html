@@ -9,6 +9,7 @@
       <a mat-list-item (click)="show()" routerLink="./projects" routerLinkActive="active">Projects</a>
     </mat-nav-list>
     <mat-nav-list class="nav nav-right">
+      <a *ngIf="isLeader" mat-list-item routerLink="/staff/admin" routerLinkActive="active">Admin</a>
       <a mat-list-item routerLink="/staff/profile" routerLinkActive="active">Profile</a>
       <app-logout></app-logout>
     </mat-nav-list>

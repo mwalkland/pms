@@ -58,7 +58,7 @@ router.post('/login', (req, res) => {
       .then((response) => {
         if (response) {
           const token = jwt.sign({ user: user }, 'WO3V%oIBK5c2', { expiresIn: 7200 });
-          return res.status(200).json({
+          const response = {
             message: 'User logged in',
             token: token,
             userId: user._id,
@@ -66,7 +66,11 @@ router.post('/login', (req, res) => {
             name: user.firstname,
             email: user.email,
             projectChosen: projectChosen
-          });
+          };
+          if (user.staffInfo.leader) {
+            response.leader = true;
+          }
+          return res.status(200).json(response);
         } else {
           return res.status(401).json({
             title: 'Login failed',

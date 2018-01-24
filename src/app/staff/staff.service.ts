@@ -16,6 +16,11 @@ export class StaffService {
 
   constructor(private http: HttpClient) { }
 
+  isModuleLeader(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user['isLeader'];
+  }
+
   newProject(project: Project): Observable<Object> {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = JSON.stringify(project);

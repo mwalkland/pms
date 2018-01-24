@@ -4,8 +4,7 @@ import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@an
 @Component({
   selector: 'app-student-header',
   templateUrl: './student-header.component.html',
-  styleUrls: ['./student-header.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./student-header.component.css']
 })
 export class StudentHeaderComponent implements OnInit {
 

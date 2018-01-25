@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Student } from '../../student.model';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { AdminService } from '../../admin.service';
+import { AdminStudentsTableDialogComponent } from './admin-students-table-dialog/admin-students-table-dialog.component';
 
 @Component({
   selector: 'app-admin-students-table',
@@ -17,7 +18,7 @@ export class AdminStudentsTableComponent implements OnInit, AfterViewInit {
   filterBy: string;
 
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.adminService.getAllStudents().subscribe((students: Student[]) => {
@@ -36,6 +37,12 @@ export class AdminStudentsTableComponent implements OnInit, AfterViewInit {
 
   changeFilter(filter: string) {
     this.dataSource.filter = filter;
+  }
+
+  openDialog(student: Student) {
+    this.dialog.open(AdminStudentsTableDialogComponent, {
+      data: { student: student }
+    })
   }
 
 }

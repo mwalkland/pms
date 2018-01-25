@@ -2,7 +2,7 @@
 
   <h1 mat-dialog-title>Choose this Project?</h1>
 
-  <div class="contents" mat-dialog-content>
+  <mat-dialog-content>
     <div class="wrap">
       <p class="title">Project Type</p>
       <p class="content">{{ project.type }}</p>
@@ -26,8 +26,7 @@
         <p class="content areas" *ngFor="let area of project.areas">{{ area }}</p>
       </ng-template>
     </div>
-
-  </div>
+  </mat-dialog-content>
 
   <div class="buttons-wrap" mat-dialog-actions>
     <div class="buttons">

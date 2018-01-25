@@ -6,6 +6,7 @@ export class Student {
     public surname: string,
     public projectname: string,
     public supervisor: string,
-    public confirmed: string
+    public confirmed: string,
+    public projectDesc: string
   ) { };
 }

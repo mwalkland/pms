@@ -30,7 +30,8 @@ export class AdminService {
               student.surname,
               project ? project.name : 'N/A',
               project ? project.staff.firstname + ' ' + project.staff.surname : 'N/A',
-              student.studentInfo.confirmed ? 'Yes' : 'No'
+              student.studentInfo.confirmed ? 'Yes' : 'No',
+              project ? project.description : null
             );
             studentList.push(newStudent);
           }
@@ -43,29 +44,33 @@ export class AdminService {
   }
 
   getAllStaff(): Observable<Staff[]> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/admin/getAllStaff' + token)
-      .map(response => {
-        const staffResponse = response['staff'];
-        const staffList: Staff[] = [];
-        for (const staff of staffResponse) {
-          let noOfStudents = 0;
-          for (const project of staff.staffInfo.suggestedProjects) {
-            noOfStudents += project.students.length;
+    if (this.staff == null) {
+      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+      return this.http.get('http://localhost:3000/admin/getAllStaff' + token)
+        .map(response => {
+          const staffResponse = response['staff'];
+          const staffList: Staff[] = [];
+          for (const staff of staffResponse) {
+            let noOfStudents = 0;
+            for (const project of staff.staffInfo.suggestedProjects) {
+              noOfStudents += project.students.length;
+            }
+            const newStudent = new Staff(
+              staff._id,
+              staff.email,
+              staff.firstname,
+              staff.surname,
+              staff.staffInfo.suggestedProjects,
+              noOfStudents
+            );
+            staffList.push(newStudent);
           }
-          const newStudent = new Staff(
-            staff._id,
-            staff.email,
-            staff.firstname,
-            staff.surname,
-            staff.staffInfo.suggestedProjects,
-            noOfStudents
-          );
-          staffList.push(newStudent);
-        }
-        this.staff = staffList;
-        return staffList;
-      });
+          this.staff = staffList;
+          return staffList;
+        });
+    } else {
+      return Observable.of(this.staff);
+    }
   }
 
   sendReminder() {

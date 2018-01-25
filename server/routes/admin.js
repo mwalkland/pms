@@ -40,7 +40,10 @@ router.get('/getAllStudents', (req, res) => {
 
 router.get('/getAllStaff', (req, res) => {
   User.find({ type: 'staff' })
-    .populate('staffInfo.suggestedProjects')
+    .populate({
+      path: 'staffInfo.suggestedProjects',
+      populate: { path: 'students' }
+    })
     .exec((err, staff) => {
       if (err) {
         return res.status(401).json({

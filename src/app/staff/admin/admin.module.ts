@@ -7,7 +7,16 @@ import { AdminListComponent } from './admin-list/admin-list.component';
 import { AdminStudentsComponent } from './admin-students/admin-students.component';
 import { AdminStaffComponent } from './admin-staff/admin-staff.component';
 import { AdminService } from './admin.service';
-import { MatTableModule, MatSortModule, MatRadioModule, MatDialogModule, MatExpansionModule, MatPaginatorModule } from '@angular/material';
+import {
+  MatTableModule,
+  MatSortModule,
+  MatRadioModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatPaginatorModule,
+  MatSelectModule,
+  MatButtonModule
+} from '@angular/material';
 import { AdminStudentsTableComponent } from './admin-students/admin-students-table/admin-students-table.component';
 import { FormsModule } from '@angular/forms';
 import { AdminStaffTableComponent } from './admin-staff/admin-staff-table/admin-staff-table.component';
@@ -17,6 +26,7 @@ import {
 import {
   AdminStudentsTableDialogComponent
 } from './admin-students/admin-students-table/admin-students-table-dialog/admin-students-table-dialog.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 @NgModule({
   imports: [
@@ -29,7 +39,9 @@ import {
     FormsModule,
     MatDialogModule,
     MatExpansionModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule,
+    MatButtonModule
   ],
   declarations: [
     AdminComponent,
@@ -39,7 +51,8 @@ import {
     AdminStudentsTableComponent,
     AdminStaffTableComponent,
     AdminStaffTableDialogComponent,
-    AdminStudentsTableDialogComponent
+    AdminStudentsTableDialogComponent,
+    AdminHomeComponent
   ],
   providers: [
     AdminService

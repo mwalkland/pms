@@ -6,3 +6,23 @@
 .bold-text {
   font-weight: bold;
 }
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+@media(max-width: 668px) {
+  .mat-expansion-panel-header {
+    overflow: hidden;
+  }
+  .mat-expansion-panel-header-title {
+    overflow: hidden;
+  }
+  .mat-expansion-panel-header-description {
+    display: none;
+  }
+  .mat-expansion-panel-header-title p {
+    width: 100%;
+    text-align: center;
+  }
+}

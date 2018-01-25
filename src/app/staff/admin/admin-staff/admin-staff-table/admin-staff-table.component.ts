@@ -13,7 +13,7 @@ export class AdminStaffTableComponent implements OnInit, AfterViewInit {
 
   staff: Staff[];
   dataSource = new MatTableDataSource<Staff>();
-  displayedColumns = ['firstname', 'surname', 'email', 'students'];
+  displayedColumns = ['firstname', 'surname', 'email', 'noOfStudents'];
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private adminService: AdminService, private dialog: MatDialog) { }

@@ -1,0 +1,16 @@
+.drop-down {
+  display: none;
+}
+
+h3 {
+  text-align: center;
+}
+
+@media(max-width: 868px) {
+  .drop-down {
+    display: block
+  }
+  .left-hand {
+    display: none;
+  }
+}

@@ -22,6 +22,9 @@
   .mat-table {
     overflow: initial;
   }
+  .mat-header-row, .mat-row {
+    padding: 0px;
+  }
 
   .mat-cell {
     font-size: 12px;

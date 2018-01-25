@@ -15,9 +15,9 @@
     <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="students">
+  <ng-container matColumnDef="noOfStudents">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Number of Students</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.noOfStudents}}</mat-cell>
+    <mat-cell class="noOfStudents" *matCellDef="let row">{{row.noOfStudents}}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

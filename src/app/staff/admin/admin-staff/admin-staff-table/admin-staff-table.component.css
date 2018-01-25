@@ -14,7 +14,7 @@
   cursor: pointer;
 }
 
-.mat-row:hover > .mat-cell {
+.mat-row:hover>.mat-cell {
   color: #0355A6;
 }
 
@@ -22,8 +22,18 @@
   .mat-table {
     overflow: initial;
   }
-
   .mat-cell {
     font-size: 12px;
+    text-overflow: ellipsis;
+    word-wrap: initial;
+  }
+}
+
+@media(max-width: 568px) {
+  .noOfStudents {
+    text-align: center;
+  }
+  .mat-header-row, .mat-row {
+    padding: 0px;
   }
 }

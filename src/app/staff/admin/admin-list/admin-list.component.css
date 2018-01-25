@@ -16,3 +16,16 @@ li:hover {
 .active {
   color: #0355A6;
 }
+
+.list-dropdown-wrap {
+  display: none;
+}
+
+@media(max-width: 868px) {
+  .list-wrap {
+    display: none;
+  }
+  .list-dropdown-wrap {
+    display: block;
+  }
+}

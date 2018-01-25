@@ -14,7 +14,7 @@
   cursor: pointer;
 }
 
-.mat-row:hover > .mat-cell {
+.mat-row:hover>.mat-cell {
   color: #0355A6;
 }
 
@@ -30,9 +30,26 @@
   .mat-table {
     overflow: initial;
   }
-
   .mat-cell {
     font-size: 12px;
+    text-overflow: ellipsis;
+    word-wrap: initial;
+  }
+  .radio-wrap {
+    padding: 0px;
+    margin-top: 15px;
+  }
+  .mat-radio-group {
+    display: flex;
+    justify-content: center;
+  }
+  .show {
+    display: none;
   }
 }
 
+@media(max-width: 568px) {
+  .mat-header-row, .mat-row {
+    padding: 0px;
+  }
+}

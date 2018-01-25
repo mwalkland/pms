@@ -3,12 +3,17 @@ import { AdminComponent } from './admin.component';
 import { NgModule } from '@angular/core';
 import { AdminStudentsComponent } from './admin-students/admin-students.component';
 import { AdminStaffComponent } from './admin-staff/admin-staff.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 const adminRoutes: Routes = [
   {
     path: '',
     component: AdminComponent,
     children: [
+      {
+        path: '',
+        component: AdminHomeComponent
+      },
       {
         path: 'students',
         component: AdminStudentsComponent

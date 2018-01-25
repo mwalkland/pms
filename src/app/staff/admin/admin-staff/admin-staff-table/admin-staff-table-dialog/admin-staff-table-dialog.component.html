@@ -6,9 +6,11 @@
       <mat-expansion-panel *ngFor="let student of project.students">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{student.firstname}} {{student.surname}}
+            <p>{{student.firstname}} {{student.surname}}</p>
           </mat-panel-title>
-          <mat-panel-description>{{project.name}}</mat-panel-description>
+          <mat-panel-description>
+            <p>{{project.name}}</p>
+          </mat-panel-description>
         </mat-expansion-panel-header>
         <p>
           <span class="bold-text">Confirmed:</span>
@@ -24,3 +26,6 @@
     <h3>This staff member does not have any students yet.</h3>
   </ng-template>
 </mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>

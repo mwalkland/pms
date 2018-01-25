@@ -11,7 +11,6 @@ const mongoose = require('mongoose');
 const authRoutes = require('./server/routes/auth');
 const userRoutes = require('./server/routes/user');
 const projectRoutes = require('./server/routes/project');
-const emailRoutes = require('./server/routes/email');
 const adminRoutes = require('./server/routes/admin');
 
 const app = express();
@@ -31,7 +30,6 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/project', projectRoutes);
-app.use('/email', emailRoutes);
 app.use('/admin', adminRoutes);
 
 // Catch all other routes and return the index file

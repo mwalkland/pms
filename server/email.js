@@ -101,6 +101,37 @@ class EmailController {
     });
   }
 
+  sendModuleLeaderEmail(staffName, studentName, projectName, leaderName, email) {
+    nodemailer.createTestAccount((err, account) => {
+
+      let transporter = this.createTransport(account);
+
+      const options = this.getOptions();
+
+      transporter.use('compile', hbs(options));
+
+      let mailOptions = {
+        from: '"Test" <test@test.com>',
+        to: leaderName + ' ' + email,
+        subject: 'A final-year project has been confirmed',
+        template: 'leader.body',
+        context: {
+          staff: staffName,
+          student: studentName,
+          project: projectName
+        }
+      };
+
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          return console.log(err);
+        }
+        console.log('url ' + nodemailer.getTestMessageUrl(info));
+      });
+
+    });
+  }
+
   sendReminder(emailList) {
     nodemailer.createTestAccount((err, account) => {
 

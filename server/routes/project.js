@@ -199,24 +199,37 @@ router.patch('/confirmProject', (req, res) => {
       User.findById(decoded.user._id, (err, staff) => {
         if (err) {
           return res.status(500).json({
-            title: 'An error occured getting the user',
+            title: 'An error occured getting the staff',
             error: err
           });
         }
-        const email = new EmailController();
-        email.sendStudentEmail(
-          staff.firstname + ' ' + staff.surname,
-          student.firstname + ' ' + student.surname,
-          student.email,
-          project.name,
-          true);
+        User.findOne({ 'staffInfo.leader': true }, (err, leader) => {
+          if (err) {
+            return res.status(500).json({
+              title: 'An error occured getting the module leader',
+              error: err
+            });
+          }
+          const email = new EmailController();
+          email.sendStudentEmail(
+            staff.firstname + ' ' + staff.surname,
+            student.firstname + ' ' + student.surname,
+            student.email,
+            project.name,
+            true);
+          email.sendModuleLeaderEmail(
+            staff.firstname + ' ' + staff.surname,
+            student.firstname + ' ' + student.surname,
+            project.name,
+            leader.firstname + ' ' + leader.surname,
+            leader.email
+          );
+          res.status(200).json({
+            message: 'Successfully updated the projects',
+          });
+        });
       });
     });
-
-
-  });
-  res.status(200).json({
-    message: 'Successfully updated the projects',
   });
 });
 

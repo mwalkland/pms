@@ -84,7 +84,7 @@ export class StudentCreateComponent implements OnInit {
       type = values.type[0];
     }
     const staff: User = this.staffList.filter((s) => {
-      return s.email = values.staffEmail;
+      return s.email === values.staffEmail;
     })[0];
 
     const project = new Project(

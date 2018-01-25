@@ -31,7 +31,7 @@ class EmailController {
     };
   }
 
-  sendStaffEmail(student, project) {
+  sendStaffEmail(student, staff, email, project) {
     console.log('hit');
     nodemailer.createTestAccount((err, account) => {
 
@@ -43,7 +43,7 @@ class EmailController {
 
       let mailOptions = {
         from: '"Test" <test@test.com>',
-        to: '"Test Receiver" <receiver@receiver.com>',
+        to: staff + ' ' + email,
         subject: 'You have a new Project request',
         template: 'staff.body',
         context: {
@@ -62,7 +62,7 @@ class EmailController {
     });
   }
 
-  sendStudentEmail(staff, project, isAccepted) {
+  sendStudentEmail(staff, student, email, project, isAccepted) {
     console.log('student');
     nodemailer.createTestAccount((err, account) => {
 
@@ -81,7 +81,7 @@ class EmailController {
 
       let mailOptions = {
         from: '"Test" <test@test.com>',
-        to: '"Test Receiver" <receiver@receiver.com>',
+        to: student + ' ' + email,
         subject: 'Your Project request has a response',
         template: 'student.body',
         context: {
@@ -89,6 +89,32 @@ class EmailController {
           project: project,
           response: response
         }
+      };
+
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          return console.log(err);
+        }
+        console.log('url ' + nodemailer.getTestMessageUrl(info));
+      });
+
+    });
+  }
+
+  sendReminder(emailList) {
+    nodemailer.createTestAccount((err, account) => {
+
+      let transporter = this.createTransport(account);
+
+      const options = this.getOptions();
+
+      transporter.use('compile', hbs(options));
+
+      let mailOptions = {
+        from: '"Test" <test@test.com>',
+        to: emailList,
+        subject: 'Final-year project reminder',
+        template: 'reminder.body',
       };
 
       transporter.sendMail(mailOptions, (err, info) => {

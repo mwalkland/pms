@@ -68,4 +68,8 @@ export class AdminService {
       });
   }
 
+  sendReminder() {
+
+  }
+
 }

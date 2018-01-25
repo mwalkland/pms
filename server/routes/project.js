@@ -196,7 +196,7 @@ router.patch('/confirmProject', (req, res) => {
           error: err
         });
       }
-      User.findById(decoded.user._id, (err, user) => {
+      User.findById(decoded.user._id, (err, staff) => {
         if (err) {
           return res.status(500).json({
             title: 'An error occured getting the user',
@@ -204,7 +204,12 @@ router.patch('/confirmProject', (req, res) => {
           });
         }
         const email = new EmailController();
-        email.sendStudentEmail(user.firstname + ' ' + user.surname, project.name, true);
+        email.sendStudentEmail(
+          staff.firstname + ' ' + staff.surname,
+          student.firstname + ' ' + student.surname,
+          student.email,
+          project.name,
+          true);
       });
     });
 
@@ -240,16 +245,21 @@ router.patch('/rejectProject', (req, res) => {
 
       student.save();
       project.save();
-    });
-    User.findById(decoded.user._id, (err, user) => {
-      if (err) {
-        return res.status(500).json({
-          title: 'An error occured getting the user',
-          error: err
-        });
-      }
-      const email = new EmailController();
-      email.sendStudentEmail(user.firstname + ' ' + user.surname, project.name, false);
+      User.findById(decoded.user._id, (err, staff) => {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured getting the user',
+            error: err
+          });
+        }
+        const email = new EmailController();
+        email.sendStudentEmail(
+          staff.firstname + ' ' + staff.surname,
+          student.firstname + ' ' + student.surname,
+          student.email,
+          project.name,
+          false);
+      });
     });
   });
 
@@ -284,29 +294,35 @@ router.patch('/addStudentProject', (req, res) => {
     $push: { pendingStudents: decoded.user._id }
   };
 
-  Project.findByIdAndUpdate(body.id, updateObj, { new: true }, (err, project) => {
-    if (err) {
-      return res.status(500).json({
-        title: 'An error occured finding the project',
-        error: err
-      });
-    }
-
-    User.findByIdAndUpdate(decoded.user._id, { $set: { 'studentInfo.chosenProject': project } }, (err, user) => {
+  Project.findByIdAndUpdate(body.id, updateObj, { new: true })
+    .populate('staff').exec((err, project) => {
       if (err) {
         return res.status(500).json({
-          title: 'An error occured updating the user',
+          title: 'An error occured finding the project',
           error: err
         });
       }
-      const email = new EmailController();
-      email.sendStaffEmail(user.firstname + ' ' + user.surname, project.name);
-    });
 
-    res.status(200).json({
-      message: 'Student has been updated',
+      User.findByIdAndUpdate(decoded.user._id, { $set: { 'studentInfo.chosenProject': project } }, (err, user) => {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured updating the user',
+            error: err
+          });
+        }
+        const email = new EmailController();
+        email.sendStaffEmail(
+          user.firstname + ' ' + user.surname,
+          project.staff.firstname + ' ' + project.staff.surname,
+          project.staff.email,
+          project.name
+        );
+      });
+
+      res.status(200).json({
+        message: 'Student has been updated',
+      });
     });
-  });
 });
 
 // for a student created project
@@ -314,43 +330,48 @@ router.post('/createStudentProject', (req, res) => {
   const body = req.body;
   const decoded = jwt.decode(req.query.token);
 
-  User.findById(decoded.user._id, (err, user) => {
+  User.findById(decoded.user._id, (err, student) => {
     if (err) {
       return res.status(500).json({
         title: 'An error occured getting the user',
         error: err
       });
     }
-    const project = new Project({
-      name: body.name,
-      description: body.description,
-      type: body.type,
-      staff: body.staff.id,
-      full: true,
-      pendingStudents: user,
-      areas: body.areas,
-      isStudentProject: true
-    });
+    User.findById(body.staff.id, (err, staff) => {
+      const project = new Project({
+        name: body.name,
+        description: body.description,
+        type: body.type,
+        staff: staff._id,
+        full: true,
+        pendingStudents: student,
+        areas: body.areas,
+        isStudentProject: true
+      });
+      project.save((err, result) => {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured creating Project',
+            error: err
+          });
+        }
+        User.update(
+          { _id: student._id },
+          { $set: { 'studentInfo.chosenProject': result } }
+        ).exec();
 
-    project.save((err, result) => {
-      if (err) {
-        return res.status(500).json({
-          title: 'An error occured creating Project',
-          error: err
+        const email = new EmailController();
+        email.sendStaffEmail(
+          student.firstname + ' ' + student.surname,
+          staff.firstname + ' ' + staff.surname,
+          staff.email,
+          project.name
+        );
+
+        res.status(201).json({
+          message: 'Project created',
+          obj: result
         });
-      }
-
-      User.update(
-        { _id: user._id },
-        { $set: { 'studentInfo.chosenProject': result } }
-      ).exec();
-
-      const email = new EmailController();
-      email.sendStaffEmail(user.firstname + ' ' + user.surname, project.name);
-
-      res.status(201).json({
-        message: 'Project created',
-        obj: result
       });
     });
   });

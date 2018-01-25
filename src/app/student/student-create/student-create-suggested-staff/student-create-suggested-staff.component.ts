@@ -22,6 +22,8 @@ export class StudentCreateSuggestedStaffComponent implements OnInit {
   ngOnInit() {
     const matcher = new StaffMatcher(this.areas, this.staff);
     const suggested: { email: string, score: number }[] = matcher.findStaff();
+    console.log(suggested);
+    console.log(this.staff);
     for (const s of suggested) {
       for (const staff of this.staff) {
         if (s.email === staff.email) {

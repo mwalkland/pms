@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Student } from '../../student.model';
-import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatSort, MatDialog, MatPaginator } from '@angular/material';
 import { AdminService } from '../../admin.service';
 import { AdminStudentsTableDialogComponent } from './admin-students-table-dialog/admin-students-table-dialog.component';
 
@@ -15,6 +15,7 @@ export class AdminStudentsTableComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Student>();
   displayedColumns = ['firstname', 'surname', 'projectname', 'supervisor', 'confirmed'];
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator
   filterBy: string;
 
 
@@ -33,6 +34,7 @@ export class AdminStudentsTableComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.filter = this.filterBy;
+    this.dataSource.paginator = this.paginator;
   }
 
   changeFilter(filter: string) {

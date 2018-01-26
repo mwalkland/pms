@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { AdminReminderComponent } from '../admin-reminder/admin-reminder.component';
 
 @Component({
   selector: 'app-admin-list',
@@ -8,9 +10,13 @@ import { FormControl } from '@angular/forms';
 })
 export class AdminListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  sendReminder() {
+    this.dialog.open(AdminReminderComponent);
   }
 
 }

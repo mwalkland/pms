@@ -70,7 +70,11 @@ router.post('/sendReminder', (req, res) => {
       emails.push(student.email);
     }
     const emailController = new EmailController();
-    emailController.sendReminder(emails);
+    emailController.sendReminder(emails, () => {
+      res.status(200).json({
+        message: 'Successfully sent reminder'
+      });
+    });
   });
 });
 

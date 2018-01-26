@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../auth/user.model';
 import { Student } from './student.model';
@@ -74,7 +74,10 @@ export class AdminService {
   }
 
   sendReminder() {
-
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const body = {};
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post('http://localhost:3000/admin/sendReminder' + token, body, { headers: headers });
   }
 
 }

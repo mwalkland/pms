@@ -27,6 +27,7 @@ import {
   AdminStudentsTableDialogComponent
 } from './admin-students/admin-students-table/admin-students-table-dialog/admin-students-table-dialog.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminReminderComponent } from './admin-reminder/admin-reminder.component';
 
 @NgModule({
   imports: [
@@ -52,14 +53,16 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
     AdminStaffTableComponent,
     AdminStaffTableDialogComponent,
     AdminStudentsTableDialogComponent,
-    AdminHomeComponent
-  ],
+    AdminHomeComponent,
+    AdminReminderComponent
+],
   providers: [
     AdminService
   ],
   entryComponents: [
     AdminStaffTableDialogComponent,
-    AdminStudentsTableDialogComponent
+    AdminStudentsTableDialogComponent,
+    AdminReminderComponent
   ]
 })
 export class AdminModule { }

@@ -132,7 +132,7 @@ class EmailController {
     });
   }
 
-  sendReminder(emailList) {
+  sendReminder(emailList, cb) {
     nodemailer.createTestAccount((err, account) => {
 
       let transporter = this.createTransport(account);
@@ -151,8 +151,10 @@ class EmailController {
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
           return console.log(err);
+        } else {
+          cb();
+          console.log('url ' + nodemailer.getTestMessageUrl(info));
         }
-        console.log('url ' + nodemailer.getTestMessageUrl(info));
       });
 
     });

@@ -3,14 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../auth/user.model';
 import { Student } from './student.model';
-import { Project } from '../../core/project.model';
 import { Staff } from './staff.model';
+import { Project } from './project.model';
 
 @Injectable()
 export class AdminService {
 
   students: Student[];
   staff: Staff[];
+  projects: Project[];
 
   constructor(private http: HttpClient) { }
 
@@ -23,13 +24,14 @@ export class AdminService {
           const studentList: Student[] = [];
           for (const student of students) {
             const project = student.studentInfo.chosenProject;
+            const supervisor = student.studentInfo.supervisor;
             const newStudent = new Student(
               student._id,
               student.email,
               student.firstname,
               student.surname,
               project ? project.name : 'N/A',
-              project ? project.staff.firstname + ' ' + project.staff.surname : 'N/A',
+              supervisor ? supervisor.firstname + ' ' + supervisor.surname : 'N/A',
               student.studentInfo.confirmed ? 'Yes' : 'No',
               project ? project.description : null
             );
@@ -43,34 +45,71 @@ export class AdminService {
     }
   }
 
-  getAllStaff(): Observable<Staff[]> {
+  getAllStaff() {
     if (this.staff == null) {
+
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
       return this.http.get('http://localhost:3000/admin/getAllStaff' + token)
         .map(response => {
-          const staffResponse = response['staff'];
           const staffList: Staff[] = [];
+          const studentResponse = response['students'];
+          const staffResponse = response['staff'];
           for (const staff of staffResponse) {
-            let noOfStudents = 0;
-            for (const project of staff.staffInfo.suggestedProjects) {
-              noOfStudents += project.students.length;
+            const staffProjects = [];
+            for (const student of studentResponse) {
+              if (student.studentInfo.supervisor && student.studentInfo.supervisor._id === staff._id) {
+                staffProjects.push(student.studentInfo.chosenProject);
+              }
             }
-            const newStudent = new Staff(
+            const newStaff = new Staff(
               staff._id,
               staff.email,
               staff.firstname,
               staff.surname,
-              staff.staffInfo.suggestedProjects,
-              noOfStudents
+              staffProjects,
+              staffProjects.length
             );
-            staffList.push(newStudent);
+            staffList.push(newStaff);
           }
+          console.log(staffList)
           this.staff = staffList;
           return staffList;
         });
     } else {
       return Observable.of(this.staff);
     }
+  }
+
+  getAllProjects(): Observable<Project[]> {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/admin/getAllProjects' + token)
+      .map(response => {
+        const projectResponse = response['projects'];
+        const projectList: Project[] = [];
+        for (const project of projectResponse) {
+          for (const student of project.students) {
+            const newProject = new Project(
+              project.name,
+              project.areas,
+              project.staff.firstname + ' ' + project.staff.surname,
+              project.staff.email,
+              project.staff._id,
+              student.firstname + ' ' + student.surname,
+              project.isStudentProject ? 'Student' : 'Staff'
+            );
+            projectList.push(newProject);
+          }
+        }
+        this.projects = projectList;
+        return projectList;
+      });
+  }
+
+  modifyProjectSupervisor(staff: { staffId: string }) {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const body = JSON.stringify(staff);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.patch('http://localhost:3000/admin/modifyProjectSupervisor' + token, body, { headers: headers });
   }
 
   sendReminder() {

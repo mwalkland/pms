@@ -15,10 +15,12 @@ import {
   MatExpansionModule,
   MatPaginatorModule,
   MatSelectModule,
-  MatButtonModule
+  MatButtonModule,
+  MatIconModule,
+  MatTooltipModule
 } from '@angular/material';
 import { AdminStudentsTableComponent } from './admin-students/admin-students-table/admin-students-table.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminStaffTableComponent } from './admin-staff/admin-staff-table/admin-staff-table.component';
 import {
   AdminStaffTableDialogComponent
@@ -28,6 +30,15 @@ import {
 } from './admin-students/admin-students-table/admin-students-table-dialog/admin-students-table-dialog.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminReminderComponent } from './admin-reminder/admin-reminder.component';
+import { AdminModifyComponent } from './admin-modify/admin-modify.component';
+import { AdminModifyTableComponent } from './admin-modify/admin-modify-table/admin-modify-table.component';
+import {
+  AdminModifyTableDialogComponent
+} from './admin-modify/admin-modify-table/admin-modify-table-dialog/admin-modify-table-dialog.component';
+import {
+  AdminModifyTableDialogConfirmComponent
+// tslint:disable-next-line:max-line-length
+} from './admin-modify/admin-modify-table/admin-modify-table-dialog/admin-modify-table-dialog-confirm/admin-modify-table-dialog-confirm.component';
 
 @NgModule({
   imports: [
@@ -42,7 +53,10 @@ import { AdminReminderComponent } from './admin-reminder/admin-reminder.componen
     MatExpansionModule,
     MatPaginatorModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AdminComponent,
@@ -54,15 +68,21 @@ import { AdminReminderComponent } from './admin-reminder/admin-reminder.componen
     AdminStaffTableDialogComponent,
     AdminStudentsTableDialogComponent,
     AdminHomeComponent,
-    AdminReminderComponent
-],
+    AdminReminderComponent,
+    AdminModifyComponent,
+    AdminModifyTableComponent,
+    AdminModifyTableDialogComponent,
+    AdminModifyTableDialogConfirmComponent
+  ],
   providers: [
     AdminService
   ],
   entryComponents: [
     AdminStaffTableDialogComponent,
     AdminStudentsTableDialogComponent,
-    AdminReminderComponent
+    AdminReminderComponent,
+    AdminModifyTableDialogComponent,
+    AdminModifyTableDialogConfirmComponent
   ]
 })
 export class AdminModule { }

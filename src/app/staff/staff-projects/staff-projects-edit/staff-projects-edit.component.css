@@ -25,37 +25,6 @@
   justify-content: center;
 }
 
-/* @media(max-width: 1048px) {
-  .control {
-    width: 600px;
-  }
-  .area {
-    width: 350px;
-  }
-  .area-wrap {
-    max-width: 600px;
-  }
+.wrap {
+  display: flex;
 }
-
-@media(max-width: 568px) {
-  .control {
-    width: 200px;
-  }
-  .area {
-    width: 200px;
-  }
-  .area-wrap {
-    max-width: 200px;
-  }
-}
-
-@media(max-width: 568px) {
-  .control {
-    width: 200px;
-  }
-  .area {
-    width: 200px;
-  }
-  .area-wrap {
-    max-width: 200px;
-  } */

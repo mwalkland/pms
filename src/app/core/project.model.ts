@@ -12,6 +12,9 @@ export class Project {
     public areaString?: string,
     public staffName?: string,
     public students?: User[],
-    public isStudentProject?: boolean
+    public isStudentProject?: boolean,
+    public studentName?: string,
+    public studentId?: string,
+    public student?: User
   ) { }
 }

@@ -12,32 +12,31 @@ import { StaffService } from '../../../staff.service';
 })
 export class StaffProfileRequestsConfirmComponent implements OnInit {
   project: Project;
-  student: User
   confirm: boolean;
 
   constructor(private staffService: StaffService,
     public dialogRef: MatDialogRef<StaffNewProjectComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { project: Project, student: User, confirm: boolean }) {
+    @Inject(MAT_DIALOG_DATA) public data: { project: Project, confirm: boolean }) {
     this.project = data.project;
-    this.student = data.student;
     this.confirm = data.confirm;
   }
 
   ngOnInit() {
+    console.log(this.project);
 
   }
 
   onConfirm() {
-    this.staffService.confirmProject(this.project, this.student).subscribe(response => {
+    this.staffService.confirmProject(this.project, this.project.studentId).subscribe(response => {
       if (!response['error']) {
         this.staffService.removeProjectFromRequests.next(this.project);
-        this.staffService.addProjectToConfirmed.next({ project: this.project, student: this.student });
+        this.staffService.addProjectToConfirmed.next({ project: this.project, student: this.project.student });
       }
     });
   }
 
   onReject() {
-    this.staffService.rejectProject(this.project, this.student).subscribe(response => {
+    this.staffService.rejectProject(this.project, this.project.studentId).subscribe(response => {
       if (!response['error']) {
         this.staffService.removeProjectFromRequests.next(this.project);
       }

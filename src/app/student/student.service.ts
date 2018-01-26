@@ -110,10 +110,10 @@ export class StudentService {
     }
   }
 
-  getAllProjects(): Observable<Project[]> {
+  getStaffProjects(): Observable<Project[]> {
     if (this.projects == null) {
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-      return this.http.get('http://localhost:3000/project/getAllProjects' + token)
+      return this.http.get('http://localhost:3000/project/getAllStaffProjects' + token)
         .map((response: Response) => {
           const projects = response['projects'];
           const projectList: Project[] = [];
@@ -137,6 +137,7 @@ export class StudentService {
       return this.http.get('http://localhost:3000/project/getStudentProject' + token)
         .map((response: Response) => {
           const project = response['project'];
+          const supervisor = response['supervisor'];
           let newProject: Project;
           if (project) {
             newProject = new Project(
@@ -146,7 +147,7 @@ export class StudentService {
               project.type,
               project.maxStudents,
               project.areas,
-              project.staff
+              supervisor
             );
           }
           this.chosenProject = newProject;

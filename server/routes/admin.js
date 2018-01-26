@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 const User = require('../../models/user');
+const Project = require('../../models/project');
 const EmailController = require('../email');
 
 // router.use('/', (req, res, next) => {
@@ -21,10 +22,7 @@ const EmailController = require('../email');
 
 router.get('/getAllStudents', (req, res) => {
   User.find({ type: 'student' })
-    .populate({
-      path: 'studentInfo.chosenProject',
-      populate: { path: 'staff' }
-    })
+    .populate('studentInfo.chosenProject studentInfo.supervisor')
     .exec((err, students) => {
       if (err) {
         return res.status(401).json({
@@ -39,21 +37,34 @@ router.get('/getAllStudents', (req, res) => {
 });
 
 router.get('/getAllStaff', (req, res) => {
-  User.find({ type: 'staff' })
-    .populate({
-      path: 'staffInfo.suggestedProjects',
-      populate: { path: 'students' }
-    })
-    .exec((err, staff) => {
+
+  User.find({ type: 'student' })
+    .populate({ path: 'studentInfo.chosenProject', populate: { path: 'students' } })
+    .populate('studentInfo.supervisor')
+    .exec((err, students) => {
       if (err) {
         return res.status(401).json({
           title: 'Error',
           error: err
         });
       }
-      res.status(200).json({
-        staff: staff
-      });
+      User.find({ type: 'staff' })
+        .populate({
+          path: 'staffInfo.suggestedProjects',
+          populate: { path: 'students' }
+        })
+        .exec((err, staff) => {
+          if (err) {
+            return res.status(401).json({
+              title: 'Error',
+              error: err
+            });
+          }
+          res.status(200).json({
+            staff: staff,
+            students: students
+          });
+        });
     });
 });
 
@@ -77,5 +88,25 @@ router.post('/sendReminder', (req, res) => {
     });
   });
 });
+
+router.get('/getAllProjects', (req, res) => {
+  Project.find().populate('staff students').exec(
+    (err, projects) => {
+      if (err) {
+        return res.status(401).json({
+          title: 'Error retrieving projects',
+          error: err
+        });
+      }
+      res.status(200).json({
+        projects: projects
+      });
+    });
+});
+
+// router.patch('/modifyProjectSupervisor', (req, res) => {
+//   const staffId = req.body.staffId;
+//   Project
+// });
 
 module.exports = router;

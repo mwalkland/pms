@@ -27,8 +27,7 @@ export class StaffProjectsComponent implements OnInit {
 
   onEdit(project: Project) {
     this.dialog.open(StaffProjectsEditComponent, {
-      data: { project: project },
-      width: '60%'
+      data: { project: project }
     });
 
   }

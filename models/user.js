@@ -10,7 +10,8 @@ const schema = new Schema({
   type: { type: String, required: true },
   studentInfo: {
     chosenProject: { type: Schema.Types.ObjectId, ref: 'Project' },
-    confirmed: { type: Boolean, default: false }
+    confirmed: { type: Boolean, default: false },
+    supervisor: { type: Schema.Types.ObjectId, ref: 'User' }
   },
   staffInfo: {
     suggestedProjects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],

@@ -12,38 +12,31 @@ import { StaffProfileRequestsConfirmComponent } from './staff-profile-requests-c
 })
 export class StaffProfileRequestsComponent implements OnInit {
   projects: Project[];
-  noOfProjects = 0;
 
   constructor(private staffService: StaffService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.staffService.getProjectRequests().subscribe(projects => {
       this.projects = projects;
-      for (const project of projects) {
-        this.noOfProjects += project.pendingStudents.length;
-      }
     });
     this.staffService.removeProjectFromRequests.subscribe((project) => {
       this.projects.splice(this.projects.indexOf(project), 1);
-      this.noOfProjects -= 1;
-    })
+    });
   }
 
-  confirm(project: Project, student: User) {
+  confirm(project: Project) {
     this.dialog.open(StaffProfileRequestsConfirmComponent, {
       data: {
         project: project,
-        student: student,
         confirm: true
       }
     });
   }
 
-  reject(project: Project, student: User) {
+  reject(project: Project) {
     this.dialog.open(StaffProfileRequestsConfirmComponent, {
       data: {
         project: project,
-        student: student,
         confirm: false
       }
     });

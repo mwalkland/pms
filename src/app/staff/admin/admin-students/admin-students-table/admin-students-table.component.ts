@@ -18,7 +18,6 @@ export class AdminStudentsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator
   filterBy: string;
 
-
   constructor(private adminService: AdminService, private dialog: MatDialog) { }
 
   ngOnInit() {

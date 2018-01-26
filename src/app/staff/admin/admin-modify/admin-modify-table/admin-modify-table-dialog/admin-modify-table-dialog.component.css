@@ -1,0 +1,27 @@
+.mat-icon:hover {
+  cursor: pointer;
+}
+
+#edit-dropdown {
+  display: none;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+.mat-raised-button {
+  color: white;
+}
+
+.areas {
+  margin: 0px;
+}
+
+.area {
+  margin-left: 5px;
+}
+
+.mat-dialog-title {
+  max-width: 500px;
+}

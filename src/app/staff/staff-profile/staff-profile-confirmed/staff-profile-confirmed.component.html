@@ -6,10 +6,10 @@
 
   <mat-accordion>
     <ng-container *ngFor="let project of projects; let i = index">
-      <mat-expansion-panel *ngFor="let student of project.students">
+      <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <p>{{ student.firstname }} {{ student.surname }}</p>
+            <p>{{ project.student.firstname }} {{ project.student.surname }}</p>
           </mat-panel-title>
           <mat-panel-description>
             <p>{{ project.name }}</p>

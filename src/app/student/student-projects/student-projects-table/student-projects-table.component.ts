@@ -20,7 +20,7 @@ export class StudentProjectsTableComponent implements OnInit, AfterViewInit {
   constructor(private studentService: StudentService, private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.studentService.getAllProjects().subscribe((projects: Project[]) => {
+    this.studentService.getStaffProjects().subscribe((projects: Project[]) => {
       for (const project of projects) {
         const areas = project['areas'];
         let stringBuilder = '';

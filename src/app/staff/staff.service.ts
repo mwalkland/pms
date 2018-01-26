@@ -86,12 +86,14 @@ export class StaffService {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     return this.http.get('http://localhost:3000/project/getProjectRequests' + token)
       .map((response) => {
-        const projects = response['projects'];
+        const students = response['students'];
         const projectList: Project[] = [];
-        for (const project of projects) {
+        for (const student of students) {
+          const project = student.studentInfo.chosenProject;
           const newProject = new Project(
             project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-            project.staff, project.pendingStudents, null, null, project.students, project.isStudentProject
+            project.staff, project.pendingStudents, null, null, project.students, project.isStudentProject,
+            student.firstname + ' ' + student.surname, student._id, student
           );
           projectList.push(newProject);
         }
@@ -103,34 +105,48 @@ export class StaffService {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     return this.http.get('http://localhost:3000/project/getConfirmedProjects' + token)
       .map((response) => {
-        const projects = response['projects'];
+        const students = response['students'];
         const projectList: Project[] = [];
-        for (const project of projects) {
+        for (const student of students) {
+          const project = student.studentInfo.chosenProject;
           const newProject = new Project(
             project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-            project.staff, null, null, null, project.students
+            project.staff, project.pendingStudents, null, null, project.students, project.isStudentProject,
+            student.firstname + ' ' + student.surname, student._id, student
           );
           projectList.push(newProject);
         }
         return projectList;
+
+
+        // const projects = response['projects'];
+        // const projectList: Project[] = [];
+        // for (const project of projects) {
+        //   const newProject = new Project(
+        //     project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
+        //     project.staff, null, null, null, project.students, project.isStudentProject, null, null, 
+        //   );
+        //   projectList.push(newProject);
+        // }
+        // return projectList;
       });
   }
 
-  confirmProject(project: Project, student: User): Observable<Object> {
+  confirmProject(project: Project, studentId: string): Observable<Object> {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = {
       project: project,
-      student: student
+      studentId: studentId
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.patch('http://localhost:3000/project/confirmProject' + token, body, { headers: headers });
   }
 
-  rejectProject(project: Project, student: User): Observable<Object> {
+  rejectProject(project: Project, studentId: string): Observable<Object> {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = {
       project: project,
-      student: student
+      studentId: studentId
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.patch('http://localhost:3000/project/rejectProject' + token, body, { headers: headers });

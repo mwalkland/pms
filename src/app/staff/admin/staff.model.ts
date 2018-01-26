@@ -1,4 +1,4 @@
-import { Project } from '../../core/project.model';
+import { Project } from './project.model';
 
 export class Staff {
   constructor(

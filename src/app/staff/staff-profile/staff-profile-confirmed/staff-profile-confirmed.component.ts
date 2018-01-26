@@ -16,14 +16,12 @@ export class StaffProfileConfirmedComponent implements OnInit {
   ngOnInit() {
     this.staffService.getConfirmedProjects().subscribe(projects => {
       this.projects = projects;
-
       for (const project of projects) {
         this.noOfProjects += project.students.length;
       }
     });
     this.staffService.addProjectToConfirmed.subscribe(response => {
       const project = response.project;
-      console.log(project);
       const student = response.student;
 
       const currentProject = this.projects.find((element) => {

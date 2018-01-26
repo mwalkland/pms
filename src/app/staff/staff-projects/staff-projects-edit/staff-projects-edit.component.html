@@ -32,17 +32,19 @@
     <br>
 
     <div class="areas" formArrayName="areas">
-      <mat-form-field class="control area">
-        <input matInput placeholder="Areas of Research" id="autocomplete" [matAutocomplete]="auto" #areaName id="areaInput" (keydown.enter)="$event.preventDefault()"
-          (keyup.enter)="addArea(areaName.value)" [formControl]="areaCtrl">
-        <mat-hint>At least one area is required.</mat-hint>
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let a of filteredAreas | async" [value]="a">
-            <span>{{ a }}</span>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <button mat-button color="primary" type="button" (click)="addArea(areaName.value)">Add</button>
+      <div class="wrap">
+        <mat-form-field class="control area">
+          <input matInput placeholder="Areas of Research" id="autocomplete" [matAutocomplete]="auto" #areaName id="areaInput" (keydown.enter)="$event.preventDefault()"
+            (keyup.enter)="addArea(areaName.value)" [formControl]="areaCtrl">
+          <mat-hint>At least one area is required.</mat-hint>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let a of filteredAreas | async" [value]="a">
+              <span>{{ a }}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button mat-button color="primary" type="button" (click)="addArea(areaName.value)">Add</button>
+      </div>
       <div class="area-wrap">
         <div class="area-list-wrap" *ngFor="let area of form.get('areas').value; let i = index">
           {{area}}

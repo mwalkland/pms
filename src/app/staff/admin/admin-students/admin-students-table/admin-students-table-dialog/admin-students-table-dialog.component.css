@@ -5,3 +5,11 @@
 .mat-dialog-actions {
   justify-content: flex-end;
 }
+
+#edit-dropdown {
+  display: none;
+}
+
+.mat-icon:hover {
+  cursor: pointer;
+}

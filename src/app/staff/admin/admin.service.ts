@@ -31,7 +31,7 @@ export class AdminService {
               student.firstname,
               student.surname,
               project ? project.name : 'N/A',
-              supervisor ? supervisor.firstname + ' ' + supervisor.surname : 'N/A',
+              supervisor,
               student.studentInfo.confirmed ? 'Yes' : 'No',
               project ? project.description : null
             );

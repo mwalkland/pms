@@ -2,22 +2,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { AdminStudentsTableDialogConfirmComponent } from './admin-students-table-dialog-confirm.component';
 
-import { AdminModifyTableDialogConfirmComponent } from './admin-modify-table-dialog-confirm.component';
 
 describe('AdminModifyTableDialogConfirmComponent', () => {
-  let component: AdminModifyTableDialogConfirmComponent;
-  let fixture: ComponentFixture<AdminModifyTableDialogConfirmComponent>;
+  let component: AdminStudentsTableDialogConfirmComponent;
+  let fixture: ComponentFixture<AdminStudentsTableDialogConfirmComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminModifyTableDialogConfirmComponent ]
+      declarations: [ AdminStudentsTableDialogConfirmComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminModifyTableDialogConfirmComponent);
+    fixture = TestBed.createComponent(AdminStudentsTableDialogConfirmComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

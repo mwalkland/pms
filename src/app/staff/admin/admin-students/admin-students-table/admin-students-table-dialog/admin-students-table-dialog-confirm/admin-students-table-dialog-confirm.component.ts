@@ -3,11 +3,11 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { AdminService } from '../../../../admin.service';
 
 @Component({
-  selector: 'app-admin-modify-table-dialog-confirm',
-  templateUrl: './admin-modify-table-dialog-confirm.component.html',
-  styleUrls: ['./admin-modify-table-dialog-confirm.component.css']
+  selector: 'app-admin-students-table-dialog-confirm',
+  templateUrl: './admin-students-table-dialog-confirm.component.html',
+  styleUrls: ['./admin-students-table-dialog-confirm.component.css']
 })
-export class AdminModifyTableDialogConfirmComponent implements OnInit {
+export class AdminStudentsTableDialogConfirmComponent implements OnInit {
 
   staffId: string;
 

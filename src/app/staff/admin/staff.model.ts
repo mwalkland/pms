@@ -2,7 +2,7 @@ import { Project } from './project.model';
 
 export class Staff {
   constructor(
-    public id: string,
+    public _id: string,
     public email: string,
     public firstname: string,
     public surname: string,

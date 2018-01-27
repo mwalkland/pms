@@ -36,9 +36,9 @@ import {
   AdminModifyTableDialogComponent
 } from './admin-modify/admin-modify-table/admin-modify-table-dialog/admin-modify-table-dialog.component';
 import {
-  AdminModifyTableDialogConfirmComponent
+  AdminStudentsTableDialogConfirmComponent
 // tslint:disable-next-line:max-line-length
-} from './admin-modify/admin-modify-table/admin-modify-table-dialog/admin-modify-table-dialog-confirm/admin-modify-table-dialog-confirm.component';
+} from './admin-students/admin-students-table/admin-students-table-dialog/admin-students-table-dialog-confirm/admin-students-table-dialog-confirm.component';
 
 @NgModule({
   imports: [
@@ -72,7 +72,7 @@ import {
     AdminModifyComponent,
     AdminModifyTableComponent,
     AdminModifyTableDialogComponent,
-    AdminModifyTableDialogConfirmComponent
+    AdminStudentsTableDialogConfirmComponent
   ],
   providers: [
     AdminService
@@ -82,7 +82,7 @@ import {
     AdminStudentsTableDialogComponent,
     AdminReminderComponent,
     AdminModifyTableDialogComponent,
-    AdminModifyTableDialogConfirmComponent
+    AdminStudentsTableDialogConfirmComponent
   ]
 })
 export class AdminModule { }

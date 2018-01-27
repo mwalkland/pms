@@ -10,10 +10,18 @@
       <span class="bold-text">Confirmed:</span>
       <span>{{student.confirmed}}</span>
     </p>
-    <p>
+    <p id="supervisor">
       <span class="bold-text">Supervisor:</span>
-      <span>{{student.supervisor}}</span>
+      <span>{{student.supervisor.firstname}} {{student.supervisor.surname}}</span>
+      <span>
+        <mat-icon matTooltip="Edit" (click)="onEdit()">edit</mat-icon>
+      </span>
     </p>
+    <mat-form-field id="edit-dropdown">
+      <mat-select [formControl]="editStaff">
+        <mat-option *ngFor="let staff of staffList" [value]="staff._id">{{staff.firstname}} {{staff.surname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <p class="bold-text">Description:</p>
     <p>{{student.projectDesc}}</p>
   </ng-container>
@@ -22,5 +30,6 @@
   </ng-template>
 </mat-dialog-content>
 <mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="!buttonDisabled" (click)="confirmEdit()">Save</button>
   <button mat-button color="primary" mat-dialog-close>Close</button>
 </mat-dialog-actions>

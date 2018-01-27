@@ -8,8 +8,6 @@ const schema = new Schema({
   maxStudents: { type: Number },
   areas: [{ type: String }],
   staff: { type: Schema.Types.ObjectId, ref: 'User' },
-  students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  pendingStudents: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   full: { type: Boolean, default: false },
   isStudentProject: { type: Boolean, default: false }
 });

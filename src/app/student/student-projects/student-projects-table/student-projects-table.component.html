@@ -13,7 +13,7 @@
 
     <ng-container matColumnDef="staff">
       <mat-header-cell *matHeaderCellDef> Staff </mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.staffName}}</mat-cell>
+      <mat-cell *matCellDef="let row">{{row.staff.firstname}} {{row.staff.surname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="areas">

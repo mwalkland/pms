@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AdminStudentsComponent } from './admin-students/admin-students.component';
 import { AdminStaffComponent } from './admin-staff/admin-staff.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
-import { AdminModifyComponent } from './admin-modify/admin-modify.component';
 
 const adminRoutes: Routes = [
   {
@@ -13,7 +12,8 @@ const adminRoutes: Routes = [
     children: [
       {
         path: '',
-        component: AdminHomeComponent
+        redirectTo: 'students'
+        // component: AdminHomeComponent
       },
       {
         path: 'students',
@@ -22,10 +22,6 @@ const adminRoutes: Routes = [
       {
         path: 'staff',
         component: AdminStaffComponent
-      },
-      {
-        path: 'modify',
-        component: AdminModifyComponent
       }
     ]
   }

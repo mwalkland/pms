@@ -31,6 +31,9 @@ export class StudentCreateConfirmDialogComponent implements OnInit {
     this.studentService.createStudentProject(this.project).subscribe(
       response => {
         this.dialogRef.close();
+        const user = JSON.parse(localStorage.getItem('user'));
+        user.projectChosen = true;
+        localStorage.setItem('user', JSON.stringify(user));
         this.router.navigate(['/student/confirmation']);
       }
     );

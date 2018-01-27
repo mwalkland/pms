@@ -30,8 +30,9 @@ export class AdminStudentsTableDialogComponent implements OnInit {
     this.adminService.getAllStaff().subscribe((staff: Staff[]) => {
       this.staffList = staff;
     });
-    console.log(this.student.supervisor);
-    this.editStaff = new FormControl(this.student.supervisor._id);
+    if (this.student.supervisor) {
+      this.editStaff = new FormControl(this.student.supervisor._id);
+    }
   }
 
   onEdit() {

@@ -51,7 +51,6 @@ export class StaffProjectsEditComponent implements OnInit {
       areas: this.builder.array(this.project.areas, Validators.required),
       type: this.builder.array(type, Validators.required)
     });
-    console.log(this.project.type);
 
 
     this.areaCtrl = new FormControl();

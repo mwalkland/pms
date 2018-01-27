@@ -27,16 +27,16 @@ export class StaffProfileRequestsConfirmComponent implements OnInit {
   }
 
   onConfirm() {
-    this.staffService.confirmProject(this.project, this.project.studentId).subscribe(response => {
+    this.staffService.confirmProject(this.project, this.project.student.id).subscribe(response => {
       if (!response['error']) {
         this.staffService.removeProjectFromRequests.next(this.project);
-        this.staffService.addProjectToConfirmed.next({ project: this.project, student: this.project.student });
+        this.staffService.addProjectToConfirmed.next({ project: this.project });
       }
     });
   }
 
   onReject() {
-    this.staffService.rejectProject(this.project, this.project.studentId).subscribe(response => {
+    this.staffService.rejectProject(this.project, this.project.student.id).subscribe(response => {
       if (!response['error']) {
         this.staffService.removeProjectFromRequests.next(this.project);
       }

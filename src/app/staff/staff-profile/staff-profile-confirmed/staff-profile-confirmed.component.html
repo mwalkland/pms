@@ -1,6 +1,6 @@
 <div class="content">
 
-  <h2 *ngIf="projects">Confirmed Projects ({{ noOfProjects }})</h2>
+  <h2 *ngIf="projects">Confirmed Projects ({{ projects.length }})</h2>
 
   <h3 *ngIf="projects && projects.length === 0">You currently have no projects to supervise.</h3>
 
@@ -24,11 +24,6 @@
         </p>
         <p class="bold-text">{{project.name}}</p>
         <p>{{project.description}}</p>
-
-        <!-- <div class="buttons-wrap">
-            <button mat-button color="primary" (click)="confirm(project, student)">Confirm</button>
-            <button mat-button (click)="reject(project, student)">Reject</button>
-          </div> -->
 
       </mat-expansion-panel>
     </ng-container>

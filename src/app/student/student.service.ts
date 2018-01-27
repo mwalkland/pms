@@ -132,30 +132,26 @@ export class StudentService {
   }
 
   getStudentProject(): Observable<Project> {
-    if (this.chosenProject == null) {
-      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-      return this.http.get('http://localhost:3000/project/getStudentProject' + token)
-        .map((response: Response) => {
-          const project = response['project'];
-          const supervisor = response['supervisor'];
-          let newProject: Project;
-          if (project) {
-            newProject = new Project(
-              project._id,
-              project.name,
-              project.description,
-              project.type,
-              project.maxStudents,
-              project.areas,
-              supervisor
-            );
-          }
-          this.chosenProject = newProject;
-          return newProject;
-        });
-    } else {
-      return Observable.of(this.chosenProject);
-    }
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/project/getStudentProject' + token)
+      .map((response: Response) => {
+        const project = response['project'];
+        const supervisor = response['supervisor'];
+        let newProject: Project;
+        if (project) {
+          newProject = new Project(
+            project._id,
+            project.name,
+            project.description,
+            project.type,
+            project.maxStudents,
+            project.areas,
+            supervisor
+          );
+        }
+        this.chosenProject = newProject;
+        return newProject;
+      });
   }
 
   addStudentProject(project: Project) {

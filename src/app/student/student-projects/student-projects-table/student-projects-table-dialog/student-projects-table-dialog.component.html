@@ -13,7 +13,7 @@
     </div>
     <div class="wrap">
       <p class="title">Staff Member</p>
-      <p class="content">{{ project.staffName }}</p>
+      <p class="content">{{ project.staff.firstname }} {{ project.staff.surname }}</p>
     </div>
     <div class="wrap desc">
       <p class="title">Description</p>
@@ -30,8 +30,7 @@
 
   <div class="buttons-wrap" mat-dialog-actions>
     <div class="buttons">
-      <!-- <button [disabled]="projectChosen" mat-button (click)="onContinue()">Continue</button> -->
-      <button mat-button (click)="onContinue()">Continue</button>
+      <button [disabled]="projectChosen" mat-button (click)="onContinue()">Continue</button>
       <button mat-button mat-dialog-close>Back</button>
     </div>
     <div *ngIf="projectChosen" class="error">

@@ -48,3 +48,8 @@
     margin-top: 30px;
   }
 }
+@media(max-width: 568px) {
+  .title {
+    font-size: 13px;
+  }
+}

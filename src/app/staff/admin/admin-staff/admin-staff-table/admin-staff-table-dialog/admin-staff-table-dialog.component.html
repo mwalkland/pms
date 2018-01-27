@@ -2,25 +2,23 @@
 
 <mat-dialog-content>
   <mat-accordion *ngIf="staff.projects.length !== 0; else noProjects">
-    <ng-container *ngFor="let project of staff.projects">
-      <mat-expansion-panel *ngFor="let student of project.students">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <p>{{student.firstname}} {{student.surname}}</p>
-          </mat-panel-title>
-          <mat-panel-description>
-            <p>{{project.name}}</p>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>
-          <span class="bold-text">Confirmed:</span>
-          <span *ngIf="student.studentInfo.confirmed">Yes</span>
-          <span *ngIf="!student.studentInfo.confirmed">No</span>
-        </p>
-        <p class="bold-text">Description:</p>
-        <p>{{project.description}}</p>
-      </mat-expansion-panel>
-    </ng-container>
+    <mat-expansion-panel *ngFor="let project of staff.projects">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <p>{{project.studentName}}</p>
+        </mat-panel-title>
+        <mat-panel-description>
+          <p>{{project.name}}</p>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>
+        <span class="bold-text">Confirmed:</span>
+        <span *ngIf="project.confirmed">Yes</span>
+        <span *ngIf="!project.confirmed">No</span>
+      </p>
+      <p class="bold-text">Description:</p>
+      <p>{{project.description}}</p>
+    </mat-expansion-panel>
   </mat-accordion>
   <ng-template #noProjects>
     <h3>This staff member does not have any students yet.</h3>

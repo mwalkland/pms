@@ -26,7 +26,7 @@
 
   <ng-container matColumnDef="supervisor">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Supervisor</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.supervisor}}</mat-cell>
+    <mat-cell *matCellDef="let row">{{row.supervisor.firstname}} {{row.supervisor.surname}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="confirmed">

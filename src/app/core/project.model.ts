@@ -8,13 +8,9 @@ export class Project {
     public maxStudents?: number,
     public areas?: string[],
     public staff?: User,
-    public pendingStudents?: User[],
     public areaString?: string,
-    public staffName?: string,
-    public students?: User[],
+    public staffName?: string, // requried for table filtering
     public isStudentProject?: boolean,
-    public studentName?: string,
-    public studentId?: string,
     public student?: User
   ) { }
 }

@@ -19,15 +19,14 @@ export class StaffProjectsComponent implements OnInit {
       this.projects = projects;
     });
     this.staffService.updateProjectInList.subscribe((updatedProject: Project) => {
-      console.log(updatedProject);
       this.projects[this.projects.findIndex(proj => proj.id === updatedProject.id)] = updatedProject;
-      console.log(this.projects);
     })
   }
 
   onEdit(project: Project) {
     this.dialog.open(StaffProjectsEditComponent, {
-      data: { project: project }
+      data: { project: project },
+      minWidth: '80vw'
     });
 
   }

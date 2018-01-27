@@ -62,6 +62,7 @@ router.post('/new', (req, res) => {
   });
 });
 
+// A Staff can update their suggested project details
 router.patch('/updateStaffProject', (req, res) => {
   const body = req.body;
   Project.findByIdAndUpdate(body.id, {
@@ -84,11 +85,12 @@ router.patch('/updateStaffProject', (req, res) => {
   });
 });
 
+// Get all project areas to filter by in the student table
 router.get('/getAreas', (req, res) => {
   Project.find().distinct('areas', (err, areas) => {
     if (err) {
       return res.status(500).json({
-        title: 'An error occured retrieving staff members',
+        title: 'An error occured retrieving project areas',
         error: err
       });
     }
@@ -98,6 +100,7 @@ router.get('/getAreas', (req, res) => {
   });
 });
 
+// Get All staff suggested projects for the student table
 router.get('/getAllStaffProjects', (req, res) => {
   Project.find({ isStudentProject: false }).populate('staff').exec(
     (err, projects) => {
@@ -126,7 +129,6 @@ router.get('/getProjectRequests', (req, res) => {
     User.find({ 'studentInfo.supervisor': user })
       .populate('studentInfo.chosenProject')
       .exec((err, students) => {
-        console.log(students);
         const studentList = [];
         for (const student of students) {
           if (student.studentInfo.confirmed === false) {
@@ -153,7 +155,6 @@ router.get('/getConfirmedProjects', (req, res) => {
     User.find({ 'studentInfo.supervisor': user })
       .populate('studentInfo.chosenProject')
       .exec((err, students) => {
-        console.log(students);
         const studentList = [];
         for (const student of students) {
           if (student.studentInfo.confirmed === true) {
@@ -169,7 +170,7 @@ router.get('/getConfirmedProjects', (req, res) => {
 
 router.get('/getStaffProjects', (req, res) => {
   const decoded = jwt.decode(req.query.token);
-  Project.find({ staff: decoded.user._id }, (err, projects) => {
+  Project.find({ staff: decoded.user._id, isStudentProject: false }, (err, projects) => {
     if (err) {
       return res.status(500).json({
         title: 'An error occured getting the projects',
@@ -187,61 +188,44 @@ router.patch('/confirmProject', (req, res) => {
   const project = body.project;
   const studentId = body.studentId;
   const decoded = jwt.decode(req.query.token);
-
-  // note the different in id and _id
-  Project.findByIdAndUpdate(project.id, {
-    $pull: { pendingStudents: studentId },
-    $push: { students: studentId }
-  }, { new: true }, (err, project) => {
+  console.log(studentId)
+  User.findByIdAndUpdate(studentId, { $set: { 'studentInfo.confirmed': true } }, (err, student) => {
     if (err) {
       return res.status(500).json({
-        title: 'An error occured updating the project information',
+        title: 'An error occured getting the student',
         error: err
       });
     }
-    if (project.maxStudents === project.students.length) {
-      project.full = true;
-      project.save();
-    }
-
-    User.findByIdAndUpdate(studentId, { $set: { 'studentInfo.confirmed': true } }, (err, student) => {
+    User.findById(decoded.user._id, (err, staff) => {
       if (err) {
         return res.status(500).json({
-          title: 'An error occured getting the student',
+          title: 'An error occured getting the staff',
           error: err
         });
       }
-      User.findById(decoded.user._id, (err, staff) => {
+      User.findOne({ 'staffInfo.leader': true }, (err, leader) => {
         if (err) {
           return res.status(500).json({
-            title: 'An error occured getting the staff',
+            title: 'An error occured getting the module leader',
             error: err
           });
         }
-        User.findOne({ 'staffInfo.leader': true }, (err, leader) => {
-          if (err) {
-            return res.status(500).json({
-              title: 'An error occured getting the module leader',
-              error: err
-            });
-          }
-          const email = new EmailController();
-          email.sendStudentEmail(
-            staff.firstname + ' ' + staff.surname,
-            student.firstname + ' ' + student.surname,
-            student.email,
-            project.name,
-            true);
-          email.sendModuleLeaderEmail(
-            staff.firstname + ' ' + staff.surname,
-            student.firstname + ' ' + student.surname,
-            project.name,
-            leader.firstname + ' ' + leader.surname,
-            leader.email
-          );
-          res.status(200).json({
-            message: 'Successfully updated the projects',
-          });
+        const email = new EmailController();
+        email.sendStudentEmail(
+          staff.firstname + ' ' + staff.surname,
+          student.firstname + ' ' + student.surname,
+          student.email,
+          project.name,
+          true);
+        email.sendModuleLeaderEmail(
+          staff.firstname + ' ' + staff.surname,
+          student.firstname + ' ' + student.surname,
+          project.name,
+          leader.firstname + ' ' + leader.surname,
+          leader.email
+        );
+        res.status(200).json({
+          message: 'Successfully updated the project',
         });
       });
     });
@@ -270,7 +254,6 @@ router.patch('/rejectProject', (req, res) => {
       }
       student.studentInfo.chosenProject = undefined;
       student.studentInfo.supervisor = undefined;
-      project.pendingStudents.pull(student._id);
 
       student.save();
       project.save();
@@ -299,29 +282,19 @@ router.patch('/rejectProject', (req, res) => {
 
 router.get('/getStudentProject', (req, res) => {
   const decoded = jwt.decode(req.query.token);
-  Project.findOne({ students: decoded.user._id })
-    .populate('staff')
-    .exec((err, project) => {
+  User.findById(decoded.user._id)
+    .populate('studentInfo.supervisor studentInfo.chosenProject')
+    .exec((err, student) => {
       if (err) {
         return res.status(500).json({
-          title: 'Could not get student project',
+          title: 'Could not get student',
           error: err
         });
       }
-      User.findById(decoded.user._id)
-        .populate('studentInfo.supervisor')
-        .exec((err, student) => {
-          if (err) {
-            return res.status(500).json({
-              title: 'Could not get student',
-              error: err
-            });
-          }
-          return res.status(200).json({
-            project: project,
-            supervisor: student.studentInfo.supervisor
-          });
-        });
+      return res.status(200).json({
+        project: student.studentInfo.chosenProject,
+        supervisor: student.studentInfo.supervisor
+      });
     });
 });
 
@@ -329,12 +302,9 @@ router.get('/getStudentProject', (req, res) => {
 router.patch('/addStudentProject', (req, res) => {
   const body = req.body;
   const decoded = jwt.decode(req.query.token);
-  const updateObj = {
-    $set: { status: 'pending' },
-    $push: { pendingStudents: decoded.user._id }
-  };
 
-  Project.findByIdAndUpdate(body.id, updateObj, { new: true })
+
+  Project.findById(body.id)
     .populate('staff').exec((err, project) => {
       if (err) {
         return res.status(500).json({
@@ -342,7 +312,6 @@ router.patch('/addStudentProject', (req, res) => {
           error: err
         });
       }
-
       User.findByIdAndUpdate(decoded.user._id, {
         $set: { 'studentInfo.chosenProject': project, 'studentInfo.supervisor': project.staff },
       }, (err, user) => {
@@ -386,7 +355,6 @@ router.post('/createStudentProject', (req, res) => {
         type: body.type,
         staff: staff._id,
         full: true,
-        pendingStudents: student,
         areas: body.areas,
         isStudentProject: true
       });

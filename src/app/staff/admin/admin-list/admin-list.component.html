@@ -1,7 +1,6 @@
 <div class="list-wrap">
   <li routerLink="./students" routerLinkActive="active" class="top">Students</li>
   <li routerLink="./staff" routerLinkActive="active">Staff</li>
-  <li routerLink="./modify" routerLinkActive="active">Projects</li>
   <li (click)="sendReminder()">Send Reminder</li>
 </div>
 <div class="list-dropdown-wrap">
@@ -9,7 +8,6 @@
     <mat-select placeholder="Select Option">
       <mat-option selected value="Students" routerLink="./students">Students</mat-option>
       <mat-option value="Staff" routerLink="./staff">Staff</mat-option>
-      <mat-option value="Modify" routerLink="./modify">Projects</mat-option>
       <mat-option value="Reminder" (click)="sendReminder()">Send Reminder</mat-option>
     </mat-select>
   </mat-form-field>

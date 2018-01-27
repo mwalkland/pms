@@ -11,7 +11,7 @@ export class StaffService {
 
   resetForm = new Subject<void>();
   removeProjectFromRequests = new Subject<Project>();
-  addProjectToConfirmed = new Subject<{ project: Project, student: User }>();
+  addProjectToConfirmed = new Subject<{ project: Project }>();
   updateProjectInList = new Subject<Project>();
 
   constructor(private http: HttpClient) { }
@@ -74,7 +74,7 @@ export class StaffService {
         for (const project of projects) {
           const newProject = new Project(
             project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-            project.staff, project.pendingStudents, null, null, project.students, project.isStudentProject
+            project.staff, null, null, project.students, project.isStudentProject
           );
           projectList.push(newProject);
         }
@@ -92,8 +92,9 @@ export class StaffService {
           const project = student.studentInfo.chosenProject;
           const newProject = new Project(
             project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-            project.staff, project.pendingStudents, null, null, project.students, project.isStudentProject,
-            student.firstname + ' ' + student.surname, student._id, student
+            project.staff, null, null, project.isStudentProject,
+            new User(student.email, null, student.firstname, student.surname,
+              student.type, null, null, student._id)
           );
           projectList.push(newProject);
         }
@@ -111,24 +112,13 @@ export class StaffService {
           const project = student.studentInfo.chosenProject;
           const newProject = new Project(
             project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-            project.staff, project.pendingStudents, null, null, project.students, project.isStudentProject,
-            student.firstname + ' ' + student.surname, student._id, student
+            project.staff, null, null, project.isStudentProject,
+            new User(student.email, null, student.firstname, student.surname,
+              student.type, null, null, student._id)
           );
           projectList.push(newProject);
         }
         return projectList;
-
-
-        // const projects = response['projects'];
-        // const projectList: Project[] = [];
-        // for (const project of projects) {
-        //   const newProject = new Project(
-        //     project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-        //     project.staff, null, null, null, project.students, project.isStudentProject, null, null, 
-        //   );
-        //   projectList.push(newProject);
-        // }
-        // return projectList;
       });
   }
 

@@ -13,6 +13,7 @@ export class AdminStaffTableDialogComponent implements OnInit {
 
   constructor( @Inject(MAT_DIALOG_DATA) public data: { staff: Staff }) {
     this.staff = data.staff;
+    console.log(this.staff);
   }
 
   ngOnInit() {

@@ -31,7 +31,14 @@ export class AdminService {
               student.firstname,
               student.surname,
               project ? project.name : 'N/A',
-              supervisor,
+              new Staff(
+                supervisor ? supervisor._id : '',
+                supervisor ? supervisor.email : '',
+                supervisor ? supervisor.firstname : 'N/A',
+                supervisor ? supervisor.surname : '',
+                null,
+                null
+              ),
               student.studentInfo.confirmed ? 'Yes' : 'No',
               project ? project.description : null
             );
@@ -45,7 +52,7 @@ export class AdminService {
     }
   }
 
-  getAllStaff() {
+  getAllStaff(): Observable<Staff[]> {
     if (this.staff == null) {
 
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
@@ -58,7 +65,18 @@ export class AdminService {
             const staffProjects = [];
             for (const student of studentResponse) {
               if (student.studentInfo.supervisor && student.studentInfo.supervisor._id === staff._id) {
-                staffProjects.push(student.studentInfo.chosenProject);
+                const studentProject = student.studentInfo.chosenProject;
+                staffProjects.push(new Project(
+                  studentProject.name,
+                  studentProject.description,
+                  studentProject.areas,
+                  staff.firstname + ' ' + staff.surname,
+                  staff.email,
+                  staff._id,
+                  student.firstname + ' ' + student.surname,
+                  studentProject.type,
+                  student.studentInfo.confirmed
+                ));
               }
             }
             const newStaff = new Staff(
@@ -71,38 +89,12 @@ export class AdminService {
             );
             staffList.push(newStaff);
           }
-          console.log(staffList)
           this.staff = staffList;
           return staffList;
         });
     } else {
       return Observable.of(this.staff);
     }
-  }
-
-  getAllProjects(): Observable<Project[]> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/admin/getAllProjects' + token)
-      .map(response => {
-        const projectResponse = response['projects'];
-        const projectList: Project[] = [];
-        for (const project of projectResponse) {
-          for (const student of project.students) {
-            const newProject = new Project(
-              project.name,
-              project.areas,
-              project.staff.firstname + ' ' + project.staff.surname,
-              project.staff.email,
-              project.staff._id,
-              student.firstname + ' ' + student.surname,
-              project.isStudentProject ? 'Student' : 'Staff'
-            );
-            projectList.push(newProject);
-          }
-        }
-        this.projects = projectList;
-        return projectList;
-      });
   }
 
   modifyProjectSupervisor(staff: { staffId: string }) {

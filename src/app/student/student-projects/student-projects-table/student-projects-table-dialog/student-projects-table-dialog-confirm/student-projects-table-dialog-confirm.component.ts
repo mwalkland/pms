@@ -28,6 +28,9 @@ export class StudentProjectsTableDialogConfirmComponent implements OnInit {
   onConfirm() {
     this.studentService.addStudentProject(this.project).subscribe(() => {
       this.dialog.closeAll();
+      const user = JSON.parse(localStorage.getItem('user'));
+      user.projectChosen = true;
+      localStorage.setItem('user', JSON.stringify(user));
       this.router.navigate(['/student/confirmation']);
     });
   }

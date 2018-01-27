@@ -30,14 +30,9 @@ import {
 } from './admin-students/admin-students-table/admin-students-table-dialog/admin-students-table-dialog.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminReminderComponent } from './admin-reminder/admin-reminder.component';
-import { AdminModifyComponent } from './admin-modify/admin-modify.component';
-import { AdminModifyTableComponent } from './admin-modify/admin-modify-table/admin-modify-table.component';
-import {
-  AdminModifyTableDialogComponent
-} from './admin-modify/admin-modify-table/admin-modify-table-dialog/admin-modify-table-dialog.component';
 import {
   AdminStudentsTableDialogConfirmComponent
-// tslint:disable-next-line:max-line-length
+  // tslint:disable-next-line:max-line-length
 } from './admin-students/admin-students-table/admin-students-table-dialog/admin-students-table-dialog-confirm/admin-students-table-dialog-confirm.component';
 
 @NgModule({
@@ -69,9 +64,6 @@ import {
     AdminStudentsTableDialogComponent,
     AdminHomeComponent,
     AdminReminderComponent,
-    AdminModifyComponent,
-    AdminModifyTableComponent,
-    AdminModifyTableDialogComponent,
     AdminStudentsTableDialogConfirmComponent
   ],
   providers: [
@@ -81,7 +73,6 @@ import {
     AdminStaffTableDialogComponent,
     AdminStudentsTableDialogComponent,
     AdminReminderComponent,
-    AdminModifyTableDialogComponent,
     AdminStudentsTableDialogConfirmComponent
   ]
 })

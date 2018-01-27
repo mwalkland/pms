@@ -26,6 +26,10 @@
   padding: 0px 15px;
 }
 
+.mat-cell {
+  padding: 0px 5px;
+}
+
 @media(max-width: 868px) {
   .mat-table {
     overflow: initial;

@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 import { StudentComponent } from './student.component';
 import { StudentHeaderComponent } from './student-header/student-header.component';
 import { StudentProjectsComponent } from './student-projects/student-projects.component';
-import { StudentStaffComponent } from './student-staff/student-staff.component';
 import { StudentProjectsListComponent } from './student-projects/student-projects-list/student-projects-list.component';
 import {
   MatListModule,
@@ -76,7 +75,6 @@ import {
     StudentComponent,
     StudentHeaderComponent,
     StudentProjectsComponent,
-    StudentStaffComponent,
     StudentProjectsListComponent,
     StudentProjectsTableComponent,
     StudentHomeComponent,

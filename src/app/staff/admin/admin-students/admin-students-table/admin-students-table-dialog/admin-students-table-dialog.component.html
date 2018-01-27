@@ -1,6 +1,7 @@
 <h1 mat-dialog-title>{{student.firstname}} {{student.surname}}</h1>
 
 <mat-dialog-content>
+
   <ng-container *ngIf="student.projectname !== 'N/A'; else noProject">
     <p>
       <span class="bold-text">Project Name:</span>
@@ -25,11 +26,14 @@
     <p class="bold-text">Description:</p>
     <p>{{student.projectDesc}}</p>
   </ng-container>
+
   <ng-template #noProject>
     <h3>This Student has not chosen a project yet.</h3>
   </ng-template>
+
 </mat-dialog-content>
-<mat-dialog-actions>
+
+<mat-dialog-actions *ngIf="student.projectname !== 'N/A'">
   <button mat-raised-button color="primary" [disabled]="!buttonDisabled" (click)="confirmEdit()">Save</button>
   <button mat-button color="primary" mat-dialog-close>Close</button>
 </mat-dialog-actions>

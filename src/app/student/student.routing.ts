@@ -27,11 +27,6 @@ const studentRoutes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'stafflist',
-        component: StudentStaffComponent,
-        canActivate: [AuthGuard]
-      },
-      {
         path: 'confirmation',
         component: StudentProjectsConfirmationComponent
       },

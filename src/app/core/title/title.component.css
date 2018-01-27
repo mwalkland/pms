@@ -19,7 +19,7 @@ img {
   float: left;
 }
 
-@media(max-width: 868px) {
+@media(max-width: 968px) {
   .container {
     display: flex;
     align-items: center;

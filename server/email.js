@@ -7,6 +7,17 @@ class EmailController {
 
   }
 
+  // createTransport() {
+  //   return nodemailer.createTransport({
+  //     service: 'Outlook365',
+  //     port: 587,
+  //     auth: {
+  //       user: 'mw482@exeter.ac.uk',
+  //       pass: 'g9Pz7$gkVAwm'
+  //     }
+  //   });
+  // }
+
   createTransport(account) {
     return nodemailer.createTransport({
       host: 'smtp.ethereal.email',

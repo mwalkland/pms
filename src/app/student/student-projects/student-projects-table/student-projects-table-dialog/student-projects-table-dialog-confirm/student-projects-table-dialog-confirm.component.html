@@ -4,3 +4,5 @@
   <button mat-button (click)="onConfirm()">Yes</button>
   <button mat-button mat-dialog-close>No</button>
 </div>
+
+<mat-error *ngIf="error">There has been an error confirming this project. Please try again.</mat-error>

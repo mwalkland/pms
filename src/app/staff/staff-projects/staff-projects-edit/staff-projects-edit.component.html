@@ -56,7 +56,8 @@
   </form>
 </mat-dialog-content>
 
+<mat-error *ngIf="error">An error occured saving the project.</mat-error>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" type="submit" (click)="onSave()" class="submit" [disabled]="!form.valid" mat-dialog-close>Save</button>
+  <button mat-raised-button color="primary" type="submit" (click)="onSave()" class="submit" [disabled]="!form.valid">Save</button>
   <button mat-button class="submit" mat-dialog-close>Cancel</button>
 </mat-dialog-actions>

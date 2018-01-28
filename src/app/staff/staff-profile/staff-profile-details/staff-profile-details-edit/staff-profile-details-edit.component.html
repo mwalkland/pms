@@ -45,8 +45,8 @@
     </mat-autocomplete>
   </mat-form-field>
 </div>
-
+<mat-error *ngIf="error">An error occured updating areas.</mat-error>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close color="primary" (click)="save(first.value, second.value, third.value, fourth.value, fifth.value)">Save</button>
+  <button mat-button color="primary" (click)="save(first.value, second.value, third.value, fourth.value, fifth.value)">Save</button>
   <button mat-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>

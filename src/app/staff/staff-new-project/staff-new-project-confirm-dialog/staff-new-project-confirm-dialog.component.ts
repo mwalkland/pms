@@ -10,7 +10,9 @@ import { StaffNewProjectComponent } from '../staff-new-project.component';
   styleUrls: ['./staff-new-project-confirm-dialog.component.css']
 })
 export class StaffNewProjectConfirmDialogComponent implements OnInit {
+
   project: Project;
+  error = false;
 
   constructor(
     private staffService: StaffService,
@@ -30,12 +32,10 @@ export class StaffNewProjectConfirmDialogComponent implements OnInit {
       response => {
         this.dialogRef.close();
         this.staffService.resetForm.next();
+      },
+      error => {
+        this.error = true;
       }
-      // error => {
-      //   if (error.status === 401) {
-      //     this.authError = true;
-      //   }
-      // }
     );
   }
 

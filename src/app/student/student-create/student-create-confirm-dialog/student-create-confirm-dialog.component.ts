@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class StudentCreateConfirmDialogComponent implements OnInit {
   project: Project;
+  error = false;
 
   constructor(
     private studentService: StudentService,
@@ -35,6 +36,8 @@ export class StudentCreateConfirmDialogComponent implements OnInit {
         user.projectChosen = true;
         localStorage.setItem('user', JSON.stringify(user));
         this.router.navigate(['/student/confirmation']);
+      }, error => {
+        this.error = true;
       }
     );
   }

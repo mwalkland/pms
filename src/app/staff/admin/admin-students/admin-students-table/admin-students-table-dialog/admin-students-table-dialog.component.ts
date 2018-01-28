@@ -43,7 +43,10 @@ export class AdminStudentsTableDialogComponent implements OnInit {
 
   confirmEdit() {
     this.dialog.open(AdminStudentsTableDialogConfirmComponent, {
-      data: { staffId: this.editStaff.value }
+      data: {
+        staffId: this.editStaff.value,
+        student: this.student
+      }
     })
   }
 

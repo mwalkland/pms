@@ -2,10 +2,11 @@ import {
   Component, OnInit, Inject, ViewChild
 } from '@angular/core';
 import { StaffService } from '../../../staff.service';
-import { MAT_DIALOG_DATA, MatAutocompleteTrigger } from '@angular/material';
+import { MAT_DIALOG_DATA, MatAutocompleteTrigger, MatDialogRef } from '@angular/material';
 import { Areas } from '../areas.model';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { StaffProfileDetailsComponent } from '../staff-profile-details.component';
 
 @Component({
   selector: 'app-staff-profile-details-edit',
@@ -22,8 +23,11 @@ export class StaffProfileDetailsEditComponent implements OnInit {
   areaCtrl5: FormControl;
   filteredAreas: Observable<string[]>;
   @ViewChild(MatAutocompleteTrigger) autoComplete: MatAutocompleteTrigger;
+  error = false;
 
-  constructor(private staffService: StaffService, @Inject(MAT_DIALOG_DATA) public data: { areas: Areas }) {
+  constructor(private staffService: StaffService,
+    @Inject(MAT_DIALOG_DATA) public data: { areas: Areas },
+    public dialogRef: MatDialogRef<StaffProfileDetailsComponent>) {
     this.areas = data.areas;
     this.areaCtrl1 = new FormControl(this.areas.first);
     this.areaCtrl2 = new FormControl();
@@ -44,7 +48,13 @@ export class StaffProfileDetailsEditComponent implements OnInit {
     this.areas.third = third;
     this.areas.fourth = fourth;
     this.areas.fifth = fifth;
-    this.staffService.updateStaffAreas(this.areas).subscribe();
+    this.staffService.updateStaffAreas(this.areas).subscribe(
+      response => {
+        this.dialogRef.close();
+      }, error => {
+        this.error = true;
+      }
+    );
   }
 
   filterAreas(name: string) {

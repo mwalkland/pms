@@ -12,6 +12,7 @@ import { StudentProjectsTableDialogComponent } from '../student-projects-table-d
 })
 export class StudentProjectsTableDialogConfirmComponent implements OnInit {
   project: Project;
+  error = false;
 
   constructor(public dialogRef: MatDialogRef<StudentProjectsTableDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { project: Project },
@@ -26,13 +27,16 @@ export class StudentProjectsTableDialogConfirmComponent implements OnInit {
   }
 
   onConfirm() {
-    this.studentService.addStudentProject(this.project).subscribe(() => {
-      this.dialog.closeAll();
-      const user = JSON.parse(localStorage.getItem('user'));
-      user.projectChosen = true;
-      localStorage.setItem('user', JSON.stringify(user));
-      this.router.navigate(['/student/confirmation']);
-    });
+    this.studentService.addStudentProject(this.project).subscribe(
+      response => {
+        this.dialog.closeAll();
+        const user = JSON.parse(localStorage.getItem('user'));
+        user.projectChosen = true;
+        localStorage.setItem('user', JSON.stringify(user));
+        this.router.navigate(['/student/confirmation']);
+      }, error => {
+        this.error = true;
+      });
   }
 
 }

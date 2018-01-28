@@ -13,3 +13,7 @@
 .mat-icon:hover {
   cursor: pointer;
 }
+
+.mat-raised-button {
+  color: white;
+}

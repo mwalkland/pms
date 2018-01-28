@@ -22,6 +22,7 @@ export class StaffProjectsEditComponent implements OnInit {
   @ViewChild('software') softwareCheckbox: MatCheckbox;
   @ViewChild('research') researchCheckbox: MatCheckbox;
   areaList: string[];
+  error = false;
 
   constructor(public dialogRef: MatDialogRef<StaffNewProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { project: Project },
@@ -117,6 +118,9 @@ export class StaffProjectsEditComponent implements OnInit {
         updatedProject.maxStudents,
         updatedProject.areas
       ));
+      this.dialogRef.close();
+    }, error => {
+      this.error = true;
     });
   }
 

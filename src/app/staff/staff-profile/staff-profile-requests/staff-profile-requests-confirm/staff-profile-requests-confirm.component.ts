@@ -13,6 +13,7 @@ import { StaffService } from '../../../staff.service';
 export class StaffProfileRequestsConfirmComponent implements OnInit {
   project: Project;
   confirm: boolean;
+  error = false;
 
   constructor(private staffService: StaffService,
     public dialogRef: MatDialogRef<StaffNewProjectComponent>,
@@ -22,25 +23,29 @@ export class StaffProfileRequestsConfirmComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.project);
-
   }
 
   onConfirm() {
-    this.staffService.confirmProject(this.project, this.project.student.id).subscribe(response => {
-      if (!response['error']) {
-        this.staffService.removeProjectFromRequests.next(this.project);
-        this.staffService.addProjectToConfirmed.next({ project: this.project });
-      }
-    });
+    this.staffService.confirmProject(this.project, this.project.student.id).subscribe(
+      response => {
+        if (!response['error']) {
+          this.staffService.removeProjectFromRequests.next(this.project);
+          this.staffService.addProjectToConfirmed.next({ project: this.project });
+        }
+      }, error => {
+        this.error = true;
+      });
   }
 
   onReject() {
-    this.staffService.rejectProject(this.project, this.project.student.id).subscribe(response => {
-      if (!response['error']) {
-        this.staffService.removeProjectFromRequests.next(this.project);
-      }
-    })
+    this.staffService.rejectProject(this.project, this.project.student.id).subscribe(
+      response => {
+        if (!response['error']) {
+          this.staffService.removeProjectFromRequests.next(this.project);
+        }
+      }, error => {
+        this.error = true;
+      })
   }
 
 }

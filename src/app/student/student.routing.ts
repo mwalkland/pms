@@ -4,7 +4,6 @@ import { AuthGuard } from './../auth/guards/auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { StudentProjectsComponent } from './student-projects/student-projects.component';
-import { StudentStaffComponent } from './student-staff/student-staff.component';
 import {
   StudentProjectsConfirmationComponent
 } from './student-projects/student-projects-confirmation/student-projects-confirmation.component';

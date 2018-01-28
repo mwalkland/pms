@@ -9,6 +9,7 @@ export class Student {
     public projectname: string,
     public supervisor: Staff,
     public confirmed: string,
-    public projectDesc: string
+    public projectDesc: string,
+    public supervisorName?: string
   ) { };
 }

@@ -29,9 +29,9 @@
     </div>
 
   </div>
-
+  <mat-error *ngIf="error">An error occured creating student project.</mat-error>
   <div class="buttons-wrap" mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="onSubmit()">Confirm</button>
+    <button mat-button (click)="onSubmit()">Confirm</button>
     <button mat-button mat-dialog-close>Back</button>
   </div>
 

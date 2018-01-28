@@ -188,7 +188,6 @@ router.patch('/confirmProject', (req, res) => {
   const project = body.project;
   const studentId = body.studentId;
   const decoded = jwt.decode(req.query.token);
-  console.log(studentId)
   User.findByIdAndUpdate(studentId, { $set: { 'studentInfo.confirmed': true } }, (err, student) => {
     if (err) {
       return res.status(500).json({
@@ -302,7 +301,6 @@ router.get('/getStudentProject', (req, res) => {
 router.patch('/addStudentProject', (req, res) => {
   const body = req.body;
   const decoded = jwt.decode(req.query.token);
-
 
   Project.findById(body.id)
     .populate('staff').exec((err, project) => {

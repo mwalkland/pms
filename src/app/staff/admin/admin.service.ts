@@ -40,7 +40,8 @@ export class AdminService {
                 null
               ),
               student.studentInfo.confirmed ? 'Yes' : 'No',
-              project ? project.description : null
+              project ? project.description : null,
+              supervisor ? supervisor.firstname + ' ' + supervisor.surname : 'N/A'
             );
             studentList.push(newStudent);
           }
@@ -97,9 +98,9 @@ export class AdminService {
     }
   }
 
-  modifyProjectSupervisor(staff: { staffId: string }) {
+  modifyProjectSupervisor(staffId: string, studentId: string): Observable<Object> {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    const body = JSON.stringify(staff);
+    const body = { staffId: staffId, studentId: studentId };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.patch('http://localhost:3000/admin/modifyProjectSupervisor' + token, body, { headers: headers });
   }

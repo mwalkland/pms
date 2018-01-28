@@ -13,7 +13,7 @@ export class AdminStudentsTableComponent implements OnInit, AfterViewInit {
 
   students: Student[];
   dataSource = new MatTableDataSource<Student>();
-  displayedColumns = ['firstname', 'surname', 'projectname', 'supervisor', 'confirmed'];
+  displayedColumns = ['firstname', 'surname', 'projectname', 'supervisorName', 'confirmed'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator
   filterBy: string;

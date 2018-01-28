@@ -30,3 +30,8 @@ h1 {
 mat-dialog-container {
   min-width: 40vw;
 }
+
+.mat-error {
+  margin: 10px;
+  text-align: center;
+}

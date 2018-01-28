@@ -28,3 +28,8 @@
 .wrap {
   display: flex;
 }
+
+.mat-error {
+  margin: 10px;
+  text-align: center;
+}

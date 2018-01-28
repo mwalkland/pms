@@ -1,5 +1,7 @@
 <h4>Are you sure you want to change the Staff member assigned to this project?</h4>
 
+<mat-error *ngIf="error">An error occured changing the staff member.</mat-error>
+
 <mat-dialog-actions>
   <button mat-raised-button color="primary" (click)="confirmEdit()">Confirm</button>
   <button mat-button mat-dialog-close>Cancel</button>

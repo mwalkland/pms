@@ -25,8 +25,7 @@ router.get('/getAllStudents', (req, res) => {
     .populate('studentInfo.chosenProject studentInfo.supervisor')
     .exec((err, students) => {
       if (err) {
-        return res.status(401).json({
-          title: 'Error',
+        return res.status(500).json({
           error: err
         });
       }
@@ -43,7 +42,7 @@ router.get('/getAllStaff', (req, res) => {
     .populate('studentInfo.supervisor')
     .exec((err, students) => {
       if (err) {
-        return res.status(401).json({
+        return res.status(500).json({
           title: 'Error',
           error: err
         });
@@ -55,8 +54,7 @@ router.get('/getAllStaff', (req, res) => {
         })
         .exec((err, staff) => {
           if (err) {
-            return res.status(401).json({
-              title: 'Error',
+            return res.status(500).json({
               error: err
             });
           }
@@ -71,8 +69,7 @@ router.get('/getAllStaff', (req, res) => {
 router.post('/sendReminder', (req, res) => {
   User.find({ type: 'student', 'studentInfo.confirmed': false }, 'email', (err, students) => {
     if (err) {
-      return res.status(401).json({
-        title: 'Error',
+      return res.status(500).json({
         error: err
       });
     }
@@ -93,7 +90,7 @@ router.get('/getAllProjects', (req, res) => {
   Project.find().populate('staff students').exec(
     (err, projects) => {
       if (err) {
-        return res.status(401).json({
+        return res.status(500).json({
           title: 'Error retrieving projects',
           error: err
         });
@@ -104,9 +101,20 @@ router.get('/getAllProjects', (req, res) => {
     });
 });
 
-// router.patch('/modifyProjectSupervisor', (req, res) => {
-//   const staffId = req.body.staffId;
-//   Project
-// });
+router.patch('/modifyProjectSupervisor', (req, res) => {
+  const staffId = req.body.staffId;
+  const studentId = req.body.studentId;
+  User.findByIdAndUpdate(studentId, { $set: { 'studentInfo.supervisor': staffId } }, (err) => {
+    if (err) {
+      return res.status(500).json({
+        title: 'Error updating supervisor',
+        error: err
+      });
+    }
+    res.status(200).json({
+      message: 'Successfully updated supervisor'
+    });
+  });
+});
 
 module.exports = router;

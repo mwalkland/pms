@@ -102,8 +102,8 @@ export class StudentService {
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
       return this.http.get('http://localhost:3000/project/getAreas' + token)
         .map((response: Response) => {
-          this.areas = response['obj'];
-          return response['obj'];
+          this.areas = response['areas'];
+          return response['areas'];
         });
     } else {
       return Observable.of(this.areas);

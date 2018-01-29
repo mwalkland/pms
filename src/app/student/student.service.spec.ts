@@ -7,6 +7,7 @@ import { StudentService } from './student.service';
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject, getTestBed } from '@angular/core/testing';
+import { Project } from '../core/project.model';
 
 describe('Service: StudentProjects', () => {
   beforeEach(() => {
@@ -65,7 +66,79 @@ describe('Service: StudentProjects', () => {
         expect(staff2.type).toBe('Staff');
       });
 
-      backend.expectOne('http://localhost:3000/user/getStaff').flush(staffResponse);
+      backend.expectOne(req => req.url.endsWith('/user/getStaff')).flush(staffResponse);
     }));
 
+  it('getAreas returns areas array',
+    inject([StudentService, HttpTestingController], (service: StudentService, backend: HttpTestingController) => {
+      const areasResponse = {
+        areas: [
+          'area1',
+          'areas2',
+          'areas3',
+          'areas4',
+          'areas5'
+        ]
+      };
+      console.log('fdgfd')
+      service.getAreas().subscribe((areas: string[]) => {
+        expect(areas).toEqual(areasResponse.areas);
+      });
+
+      backend.expectOne(req => req.url.endsWith('/project/getAreas')).flush(areasResponse);
+    })
+  );
+
+  it('getStaffProjects returns and processes all projects',
+    inject([StudentService, HttpTestingController], (service: StudentService, backend: HttpTestingController) => {
+      const projectResponse = {
+        projects: [
+          {
+            _id: '1',
+            name: 'name',
+            description: 'desc',
+            type: 'type',
+            maxStudents: 1,
+            areas: ['area']
+          }
+        ]
+      };
+      service.getStaffProjects().subscribe((projects: Project[]) => {
+        const project = projects[0];
+        expect(project.id).toBe('1');
+        expect(project.name).toBe('name');
+        expect(project.type).toBe('type');
+        expect(project.maxStudents).toBe(1);
+        expect(project.areas).toContain('area');
+      });
+
+      backend.expectOne(req => req.url.endsWith('/project/getAllStaffProjects')).flush(projectResponse);
+    })
+  );
+
+  it('getStudentProject returns and processes the Project',
+    inject([StudentService, HttpTestingController], (service: StudentService, backend: HttpTestingController) => {
+      const projectResponse = {
+        project: {
+          _id: '1',
+          name: 'name',
+          description: 'desc',
+          type: 'type',
+          maxStudents: 1,
+          areas: ['area']
+        },
+        supervisor: {}
+      };
+      service.getStudentProject().subscribe((project: Project) => {
+        expect(project.id).toBe('1');
+        expect(project.name).toBe('name');
+        expect(project.type).toBe('type');
+        expect(project.maxStudents).toBe(1);
+        expect(project.areas).toContain('area');
+        expect(project.staff).toEqual({});
+      });
+
+      backend.expectOne(req => req.url.endsWith('/project/getStudentProject')).flush(projectResponse);
+    })
+  );
 });

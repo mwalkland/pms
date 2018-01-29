@@ -95,7 +95,7 @@ router.get('/getAreas', (req, res) => {
       });
     }
     res.status(200).json({
-      obj: areas
+      areas: areas
     });
   });
 });

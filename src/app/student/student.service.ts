@@ -77,7 +77,7 @@ export class StudentService {
   }
 
   getStaff(): Observable<User[]> {
-    if (this.staff == null) {
+    if (!this.staff) {
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
       return this.http.get('http://localhost:3000/user/getStaff' + token)
         .map((response: Response) => {
@@ -98,7 +98,7 @@ export class StudentService {
   }
 
   getAreas(): Observable<string[]> {
-    if (this.areas == null) {
+    if (!this.areas) {
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
       return this.http.get('http://localhost:3000/project/getAreas' + token)
         .map((response: Response) => {
@@ -111,7 +111,7 @@ export class StudentService {
   }
 
   getStaffProjects(): Observable<Project[]> {
-    if (this.projects == null) {
+    if (!this.projects) {
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
       return this.http.get('http://localhost:3000/project/getAllStaffProjects' + token)
         .map((response: Response) => {
@@ -132,26 +132,30 @@ export class StudentService {
   }
 
   getStudentProject(): Observable<Project> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/project/getStudentProject' + token)
-      .map((response: Response) => {
-        const project = response['project'];
-        const supervisor = response['supervisor'];
-        let newProject: Project;
-        if (project) {
-          newProject = new Project(
-            project._id,
-            project.name,
-            project.description,
-            project.type,
-            project.maxStudents,
-            project.areas,
-            supervisor
-          );
-        }
-        this.chosenProject = newProject;
-        return newProject;
-      });
+    if (!this.chosenProject) {
+      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+      return this.http.get('http://localhost:3000/project/getStudentProject' + token)
+        .map((response: Response) => {
+          const project = response['project'];
+          const supervisor = response['supervisor'];
+          let newProject: Project;
+          if (project) {
+            newProject = new Project(
+              project._id,
+              project.name,
+              project.description,
+              project.type,
+              project.maxStudents,
+              project.areas,
+              supervisor
+            );
+          }
+          this.chosenProject = newProject;
+          return newProject;
+        });
+    } else {
+      return Observable.of(this.chosenProject);
+    }
   }
 
   addStudentProject(project: Project) {
@@ -169,7 +173,7 @@ export class StudentService {
   }
 
   getSuggestedAreas(): Observable<string[]> {
-    if (this.suggestedAreas == null) {
+    if (!this.suggestedAreas) {
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
       return this.http.get('http://localhost:3000/project/getSuggestedAreas' + token)
         .map((response: { areas: string[] }) => {

@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
@@ -30,10 +31,7 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    const token = localStorage.getItem('token');
-    const body = { token: token };
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/auth/verify', body, { headers: headers });
+    return tokenNotExpired();
   }
 
   notifyLogoutEvent() {

@@ -82,21 +82,4 @@ router.post('/login', (req, res) => {
   });
 });
 
-/**
- * Is called by the route guards on the front-end to check if the jwt token is valid
- */
-router.post('/verify', (req, res) => {
-  const token = req.body.token;
-  return jwt.verify(token, config.secret, (err, decoded) => {
-    if (decoded) {
-      return res.status(200).json({
-        valid: true
-      });
-    }
-    return res.status(200).json({
-      valid: false
-    });
-  });
-});
-
 module.exports = router;

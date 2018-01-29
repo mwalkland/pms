@@ -13,8 +13,26 @@ export class StaffService {
   removeProjectFromRequests = new Subject<Project>();
   addProjectToConfirmed = new Subject<{ project: Project }>();
   updateProjectInList = new Subject<Project>();
+  private _staffProjects: Project[];
+  private _suggestedAreas: string[];
 
   constructor(private http: HttpClient) { }
+
+  get staffProjects() {
+    return this._staffProjects;
+  }
+
+  set staffProjects(projects: Project[]) {
+    this._staffProjects = projects;
+  }
+
+  get suggestedAreas(): string[] {
+    return this._suggestedAreas;
+  }
+
+  set suggestedAreas(areas: string[]) {
+    this._suggestedAreas = areas;
+  }
 
   isModuleLeader(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -66,20 +84,25 @@ export class StaffService {
   }
 
   getStaffProjects(): Observable<Project[]> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/project/getStaffProjects' + token)
-      .map(response => {
-        const projects = response['projects'];
-        const projectList: Project[] = [];
-        for (const project of projects) {
-          const newProject = new Project(
-            project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-            project.staff, null, null, project.students, project.isStudentProject
-          );
-          projectList.push(newProject);
-        }
-        return projectList;
-      });
+    if (!this.staffProjects) {
+      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+      return this.http.get('http://localhost:3000/project/getStaffProjects' + token)
+        .map(response => {
+          const projects = response['projects'];
+          const projectList: Project[] = [];
+          for (const project of projects) {
+            const newProject = new Project(
+              project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
+              project.staff, null, null, project.students, project.isStudentProject
+            );
+            projectList.push(newProject);
+          }
+          this.staffProjects = projectList;
+          return projectList;
+        });
+    } else {
+      return Observable.of(this.staffProjects);
+    }
   }
 
   getProjectRequests(): Observable<Project[]> {
@@ -143,11 +166,16 @@ export class StaffService {
   }
 
   getSuggestedAreas(): Observable<string[]> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/project/getSuggestedAreas' + token)
-      .map((response: { areas: string[] }) => {
-        return response.areas;
-      });
+    if (!this.suggestedAreas) {
+      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+      return this.http.get('http://localhost:3000/project/getSuggestedAreas' + token)
+        .map((response: { areas: string[] }) => {
+          this.suggestedAreas = response.areas;
+          return response.areas;
+        });
+    } else {
+      return Observable.of(this.suggestedAreas);
+    }
   }
 
 }

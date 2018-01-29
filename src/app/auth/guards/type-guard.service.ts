@@ -5,7 +5,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 
 @Injectable()
 /**
- * This is a guard for not being able to access a page unless the user is logged in
+ * Redirect the home page depending on the user type
  */
 export class TypeGuard implements CanActivate {
 

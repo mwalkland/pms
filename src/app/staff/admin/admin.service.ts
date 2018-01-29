@@ -16,7 +16,7 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   getAllStudents(): Observable<Student[]> {
-    if (this.students == null) {
+    if (!this.students) {
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
       return this.http.get('http://localhost:3000/admin/getAllStudents' + token)
         .map(response => {
@@ -54,8 +54,7 @@ export class AdminService {
   }
 
   getAllStaff(): Observable<Staff[]> {
-    if (this.staff == null) {
-
+    if (!this.staff) {
       const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
       return this.http.get('http://localhost:3000/admin/getAllStaff' + token)
         .map(response => {

@@ -1,36 +1,43 @@
 <div class="content">
 
-  <h2 *ngIf="projects">Student Requests ({{projects.length}})</h2>
+  <div class="spinner-wrap" *ngIf="!loaded">
+    <mat-spinner></mat-spinner>
+  </div>
 
-  <h3 *ngIf="projects && projects.length === 0">You currently have no outstanding requests.</h3>
+  <div class="contents-wrap" *ngIf="loaded">
+    <h2 *ngIf="projects">Student Requests ({{projects.length}})</h2>
 
-  <mat-accordion>
-    <ng-container *ngFor="let project of projects; let i = index">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ project.student.firstname }} {{ project.student.surname }}
-          </mat-panel-title>
-          <mat-panel-description>
-            {{project.name}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+    <h3 *ngIf="projects && projects.length === 0">You currently have no outstanding requests.</h3>
 
-        <p *ngIf="project.maxStudents && !project.isStudentProject" class="max-students">
-          <span class="bold-text">Max Students:</span> {{project.maxStudents}}
-        </p>
-        <p *ngIf="!project.maxStudents && !project.isStudentProject" class="max-students">
-          <span class="bold-text">Max Students:</span> Unlimited
-        </p>
-        <p *ngIf="project.isStudentProject" class="bold-text">This is a student proposed project.</p>
-        <p>{{project.description}}</p>
+    <mat-accordion>
+      <ng-container *ngFor="let project of projects; let i = index">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ project.student.firstname }} {{ project.student.surname }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{project.name}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
 
-        <mat-action-row>
-          <button mat-button color="primary" (click)="confirm(project)">Confirm</button>
-          <button mat-button (click)="reject(project)">Reject</button>
-        </mat-action-row>
+          <p *ngIf="project.maxStudents && !project.isStudentProject" class="max-students">
+            <span class="bold-text">Max Students:</span> {{project.maxStudents}}
+          </p>
+          <p *ngIf="!project.maxStudents && !project.isStudentProject" class="max-students">
+            <span class="bold-text">Max Students:</span> Unlimited
+          </p>
+          <p *ngIf="project.isStudentProject" class="bold-text">This is a student proposed project.</p>
+          <p>{{project.description}}</p>
 
-      </mat-expansion-panel>
-    </ng-container>
-  </mat-accordion>
+          <mat-action-row>
+            <button mat-button color="primary" (click)="confirm(project)">Confirm</button>
+            <button mat-button (click)="reject(project)">Reject</button>
+          </mat-action-row>
+
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+  </div>
+
 </div>

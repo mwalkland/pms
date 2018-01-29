@@ -1,4 +1,8 @@
-<div class="radio-wrap">
+<div class="spinner-wrap" *ngIf="!loaded">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="radio-wrap" *ngIf="loaded">
   <span class="show">Show: </span>
   <mat-radio-group>
     <mat-radio-button (click)="changeFilter('')">All</mat-radio-button>
@@ -7,7 +11,7 @@
   </mat-radio-group>
 </div>
 <br>
-<mat-table [dataSource]="dataSource" matSort>
+<mat-table [dataSource]="dataSource" matSort *ngIf="loaded">
 
   <ng-container matColumnDef="firstname">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Firstname</mat-header-cell>

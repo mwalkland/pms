@@ -29,8 +29,9 @@ h2 {
   width: 300px;
 }
 
-.area-wrap {
-  width: 400px;
+.areas-wrap {
+  display: flex;
+  justify-content: center;
 }
 
 ol {

@@ -8,13 +8,16 @@ import { Project } from '../../core/project.model';
   styleUrls: ['./student-my-project.component.css']
 })
 export class StudentMyProjectComponent implements OnInit {
+
   project: Project;
+  loaded = false;
 
   constructor(private studentService: StudentService) { }
 
   ngOnInit() {
     this.studentService.getStudentProject().subscribe((project: Project) => {
       this.project = project;
+      this.loaded = true;
     })
   }
 

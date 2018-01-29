@@ -2,42 +2,48 @@
 
   <app-title [header]="'My Project'"></app-title>
 
-  <div class="contents" *ngIf="project; else noProject">
+  <div class="contents">
 
-    <div class="wrap">
-      <p class="header">Project Name</p>
-      <p class="content">{{ project.name }}</p>
+    <div class="spinner-wrap" *ngIf="!loaded">
+      <mat-spinner></mat-spinner>
     </div>
-    <br>
-    <div class="wrap">
-      <p class="header">Project Type</p>
-      <p class="content">{{ project.type }}</p>
-    </div>
-    <br>
-    <div class="wrap">
-      <p class="header">Staff Member</p>
-      <p class="content">{{ project.staff.firstname }} {{ project.staff.surname }}</p>
-    </div>
-    <br>
-    <div class="wrap desc">
-      <p class="header">Description</p>
-      <p class="content">{{ project.description }}</p>
-    </div>
-    <br>
-    <div class="wrap">
-      <p class="header">Areas of Research</p>
-      <p class="content areas" *ngIf="project.areas.length === 0;else elseBlock">None Specified</p>
-      <ng-template #elseBlock>
-        <p class="content areas" *ngFor="let area of project.areas">{{area}}</p>
+
+    <div class="contents-wrap" *ngIf="loaded">
+      <div class="project-wrap" *ngIf="project; else noProject">
+        <div class="wrap">
+          <p class="header">Project Name</p>
+          <p class="content">{{ project.name }}</p>
+        </div>
+        <br>
+        <div class="wrap">
+          <p class="header">Project Type</p>
+          <p class="content">{{ project.type }}</p>
+        </div>
+        <br>
+        <div class="wrap">
+          <p class="header">Staff Member</p>
+          <p class="content">{{ project.staff.firstname }} {{ project.staff.surname }}</p>
+        </div>
+        <br>
+        <div class="wrap desc">
+          <p class="header">Description</p>
+          <p class="content">{{ project.description }}</p>
+        </div>
+        <br>
+        <div class="wrap">
+          <p class="header">Areas of Research</p>
+          <p class="content areas" *ngIf="project.areas.length === 0;else elseBlock">None Specified</p>
+          <ng-template #elseBlock>
+            <p class="content areas" *ngFor="let area of project.areas">{{area}}</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <ng-template #noProject>
+        <h2>Your project has not yet been confirmed.</h2>
       </ng-template>
     </div>
 
   </div>
-
-  <ng-template #noProject>
-    <div class="contents">
-      <h2>Your project has not yet been confirmed.</h2>
-    </div>
-  </ng-template>
 
 </div>

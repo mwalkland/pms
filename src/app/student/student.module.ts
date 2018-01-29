@@ -20,7 +20,8 @@ import {
   MatAutocompleteModule,
   MatInputModule,
   MatTooltipModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
@@ -45,7 +46,6 @@ import {
   StudentCreateConfirmDialogComponent
 } from './student-create/student-create-confirm-dialog/student-create-confirm-dialog.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -66,7 +66,8 @@ import {
     MatAutocompleteModule,
     MatInputModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     StudentHeaderComponent

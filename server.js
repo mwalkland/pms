@@ -6,6 +6,7 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const config = require('./config');
 
 // Get our API routes
 const authRoutes = require('./server/routes/auth');
@@ -15,7 +16,7 @@ const adminRoutes = require('./server/routes/admin');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/pms', { useMongoClient: true });
+mongoose.connect(config.database, { useMongoClient: true });
 
 // Parsers for POST data
 app.use(bodyParser.json());

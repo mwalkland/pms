@@ -1,19 +1,26 @@
 <div class="content">
 
-  <h2>Main Research Areas
-    <mat-icon matTooltip="Edit" (click)="onEdit()">edit</mat-icon>
-  </h2>
-
-  <div class="areas-wrap" *ngIf="areas">
-    <ol *ngIf="isNotEmpty">
-      <li *ngIf="areas.first">{{areas.first}}</li>
-      <li *ngIf="areas.second">{{areas.second}}</li>
-      <li *ngIf="areas.third">{{areas.third}}</li>
-      <li *ngIf="areas.fourth">{{areas.fourth}}</li>
-      <li *ngIf="areas.fifth">{{areas.fifth}}</li>
-    </ol>
-    <h3 *ngIf="!isNotEmpty">Please enter some research areas.</h3>
+  <div class="spinner-wrap" *ngIf="!loaded">
+    <mat-spinner></mat-spinner>
   </div>
 
-  <button mat-button color="primary" (click)="onEdit()" style="display:none" class="edit-button">Edit</button>
+  <div class="contents-wrap" *ngIf="loaded">
+    <h2>Main Research Areas
+      <mat-icon matTooltip="Edit" (click)="onEdit()">edit</mat-icon>
+    </h2>
+
+    <div class="areas-wrap" *ngIf="areas">
+      <ol *ngIf="isNotEmpty">
+        <li *ngIf="areas.first">{{areas.first}}</li>
+        <li *ngIf="areas.second">{{areas.second}}</li>
+        <li *ngIf="areas.third">{{areas.third}}</li>
+        <li *ngIf="areas.fourth">{{areas.fourth}}</li>
+        <li *ngIf="areas.fifth">{{areas.fifth}}</li>
+      </ol>
+      <h3 *ngIf="!isNotEmpty">Please enter some research areas.</h3>
+    </div>
+
+    <button mat-button color="primary" (click)="onEdit()" style="display:none" class="edit-button">Edit</button>
+  </div>
+
 </div>

@@ -17,11 +17,14 @@
 }
 
 .contents {
-  display: flex;
   margin-top: 70px;
+  margin-bottom: 20px;
+}
+
+.project-wrap {
+  display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .wrap {
@@ -33,7 +36,11 @@
 }
 
 .areas {
- margin: 0px; 
+  margin: 0px;
+}
+
+h2 {
+  text-align: center;
 }
 
 @media(max-width: 568px) {

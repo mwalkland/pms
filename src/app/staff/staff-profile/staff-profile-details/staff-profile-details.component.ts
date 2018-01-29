@@ -12,6 +12,7 @@ import { Areas } from './areas.model';
 export class StaffProfileDetailsComponent implements OnInit {
   areas: Areas;
   isNotEmpty: boolean;
+  loaded = false;
 
   constructor(private staffService: StaffService, private dialog: MatDialog) { }
 
@@ -22,7 +23,8 @@ export class StaffProfileDetailsComponent implements OnInit {
         if (this.areas[key] !== '') {
           this.isNotEmpty = true;
         }
-      })
+      });
+      this.loaded = true;
     });
   }
 

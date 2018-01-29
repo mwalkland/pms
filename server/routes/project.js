@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const config = require('../../config');
 
 const mongoose = require('mongoose');
 
@@ -9,7 +10,7 @@ const User = require('../../models/user');
 const EmailController = require('../email');
 
 router.use('/', (req, res, next) => {
-  jwt.verify(req.query.token, 'WO3V%oIBK5c2', (err) => {
+  jwt.verify(req.query.token, config.secret, (err) => {
     if (err) {
       return res.status(401).json({
         title: 'Not Authenticated',
@@ -23,7 +24,7 @@ router.use('/', (req, res, next) => {
 router.post('/new', (req, res) => {
   const body = req.body;
   const decoded = jwt.decode(req.query.token);
-  User.findById(decoded.user._id, (err, user) => {
+  User.findById(decoded.userId, (err, user) => {
     if (err) {
       return res.status(500).json({
         title: 'An error occured getting the user',
@@ -105,7 +106,7 @@ router.get('/getAllStaffProjects', (req, res) => {
   Project.find({ isStudentProject: false, full: false }).populate('staff').exec(
     (err, projects) => {
       if (err) {
-        return res.status(401).json({
+        return res.status(500).json({
           title: 'Error retrieving projects',
           error: err
         });
@@ -118,7 +119,7 @@ router.get('/getAllStaffProjects', (req, res) => {
 
 router.get('/getProjectRequests', (req, res) => {
   const decoded = jwt.decode(req.query.token);
-  User.findById(decoded.user._id, (err, user) => {
+  User.findById(decoded.userId, (err, user) => {
     if (err) {
       return res.status(500).json({
         title: 'An error occured getting the user',
@@ -144,7 +145,7 @@ router.get('/getProjectRequests', (req, res) => {
 
 router.get('/getConfirmedProjects', (req, res) => {
   const decoded = jwt.decode(req.query.token);
-  User.findById(decoded.user._id, (err, user) => {
+  User.findById(decoded.userId, (err, user) => {
     if (err) {
       return res.status(500).json({
         title: 'An error occured getting the user',
@@ -170,7 +171,7 @@ router.get('/getConfirmedProjects', (req, res) => {
 
 router.get('/getStaffProjects', (req, res) => {
   const decoded = jwt.decode(req.query.token);
-  Project.find({ staff: decoded.user._id, isStudentProject: false }, (err, projects) => {
+  Project.find({ staff: decoded.userId, isStudentProject: false }, (err, projects) => {
     if (err) {
       return res.status(500).json({
         title: 'An error occured getting the projects',
@@ -195,7 +196,7 @@ router.patch('/confirmProject', (req, res) => {
         error: err
       });
     }
-    User.findById(decoded.user._id, (err, staff) => {
+    User.findById(decoded.userId, (err, staff) => {
       if (err) {
         return res.status(500).json({
           title: 'An error occured getting the staff',
@@ -257,7 +258,7 @@ router.patch('/rejectProject', (req, res) => {
 
       student.save();
       project.save();
-      User.findById(decoded.user._id, (err, staff) => {
+      User.findById(decoded.userId, (err, staff) => {
         if (err) {
           return res.status(500).json({
             title: 'An error occured getting the user',
@@ -282,7 +283,7 @@ router.patch('/rejectProject', (req, res) => {
 
 router.get('/getStudentProject', (req, res) => {
   const decoded = jwt.decode(req.query.token);
-  User.findById(decoded.user._id)
+  User.findById(decoded.userId)
     .populate('studentInfo.supervisor studentInfo.chosenProject')
     .exec((err, student) => {
       if (err) {
@@ -311,7 +312,7 @@ router.patch('/addStudentProject', (req, res) => {
           error: err
         });
       }
-      User.findByIdAndUpdate(decoded.user._id, {
+      User.findByIdAndUpdate(decoded.userId, {
         $set: { 'studentInfo.chosenProject': project, 'studentInfo.supervisor': project.staff },
       }, (err, user) => {
         if (err) {
@@ -346,7 +347,7 @@ router.post('/createStudentProject', (req, res) => {
   const body = req.body;
   const decoded = jwt.decode(req.query.token);
 
-  User.findById(decoded.user._id, (err, student) => {
+  User.findById(decoded.userId, (err, student) => {
     if (err) {
       return res.status(500).json({
         title: 'An error occured getting the user',

@@ -17,7 +17,8 @@ import {
   MatSelectModule,
   MatButtonModule,
   MatIconModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { AdminStudentsTableComponent } from './admin-students/admin-students-table/admin-students-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -51,7 +52,8 @@ import {
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     AdminComponent,

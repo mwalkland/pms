@@ -10,13 +10,16 @@ import { StaffProjectsEditComponent } from './staff-projects-edit/staff-projects
   styleUrls: ['./staff-projects.component.css']
 })
 export class StaffProjectsComponent implements OnInit {
+
   projects: Project[]
+  loaded = false;
 
   constructor(private staffService: StaffService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.staffService.getStaffProjects().subscribe((projects: Project[]) => {
       this.projects = projects;
+      this.loaded = true;
     });
     this.staffService.updateProjectInList.subscribe((updatedProject: Project) => {
       this.projects[this.projects.findIndex(proj => proj.id === updatedProject.id)] = updatedProject;

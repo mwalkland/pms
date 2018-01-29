@@ -1,24 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-
-const mongoose = require('mongoose');
+const config = require('../../config');
 
 const User = require('../../models/user');
 const Project = require('../../models/project');
 const EmailController = require('../email');
 
-// router.use('/', (req, res, next) => {
-//   jwt.verify(req.query.token, 'WO3V%oIBK5c2', (err) => {
-//     if (err) {
-//       return res.status(401).json({
-//         title: 'Not Authenticated',
-//         error: err
-//       });
-//     }
-//     next();
-//   });
-// });
+router.use('/', (req, res, next) => {
+  jwt.verify(req.query.token, config.secret, (err) => {
+    if (err) {
+      return res.status(401).json({
+        title: 'Not Authenticated',
+        error: err
+      });
+    }
+    next();
+  });
+});
 
 router.get('/getAllStudents', (req, res) => {
   User.find({ type: 'student' })

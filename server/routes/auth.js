@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const config = require('../../config');
 
 const User = require('../../models/user');
 
@@ -41,7 +42,7 @@ router.post('/login', (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
       return res.status(500).json({
-        title: 'An error occured logging in',
+        title: 'Login failed. Invalid email or password.',
         error: err
       });
     }
@@ -57,7 +58,7 @@ router.post('/login', (req, res) => {
     bcrypt.compare(req.body.password, user.password)
       .then((response) => {
         if (response) {
-          const token = jwt.sign({ user: user }, 'WO3V%oIBK5c2', { expiresIn: 7200 });
+          const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: 7200 });
           const response = {
             message: 'User logged in',
             token: token,
@@ -86,7 +87,7 @@ router.post('/login', (req, res) => {
  */
 router.post('/verify', (req, res) => {
   const token = req.body.token;
-  return jwt.verify(token, 'WO3V%oIBK5c2', (err, decoded) => {
+  return jwt.verify(token, config.secret, (err, decoded) => {
     if (decoded) {
       return res.status(200).json({
         valid: true

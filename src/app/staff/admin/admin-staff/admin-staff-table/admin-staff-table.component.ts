@@ -15,6 +15,7 @@ export class AdminStaffTableComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Staff>();
   displayedColumns = ['firstname', 'surname', 'email', 'noOfStudents'];
   @ViewChild(MatSort) sort: MatSort;
+  loaded = false;
 
   constructor(private adminService: AdminService, private dialog: MatDialog) { }
 
@@ -22,6 +23,7 @@ export class AdminStaffTableComponent implements OnInit, AfterViewInit {
     this.adminService.getAllStaff().subscribe((staff: Staff[]) => {
       this.staff = staff;
       this.dataSource.data = staff;
+      this.loaded = true;
     });
   }
 

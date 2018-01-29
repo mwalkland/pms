@@ -16,6 +16,7 @@ export class StudentProjectsTableComponent implements OnInit, AfterViewInit {
   displayedColumns = ['name', 'type', 'staff', 'areas'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  loaded = false;
 
   constructor(private studentService: StudentService, private dialog: MatDialog) { }
 
@@ -34,6 +35,7 @@ export class StudentProjectsTableComponent implements OnInit, AfterViewInit {
       }
       this.projects = projects;
       this.dataSource.data = projects;
+      this.loaded = true;
     })
   }
 

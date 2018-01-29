@@ -29,6 +29,7 @@
 @media(max-width: 868px) {
   .mat-table {
     overflow: initial;
+    max-height: initial;
   }
   .mat-cell {
     font-size: 12px;

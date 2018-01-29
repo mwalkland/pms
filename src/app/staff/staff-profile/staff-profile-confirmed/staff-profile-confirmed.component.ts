@@ -8,13 +8,16 @@ import { Project } from '../../../core/project.model';
   styleUrls: ['./staff-profile-confirmed.component.css']
 })
 export class StaffProfileConfirmedComponent implements OnInit {
+
   projects: Project[]
+  loaded = false;
 
   constructor(private staffService: StaffService) { }
 
   ngOnInit() {
     this.staffService.getConfirmedProjects().subscribe(projects => {
       this.projects = projects;
+      this.loaded = true;
     });
     this.staffService.addProjectToConfirmed.subscribe(response => {
       const project = response.project;

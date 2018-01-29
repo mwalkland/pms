@@ -6,7 +6,7 @@ import { StaffComponent } from './staff.component';
 import { StaffHeaderComponent } from './staff-header/staff-header.component';
 import {
   MatListModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule,
-  MatButtonModule, MatIconModule, MatDialogModule, MatCheckboxModule, MatExpansionModule, MatTooltipModule
+  MatButtonModule, MatIconModule, MatDialogModule, MatCheckboxModule, MatExpansionModule, MatTooltipModule, MatProgressSpinnerModule
 } from '@angular/material';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { StaffNewProjectComponent } from './staff-new-project/staff-new-project.component';
@@ -48,7 +48,8 @@ import { StaffProjectsEditComponent } from './staff-projects/staff-projects-edit
     MatCheckboxModule,
     MatExpansionModule,
     FormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     StaffComponent,

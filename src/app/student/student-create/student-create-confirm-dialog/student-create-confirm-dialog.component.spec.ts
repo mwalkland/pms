@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 import { StudentCreateConfirmDialogComponent } from './student-create-confirm-dialog.component';
 import { StudentService } from '../../student.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA, MatFormFieldModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Project } from '../../../core/project.model';
 
@@ -20,7 +20,8 @@ describe('StudentCreateConfirmDialogComponent', () => {
       imports: [
         HttpClientTestingModule,
         MatDialogModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatFormFieldModule
       ],
       providers: [
         StudentService,

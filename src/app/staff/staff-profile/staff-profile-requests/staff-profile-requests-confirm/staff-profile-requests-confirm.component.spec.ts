@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 import { StaffProfileRequestsConfirmComponent } from './staff-profile-requests-confirm.component';
 import { StaffService } from '../../../staff.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA, MatFormFieldModule } from '@angular/material';
 
 describe('StaffProfileRequestsConfirmComponent', () => {
   let component: StaffProfileRequestsConfirmComponent;
@@ -17,7 +17,8 @@ describe('StaffProfileRequestsConfirmComponent', () => {
       declarations: [StaffProfileRequestsConfirmComponent],
       imports: [
         HttpClientTestingModule,
-        MatDialogModule
+        MatDialogModule,
+        MatFormFieldModule
       ],
       providers: [
         StaffService,

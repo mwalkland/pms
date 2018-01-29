@@ -102,7 +102,7 @@ router.get('/getAreas', (req, res) => {
 
 // Get All staff suggested projects for the student table
 router.get('/getAllStaffProjects', (req, res) => {
-  Project.find({ isStudentProject: false }).populate('staff').exec(
+  Project.find({ isStudentProject: false, full: false }).populate('staff').exec(
     (err, projects) => {
       if (err) {
         return res.status(401).json({
@@ -253,6 +253,7 @@ router.patch('/rejectProject', (req, res) => {
       }
       student.studentInfo.chosenProject = undefined;
       student.studentInfo.supervisor = undefined;
+      project.full = false;
 
       student.save();
       project.save();
@@ -319,6 +320,12 @@ router.patch('/addStudentProject', (req, res) => {
             error: err
           });
         }
+        User.find({ 'studentInfo.chosenProject': project }, (err, students) => {
+          if (students.length === project.maxStudents) {
+            project.full = true;
+            project.save();
+          }
+        });
         const email = new EmailController();
         email.sendStaffEmail(
           user.firstname + ' ' + user.surname,

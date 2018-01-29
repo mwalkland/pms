@@ -28,10 +28,9 @@ export class StaffProfileRequestsConfirmComponent implements OnInit {
   onConfirm() {
     this.staffService.confirmProject(this.project, this.project.student.id).subscribe(
       response => {
-        if (!response['error']) {
-          this.staffService.removeProjectFromRequests.next(this.project);
-          this.staffService.addProjectToConfirmed.next({ project: this.project });
-        }
+        this.dialogRef.close();
+        this.staffService.removeProjectFromRequests.next(this.project);
+        this.staffService.addProjectToConfirmed.next({ project: this.project });
       }, error => {
         this.error = true;
       });
@@ -40,9 +39,8 @@ export class StaffProfileRequestsConfirmComponent implements OnInit {
   onReject() {
     this.staffService.rejectProject(this.project, this.project.student.id).subscribe(
       response => {
-        if (!response['error']) {
-          this.staffService.removeProjectFromRequests.next(this.project);
-        }
+        this.dialogRef.close();
+        this.staffService.removeProjectFromRequests.next(this.project);
       }, error => {
         this.error = true;
       })

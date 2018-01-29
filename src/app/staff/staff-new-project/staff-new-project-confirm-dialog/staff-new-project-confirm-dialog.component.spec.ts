@@ -5,11 +5,11 @@ import { DebugElement } from '@angular/core';
 
 import { StaffService } from '../../staff.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatFormFieldModule } from '@angular/material';
 import { Project } from '../../../core/project.model';
 import { StaffNewProjectConfirmDialogComponent } from './staff-new-project-confirm-dialog.component';
 
-describe('StaffConfirmProjectDialogComponent', () => {
+describe('StaffNewProjectConfirmDialogComponent', () => {
   let component: StaffNewProjectConfirmDialogComponent;
   let fixture: ComponentFixture<StaffNewProjectConfirmDialogComponent>;
 
@@ -17,7 +17,8 @@ describe('StaffConfirmProjectDialogComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ StaffNewProjectConfirmDialogComponent ],
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatFormFieldModule
       ],
       providers: [
         StaffService,

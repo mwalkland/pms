@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Staff } from '../../staff.model';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { AdminService } from '../../admin.service';
@@ -9,12 +9,14 @@ import { AdminStaffTableDialogComponent } from './admin-staff-table-dialog/admin
   templateUrl: './admin-staff-table.component.html',
   styleUrls: ['./admin-staff-table.component.css']
 })
-export class AdminStaffTableComponent implements OnInit, AfterViewInit {
+export class AdminStaffTableComponent implements OnInit {
 
   staff: Staff[];
   dataSource = new MatTableDataSource<Staff>();
   displayedColumns = ['firstname', 'surname', 'email', 'noOfStudents'];
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) set sort(sort: MatSort) {
+    this.dataSource.sort = sort;
+  };
   loaded = false;
 
   constructor(private adminService: AdminService, private dialog: MatDialog) { }
@@ -25,10 +27,6 @@ export class AdminStaffTableComponent implements OnInit, AfterViewInit {
       this.dataSource.data = staff;
       this.loaded = true;
     });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
   }
 
   openDialog(staff: Staff) {

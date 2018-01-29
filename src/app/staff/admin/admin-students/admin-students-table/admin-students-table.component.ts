@@ -14,8 +14,12 @@ export class AdminStudentsTableComponent implements OnInit, AfterViewInit {
   students: Student[];
   dataSource = new MatTableDataSource<Student>();
   displayedColumns = ['firstname', 'surname', 'projectname', 'supervisorName', 'confirmed'];
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator
+  @ViewChild(MatSort) set sort(sort: MatSort) {
+    this.dataSource.sort = sort;
+  };
+  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
+    this.dataSource.paginator = paginator;
+  }
   filterBy: string;
   loaded = false;
 
@@ -33,9 +37,7 @@ export class AdminStudentsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
     this.dataSource.filter = this.filterBy;
-    this.dataSource.paginator = this.paginator;
   }
 
   changeFilter(filter: string) {

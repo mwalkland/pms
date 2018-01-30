@@ -80,7 +80,6 @@ describe('Service: StudentProjects', () => {
           'areas5'
         ]
       };
-      console.log('fdgfd')
       service.getAreas().subscribe((areas: string[]) => {
         expect(areas).toEqual(areasResponse.areas);
       });

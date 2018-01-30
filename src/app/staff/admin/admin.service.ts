@@ -17,8 +17,7 @@ export class AdminService {
 
   getAllStudents(): Observable<Student[]> {
     if (!this.students) {
-      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-      return this.http.get('http://localhost:3000/admin/getAllStudents' + token)
+      return this.http.get('http://localhost:3000/admin/getAllStudents')
         .map(response => {
           const students = response['students'];
           const studentList: Student[] = [];
@@ -55,8 +54,7 @@ export class AdminService {
 
   getAllStaff(): Observable<Staff[]> {
     if (!this.staff) {
-      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-      return this.http.get('http://localhost:3000/admin/getAllStaff' + token)
+      return this.http.get('http://localhost:3000/admin/getAllStaff')
         .map(response => {
           const staffList: Staff[] = [];
           const studentResponse = response['students'];
@@ -98,17 +96,15 @@ export class AdminService {
   }
 
   modifyProjectSupervisor(staffId: string, studentId: string): Observable<Object> {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = { staffId: staffId, studentId: studentId };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.patch('http://localhost:3000/admin/modifyProjectSupervisor' + token, body, { headers: headers });
+    return this.http.patch('http://localhost:3000/admin/modifyProjectSupervisor', body, { headers: headers });
   }
 
   sendReminder() {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = {};
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/admin/sendReminder' + token, body, { headers: headers });
+    return this.http.post('http://localhost:3000/admin/sendReminder', body, { headers: headers });
   }
 
 }

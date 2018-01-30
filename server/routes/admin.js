@@ -8,7 +8,19 @@ const Project = require('../../models/project');
 const EmailController = require('../email');
 
 router.use('/', (req, res, next) => {
-  jwt.verify(req.query.token, config.secret, (err) => {
+  const tokenString = req.headers.authorization;
+  const tokenType = tokenString.substr(0, tokenString.indexOf(' '));
+  if (tokenType !== 'Bearer') {
+    return res.status(401).json({
+      title: 'Not Authenticated',
+      error: {
+        name: 'Invalid token type',
+        message: 'The token must be a Bearer token'
+      }
+    });
+  }
+  const token = tokenString.substr(tokenString.indexOf(' ') + 1);
+  jwt.verify(token, config.secret, (err) => {
     if (err) {
       return res.status(401).json({
         title: 'Not Authenticated',
@@ -35,7 +47,6 @@ router.get('/getAllStudents', (req, res) => {
 });
 
 router.get('/getAllStaff', (req, res) => {
-
   User.find({ type: 'student' })
     .populate({ path: 'studentInfo.chosenProject', populate: { path: 'students' } })
     .populate('studentInfo.supervisor')

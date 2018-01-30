@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
 import {
   MatFormFieldModule,
   MatInputModule,
@@ -18,6 +17,7 @@ import {
   MatListModule
 } from '@angular/material';
 import { LogoutComponent } from './logout/logout.component';
+import { ExpiredComponent } from './expired/expired.component';
 
 
 @NgModule({
@@ -29,7 +29,6 @@ import { LogoutComponent } from './logout/logout.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatRadioModule,
-    HttpClientModule,
     AuthRoutingModule,
     MatDialogModule,
     MatListModule
@@ -43,11 +42,15 @@ import { LogoutComponent } from './logout/logout.component';
     LoginComponent,
     SignupComponent,
     LogoutComponent,
-    LogoutDialogComponent
+    LogoutDialogComponent,
+    ExpiredComponent
   ],
   providers: [
     AuthGuard
   ],
-  entryComponents: [LogoutDialogComponent]
+  entryComponents: [
+    LogoutDialogComponent,
+    ExpiredComponent
+  ]
 })
 export class AuthModule { }

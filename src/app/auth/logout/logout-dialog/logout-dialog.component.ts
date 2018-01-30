@@ -18,7 +18,6 @@ export class LogoutDialogComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
-    this.router.navigate(['/auth']);
     this.dialogRef.close();
   }
 

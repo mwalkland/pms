@@ -10,7 +10,6 @@ export class StudentService {
   private _staff: User[];
   private _areas: string[];
   private _projects: Project[];
-  private _chosenProject: Project;
   private _suggestedAreas: string[];
   browseBy = 'Staff';
   browseByChanged = new Subject<string>();
@@ -56,14 +55,6 @@ export class StudentService {
     this._areas = areas;
   }
 
-  get chosenProject(): Project {
-    return this._chosenProject;
-  }
-
-  set chosenProject(project: Project) {
-    this._chosenProject = project;
-  }
-
   get suggestedAreas(): string[] {
     return this._suggestedAreas;
   }
@@ -78,8 +69,7 @@ export class StudentService {
 
   getStaff(): Observable<User[]> {
     if (!this.staff) {
-      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-      return this.http.get('http://localhost:3000/user/getStaff' + token)
+      return this.http.get('http://localhost:3000/user/getStaff')
         .map((response: Response) => {
           const staffList = response['staff'];
           const sList: User[] = [];
@@ -99,8 +89,7 @@ export class StudentService {
 
   getAreas(): Observable<string[]> {
     if (!this.areas) {
-      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-      return this.http.get('http://localhost:3000/project/getAreas' + token)
+      return this.http.get('http://localhost:3000/project/getAreas')
         .map((response: Response) => {
           this.areas = response['areas'];
           return response['areas'];
@@ -112,8 +101,7 @@ export class StudentService {
 
   getStaffProjects(): Observable<Project[]> {
     if (!this.projects) {
-      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-      return this.http.get('http://localhost:3000/project/getAllStaffProjects' + token)
+      return this.http.get('http://localhost:3000/project/getAllStaffProjects')
         .map((response: Response) => {
           const projects = response['projects'];
           const projectList: Project[] = [];
@@ -132,50 +120,41 @@ export class StudentService {
   }
 
   getStudentProject(): Observable<Project> {
-    if (!this.chosenProject) {
-      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-      return this.http.get('http://localhost:3000/project/getStudentProject' + token)
-        .map((response: Response) => {
-          const project = response['project'];
-          const supervisor = response['supervisor'];
-          let newProject: Project;
-          if (project) {
-            newProject = new Project(
-              project._id,
-              project.name,
-              project.description,
-              project.type,
-              project.maxStudents,
-              project.areas,
-              supervisor
-            );
-          }
-          this.chosenProject = newProject;
-          return newProject;
-        });
-    } else {
-      return Observable.of(this.chosenProject);
-    }
+    return this.http.get('http://localhost:3000/project/getStudentProject')
+      .map((response: Response) => {
+        const project = response['project'];
+        const supervisor = response['supervisor'];
+        let newProject: Project;
+        if (project) {
+          newProject = new Project(
+            project._id,
+            project.name,
+            project.description,
+            project.type,
+            project.maxStudents,
+            project.areas,
+            supervisor
+          );
+        }
+        return newProject;
+      });
   }
 
   addStudentProject(project: Project) {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.patch('http://localhost:3000/project/addStudentProject' + token, body, { headers: headers })
+    return this.http.patch('http://localhost:3000/project/addStudentProject', body, { headers: headers })
   }
 
   createStudentProject(project: Project) {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/project/createStudentProject' + token, body, { headers: headers })
+    return this.http.post('http://localhost:3000/project/createStudentProject', body, { headers: headers })
   }
 
   getSuggestedAreas(): Observable<string[]> {
     if (!this.suggestedAreas) {
-      const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-      return this.http.get('http://localhost:3000/project/getSuggestedAreas' + token)
+      return this.http.get('http://localhost:3000/project/getSuggestedAreas')
         .map((response: { areas: string[] }) => {
           this.suggestedAreas = response.areas;
           return response.areas;

@@ -74,7 +74,6 @@ class EmailController {
   }
 
   sendStudentEmail(staff, student, email, project, isAccepted) {
-    console.log('student');
     nodemailer.createTestAccount((err, account) => {
 
       let transporter = this.createTransport(account);

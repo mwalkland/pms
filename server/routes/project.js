@@ -10,7 +10,19 @@ const User = require('../../models/user');
 const EmailController = require('../email');
 
 router.use('/', (req, res, next) => {
-  jwt.verify(req.query.token, config.secret, (err) => {
+  const tokenString = req.headers.authorization;
+  const tokenType = tokenString.substr(0, tokenString.indexOf(' '));
+  if (tokenType !== 'Bearer') {
+    return res.status(401).json({
+      title: 'Not Authenticated',
+      error: {
+        name: 'Invalid token type',
+        message: 'The token must be a Bearer token'
+      }
+    });
+  }
+  const token = tokenString.substr(tokenString.indexOf(' ') + 1);
+  jwt.verify(token, config.secret, (err) => {
     if (err) {
       return res.status(401).json({
         title: 'Not Authenticated',
@@ -23,7 +35,8 @@ router.use('/', (req, res, next) => {
 
 router.post('/new', (req, res) => {
   const body = req.body;
-  const decoded = jwt.decode(req.query.token);
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findById(decoded.userId, (err, user) => {
     if (err) {
       return res.status(500).json({
@@ -118,7 +131,8 @@ router.get('/getAllStaffProjects', (req, res) => {
 });
 
 router.get('/getProjectRequests', (req, res) => {
-  const decoded = jwt.decode(req.query.token);
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findById(decoded.userId, (err, user) => {
     if (err) {
       return res.status(500).json({
@@ -144,7 +158,8 @@ router.get('/getProjectRequests', (req, res) => {
 });
 
 router.get('/getConfirmedProjects', (req, res) => {
-  const decoded = jwt.decode(req.query.token);
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findById(decoded.userId, (err, user) => {
     if (err) {
       return res.status(500).json({
@@ -170,7 +185,8 @@ router.get('/getConfirmedProjects', (req, res) => {
 });
 
 router.get('/getStaffProjects', (req, res) => {
-  const decoded = jwt.decode(req.query.token);
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   Project.find({ staff: decoded.userId, isStudentProject: false }, (err, projects) => {
     if (err) {
       return res.status(500).json({
@@ -188,7 +204,8 @@ router.patch('/confirmProject', (req, res) => {
   const body = req.body;
   const project = body.project;
   const studentId = body.studentId;
-  const decoded = jwt.decode(req.query.token);
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findByIdAndUpdate(studentId, { $set: { 'studentInfo.confirmed': true } }, (err, student) => {
     if (err) {
       return res.status(500).json({
@@ -236,7 +253,8 @@ router.patch('/rejectProject', (req, res) => {
   const body = req.body;
   const project = body.project;
   const studentId = body.studentId;
-  const decoded = jwt.decode(req.query.token);
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
 
   User.findById(studentId, (err, student) => {
     if (err) {
@@ -282,7 +300,8 @@ router.patch('/rejectProject', (req, res) => {
 });
 
 router.get('/getStudentProject', (req, res) => {
-  const decoded = jwt.decode(req.query.token);
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findById(decoded.userId)
     .populate('studentInfo.supervisor studentInfo.chosenProject')
     .exec((err, student) => {
@@ -302,7 +321,8 @@ router.get('/getStudentProject', (req, res) => {
 // for a staff suggested project
 router.patch('/addStudentProject', (req, res) => {
   const body = req.body;
-  const decoded = jwt.decode(req.query.token);
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
 
   Project.findById(body.id)
     .populate('staff').exec((err, project) => {
@@ -345,7 +365,8 @@ router.patch('/addStudentProject', (req, res) => {
 // for a student created project
 router.post('/createStudentProject', (req, res) => {
   const body = req.body;
-  const decoded = jwt.decode(req.query.token);
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
 
   User.findById(decoded.userId, (err, student) => {
     if (err) {

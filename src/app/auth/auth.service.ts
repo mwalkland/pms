@@ -6,13 +6,18 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
 import { tokenNotExpired } from 'angular2-jwt';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
   notifyLogout = new Subject<any>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));
@@ -34,12 +39,9 @@ export class AuthService {
     return tokenNotExpired();
   }
 
-  notifyLogoutEvent() {
-    this.notifyLogout.next();
-  }
-
   logout() {
     localStorage.clear();
+    this.router.navigate(['/auth']);
   }
 
 }

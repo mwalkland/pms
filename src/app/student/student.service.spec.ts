@@ -4,7 +4,6 @@ import { BaseRequestOptions, Http, RequestMethod, Response, ResponseOptions, XHR
 import { HttpClientModule } from '@angular/common/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { StudentService } from './student.service';
-/* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject, getTestBed } from '@angular/core/testing';
 import { Project } from '../core/project.model';
@@ -103,6 +102,7 @@ describe('Service: StudentProjects', () => {
         ]
       };
       service.getStaffProjects().subscribe((projects: Project[]) => {
+        expect(projects.length).toBe(1);
         const project = projects[0];
         expect(project.id).toBe('1');
         expect(project.name).toBe('name');

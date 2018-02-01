@@ -12,18 +12,18 @@ const appRoutes: Routes = [
   {
     path: '',
     component: AuthComponent,
-    canActivate: [AuthGuard, TypeGuard],
+    canActivate: [TypeGuard],
     pathMatch: 'full'
   },
   {
     path: 'student',
     loadChildren: 'app/student/student.module#StudentModule',
-    canActivate: [StudentGuard]
+    canActivate: [AuthGuard, StudentGuard]
   },
   {
     path: 'staff',
     loadChildren: 'app/staff/staff.module#StaffModule',
-    canActivate: [StaffGuard]
+    canActivate: [AuthGuard, StaffGuard]
   },
   // TODO Page not found
   {

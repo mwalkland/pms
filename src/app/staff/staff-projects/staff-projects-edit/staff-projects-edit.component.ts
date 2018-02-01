@@ -53,7 +53,6 @@ export class StaffProjectsEditComponent implements OnInit {
       type: this.builder.array(type, Validators.required)
     });
 
-
     this.areaCtrl = new FormControl();
     this.staffService.getSuggestedAreas().subscribe((areas: string[]) => {
       this.areaList = areas;

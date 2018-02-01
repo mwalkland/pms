@@ -35,7 +35,17 @@ describe('StudentProjectsListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('getItems correctly calls getStaff', () => {
+    spyOn(component, 'getStaff');
+    component.browseBy = 'Staff';
+    component.getItems();
+    expect(component.getStaff).toHaveBeenCalled();
+  });
+
+  it('getItems correctly calls getAreas', () => {
+    spyOn(component, 'getAreas');
+    component.browseBy = 'Area';
+    component.getItems();
+    expect(component.getAreas).toHaveBeenCalled();
   });
 });

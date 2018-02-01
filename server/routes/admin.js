@@ -58,10 +58,6 @@ router.get('/getAllStaff', (req, res) => {
         });
       }
       User.find({ type: 'staff' })
-        .populate({
-          path: 'staffInfo.suggestedProjects',
-          populate: { path: 'students' }
-        })
         .exec((err, staff) => {
           if (err) {
             return res.status(500).json({
@@ -72,7 +68,7 @@ router.get('/getAllStaff', (req, res) => {
             staff: staff,
             students: students
           });
-        });
+        }); 
     });
 });
 

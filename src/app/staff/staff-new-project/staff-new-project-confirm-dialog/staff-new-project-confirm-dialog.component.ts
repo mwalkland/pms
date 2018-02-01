@@ -27,7 +27,6 @@ export class StaffNewProjectConfirmDialogComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.staffService.newProject(this.project).subscribe(
       response => {
         this.dialogRef.close();

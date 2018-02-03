@@ -1,0 +1,40 @@
+ul {
+  list-style-type: none;
+  font-size: 18px;
+  font-weight: 300;
+  padding-left: 20px;
+}
+
+.list-wrap {
+  display: flex;
+}
+
+li {
+  padding: 5px;
+  display: flex;
+}
+.mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-raised-button {
+  color: white;
+}
+
+.mat-icon {
+  margin-left: 5px;
+}
+
+.mat-icon:hover {
+  cursor: pointer;
+}
+
+.mat-form-field {
+  padding-left: 20px;
+}
+
+.add-wrap {
+  display: flex;
+  align-items: center;
+}

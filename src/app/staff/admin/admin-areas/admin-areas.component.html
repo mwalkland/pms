@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Areas</h2>
+
+<mat-dialog-content>
+
+  <ul>
+    <li *ngFor="let area of areas; let i = index"> {{area}}
+      <mat-icon *ngIf="editMode" matTooltip="Delete" (click)="onDelete(i)">clear</mat-icon>
+    </li>
+  </ul>
+
+  <div class="add-wrap" *ngIf="editMode">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Enter Area" #areaInput (keydown.enter)="addArea()">
+    </mat-form-field>
+    <mat-icon matTooltip="Add" (click)="addArea()">add</mat-icon>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onEdit()" *ngIf="!editMode">Edit</button>
+  <button mat-raised-button color="primary" (click)="onSave()" *ngIf="editMode">Save</button>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+
+<mat-error *ngIf="error">Error updating projects. Please try again.</mat-error>

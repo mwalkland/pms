@@ -18,7 +18,9 @@ import {
   MatButtonModule,
   MatIconModule,
   MatTooltipModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatInputModule,
+  MatFormFieldModule
 } from '@angular/material';
 import { AdminStudentsTableComponent } from './admin-students/admin-students-table/admin-students-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,8 +31,8 @@ import {
 import {
   AdminStudentsTableDialogComponent
 } from './admin-students/admin-students-table/admin-students-table-dialog/admin-students-table-dialog.component';
-import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminReminderComponent } from './admin-reminder/admin-reminder.component';
+import { AdminAreasComponent } from './admin-areas/admin-areas.component';
 import {
   AdminStudentsTableDialogConfirmComponent
   // tslint:disable-next-line:max-line-length
@@ -53,7 +55,10 @@ import {
     MatIconModule,
     MatTooltipModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatTooltipModule
   ],
   declarations: [
     AdminComponent,
@@ -64,9 +69,9 @@ import {
     AdminStaffTableComponent,
     AdminStaffTableDialogComponent,
     AdminStudentsTableDialogComponent,
-    AdminHomeComponent,
     AdminReminderComponent,
-    AdminStudentsTableDialogConfirmComponent
+    AdminStudentsTableDialogConfirmComponent,
+    AdminAreasComponent
   ],
   providers: [
     AdminService
@@ -75,7 +80,8 @@ import {
     AdminStaffTableDialogComponent,
     AdminStudentsTableDialogComponent,
     AdminReminderComponent,
-    AdminStudentsTableDialogConfirmComponent
+    AdminStudentsTableDialogConfirmComponent,
+    AdminAreasComponent
   ]
 })
 export class AdminModule { }

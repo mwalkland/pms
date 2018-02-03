@@ -3,6 +3,8 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
 
+const mongoose = require('mongoose');
+
 const User = require('../../models/user');
 const Project = require('../../models/project');
 const EmailController = require('../email');
@@ -68,7 +70,7 @@ router.get('/getAllStaff', (req, res) => {
             staff: staff,
             students: students
           });
-        }); 
+        });
     });
 });
 
@@ -120,6 +122,26 @@ router.patch('/modifyProjectSupervisor', (req, res) => {
     res.status(200).json({
       message: 'Successfully updated supervisor'
     });
+  });
+});
+
+router.put('/updateAreasList', (req, res) => {
+  const newAreas = req.body.areas;
+  const Areas = mongoose.connection.db.collection('areas');
+  Areas.updateOne(
+    { areas: { $exists: true, $ne: [] } },
+    { $set: { areas: newAreas } },
+    (err) => {
+      if (err) {
+        return res.status(500).json({
+          message: 'Error occured updating the areas',
+          error: err
+        });
+      }
+    }
+  );
+  res.status(200).json({
+    message: 'Successfully updated the areas'
   });
 });
 

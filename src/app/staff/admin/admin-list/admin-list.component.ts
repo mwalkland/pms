@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { AdminReminderComponent } from '../admin-reminder/admin-reminder.component';
+import { AdminAreasComponent } from '../admin-areas/admin-areas.component';
 
 @Component({
   selector: 'app-admin-list',
@@ -17,6 +18,10 @@ export class AdminListComponent implements OnInit {
 
   sendReminder() {
     this.dialog.open(AdminReminderComponent);
+  }
+
+  showAreas() {
+    this.dialog.open(AdminAreasComponent);
   }
 
 }

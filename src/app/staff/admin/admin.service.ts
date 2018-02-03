@@ -107,4 +107,17 @@ export class AdminService {
     return this.http.post('http://localhost:3000/admin/sendReminder', body, { headers: headers });
   }
 
+  getSuggestedAreas(): Observable<string[]> {
+    return this.http.get('http://localhost:3000/project/getSuggestedAreas')
+      .map((response: { areas: string[] }) => {
+        return response.areas;
+      });
+  }
+
+  updateSuggestedAreas(areas: string[]) {
+    const body = { areas: areas };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put('http://localhost:3000/admin/updateAreasList', body, { headers: headers });
+  }
+
 }

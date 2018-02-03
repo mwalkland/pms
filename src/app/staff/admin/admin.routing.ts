@@ -3,7 +3,7 @@ import { AdminComponent } from './admin.component';
 import { NgModule } from '@angular/core';
 import { AdminStudentsComponent } from './admin-students/admin-students.component';
 import { AdminStaffComponent } from './admin-staff/admin-staff.component';
-import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminAreasComponent } from './admin-areas/admin-areas.component';
 
 const adminRoutes: Routes = [
   {
@@ -13,7 +13,6 @@ const adminRoutes: Routes = [
       {
         path: '',
         redirectTo: 'students'
-        // component: AdminHomeComponent
       },
       {
         path: 'students',

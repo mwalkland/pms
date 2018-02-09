@@ -24,11 +24,6 @@ const appRoutes: Routes = [
     path: 'staff',
     loadChildren: 'app/staff/staff.module#StaffModule',
     canActivate: [AuthGuard, StaffGuard]
-  },
-  // TODO Page not found
-  {
-    path: '**',
-    redirectTo: ''
   }
 ]
 

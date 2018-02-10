@@ -49,6 +49,11 @@ li {
   cursor: pointer;
 }
 
+.contents-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
 @media(max-width: 568px) {
   .edit-button {
     display: block !important;

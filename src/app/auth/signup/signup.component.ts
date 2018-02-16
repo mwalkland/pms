@@ -29,8 +29,9 @@ export class SignupComponent implements OnInit {
 
   onSignup() {
     const values = this.signupForm.value;
+    const email = values.email as string;
     const user = new User(
-      values.email,
+      email.toLowerCase(),
       values.password,
       values.firstname,
       values.surname,
@@ -38,12 +39,12 @@ export class SignupComponent implements OnInit {
     );
     this.authService.signup(user)
       .subscribe(
-      data => {
-        this.signedUp = true;
-      },
-      error => {
-        this.error = true;
-      }
+        data => {
+          this.authService.login(new User(user.email, user.password)).subscribe();
+        },
+        error => {
+          this.error = true;
+        }
       );
     this.signupForm.reset();
     this.error = false;

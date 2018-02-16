@@ -26,19 +26,11 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     const values = this.loginForm.value;
-    const user = new User(values.email, values.password);
-    this.authService.login(user)
-      .subscribe(data => {
-        const currentUser = {
-          email: data['email'],
-          name: data['name'],
-          type: data['type'],
-          projectChosen: data['projectChosen'],
-          isLeader: data['leader']
-        };
-        localStorage.setItem('token', data['token']);
-        localStorage.setItem('user', JSON.stringify(currentUser));
-        this.router.navigate(['/' + data['type']]);
+    const email = values.email as string;
+    const user = new User(email.toLowerCase(), values.password);
+    this.authService.login(user).subscribe(
+      data => {
+        // successfully logged in
       },
       error => {
         this.isError = true;

@@ -21,6 +21,5 @@
     <br>
     <button mat-raised-button color="primary" type="submit" (click)="onSignup()" [disabled]="!signupForm.valid">Submit</button>
   </form>
-  <p *ngIf="signedUp == true">User successfully created. You may now sign in.</p>
   <p *ngIf="error == true">Could not create User account. Your email address may already be in use.</p>
 </div>

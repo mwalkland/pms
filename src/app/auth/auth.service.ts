@@ -32,7 +32,19 @@ export class AuthService {
   login(user: User) {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/auth/login', body, { headers: headers });
+    return this.http.post('http://localhost:3000/auth/login', body, { headers: headers })
+      .map(data => {
+        const currentUser = {
+          email: data['email'],
+          name: data['name'],
+          type: data['type'],
+          projectChosen: data['projectChosen'],
+          isLeader: data['leader']
+        };
+        localStorage.setItem('token', data['token']);
+        localStorage.setItem('user', JSON.stringify(currentUser));
+        this.router.navigate(['/' + data['type']]);
+      });
   }
 
   isLoggedIn() {

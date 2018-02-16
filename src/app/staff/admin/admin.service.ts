@@ -17,7 +17,7 @@ export class AdminService {
 
   getAllStudents(): Observable<Student[]> {
     if (!this.students) {
-      return this.http.get('http://localhost:3000/admin/getAllStudents')
+      return this.http.get('http://144.173.116.200:3000/admin/getAllStudents')
         .map(response => {
           const students = response['students'];
           const studentList: Student[] = [];
@@ -54,7 +54,7 @@ export class AdminService {
 
   getAllStaff(): Observable<Staff[]> {
     if (!this.staff) {
-      return this.http.get('http://localhost:3000/admin/getAllStaff')
+      return this.http.get('http://144.173.116.200:3000/admin/getAllStaff')
         .map(response => {
           const staffList: Staff[] = [];
           const studentResponse = response['students'];
@@ -98,17 +98,17 @@ export class AdminService {
   modifyProjectSupervisor(staffId: string, studentId: string): Observable<Object> {
     const body = { staffId: staffId, studentId: studentId };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.patch('http://localhost:3000/admin/modifyProjectSupervisor', body, { headers: headers });
+    return this.http.patch('http://144.173.116.200:3000/admin/modifyProjectSupervisor', body, { headers: headers });
   }
 
   sendReminder() {
     const body = {};
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/admin/sendReminder', body, { headers: headers });
+    return this.http.post('http://144.173.116.200:3000/admin/sendReminder', body, { headers: headers });
   }
 
   getSuggestedAreas(): Observable<string[]> {
-    return this.http.get('http://localhost:3000/project/getSuggestedAreas')
+    return this.http.get('http://144.173.116.200:3000/project/getSuggestedAreas')
       .map((response: { areas: string[] }) => {
         return response.areas;
       });
@@ -117,7 +117,7 @@ export class AdminService {
   updateSuggestedAreas(areas: string[]) {
     const body = { areas: areas };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put('http://localhost:3000/admin/updateAreasList', body, { headers: headers });
+    return this.http.put('http://144.173.116.200:3000/admin/updateAreasList', body, { headers: headers });
   }
 
 }

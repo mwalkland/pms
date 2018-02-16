@@ -42,17 +42,17 @@ export class StaffService {
   newProject(project: Project): Observable<Object> {
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/project/new', body, { headers: headers });
+    return this.http.post('http://144.173.116.200:3000/project/new', body, { headers: headers });
   }
 
   updateStaffProject(project: Project): Observable<Object> {
     const body = JSON.stringify(project);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.patch('http://localhost:3000/project/updateStaffProject', body, { headers: headers });
+    return this.http.patch('http://144.173.116.200:3000/project/updateStaffProject', body, { headers: headers });
   }
 
   getStaffAreas(): Observable<Areas> {
-    return this.http.get('http://localhost:3000/user/getStaffAreas')
+    return this.http.get('http://144.173.116.200:3000/user/getStaffAreas')
       .map((response: {
         message: string,
         areas: {
@@ -76,12 +76,12 @@ export class StaffService {
   updateStaffAreas(areas: Areas) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = JSON.stringify(areas);
-    return this.http.patch('http://localhost:3000/user/updateStaffAreas', body, { headers: headers });
+    return this.http.patch('http://144.173.116.200:3000/user/updateStaffAreas', body, { headers: headers });
   }
 
   getStaffProjects(): Observable<Project[]> {
     if (!this.staffProjects) {
-      return this.http.get('http://localhost:3000/project/getStaffProjects')
+      return this.http.get('http://144.173.116.200:3000/project/getStaffProjects')
         .map(response => {
           const projects = response['projects'];
           const projectList: Project[] = [];
@@ -101,7 +101,7 @@ export class StaffService {
   }
 
   getProjectRequests(): Observable<Project[]> {
-    return this.http.get('http://localhost:3000/project/getProjectRequests')
+    return this.http.get('http://144.173.116.200:3000/project/getProjectRequests')
       .map((response) => {
         const students = response['students'];
         const projectList: Project[] = [];
@@ -120,7 +120,7 @@ export class StaffService {
   }
 
   getConfirmedProjects(): Observable<Project[]> {
-    return this.http.get('http://localhost:3000/project/getConfirmedProjects')
+    return this.http.get('http://144.173.116.200:3000/project/getConfirmedProjects')
       .map((response) => {
         const students = response['students'];
         const projectList: Project[] = [];
@@ -144,7 +144,7 @@ export class StaffService {
       studentId: studentId
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.patch('http://localhost:3000/project/confirmProject', body, { headers: headers });
+    return this.http.patch('http://144.173.116.200:3000/project/confirmProject', body, { headers: headers });
   }
 
   rejectProject(project: Project, studentId: string): Observable<Object> {
@@ -153,12 +153,12 @@ export class StaffService {
       studentId: studentId
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.patch('http://localhost:3000/project/rejectProject', body, { headers: headers });
+    return this.http.patch('http://144.173.116.200:3000/project/rejectProject', body, { headers: headers });
   }
 
   getSuggestedAreas(): Observable<string[]> {
     if (!this.suggestedAreas) {
-      return this.http.get('http://localhost:3000/project/getSuggestedAreas')
+      return this.http.get('http://144.173.116.200:3000/project/getSuggestedAreas')
         .map((response: { areas: string[] }) => {
           this.suggestedAreas = response.areas;
           return response.areas;

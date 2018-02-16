@@ -1,4 +1,4 @@
 module.exports = {
   secret: 'WO3V%oIBK5c2',
-  database: 'mongodb://localhost:27017/pms'
+  database: 'mongodb://admin:password@ds235328.mlab.com:35328/pms'
 };

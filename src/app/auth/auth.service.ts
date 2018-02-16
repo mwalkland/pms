@@ -26,13 +26,13 @@ export class AuthService {
   signup(user: User) {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/auth/signup', body, { headers: headers });
+    return this.http.post('http://144.173.116.200:3000/auth/signup', body, { headers: headers });
   }
 
   login(user: User) {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post('http://localhost:3000/auth/login', body, { headers: headers });
+    return this.http.post('http://144.173.116.200:3000/auth/login', body, { headers: headers });
   }
 
   isLoggedIn() {

@@ -23,19 +23,7 @@
   width: 100%;
   height: 100%;
   max-height: 650px;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.left {
-  max-width: 250px;
-  display: flex;
-  flex-direction: column;
-  margin-right: 25px;
+  overflow: auto;
 }
 
 .container {
@@ -63,10 +51,11 @@
   }
   .container {
     align-items: center;
-    overflow-y: auto;
   }
   .projects-table {
     height: auto;
+    overflow: initial;
+    max-height: initial;
   }
   .left {
     margin-bottom: 30px;
@@ -84,7 +73,7 @@
   .left {
     width: 100%;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
 }
 

@@ -2,12 +2,25 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
+const winston = require('winston');
 
 const mongoose = require('mongoose');
 
 const User = require('../../models/user');
 const Project = require('../../models/project');
 const EmailController = require('../email');
+
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.File)({
+      filename: config.logFile,
+      handleExceptions: true,
+      humanReadableUnhandledException: true,
+      level: 'debug',
+      json: false
+    })
+  ]
+});
 
 router.use('/', (req, res, next) => {
   const tokenString = req.headers.authorization;
@@ -34,10 +47,14 @@ router.use('/', (req, res, next) => {
 });
 
 router.get('/getAllStudents', (req, res) => {
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
+  logger.debug('fdfggfdgd');
   User.find({ type: 'student' })
     .populate('studentInfo.chosenProject studentInfo.supervisor')
     .exec((err, students) => {
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           error: err
         });
@@ -49,11 +66,14 @@ router.get('/getAllStudents', (req, res) => {
 });
 
 router.get('/getAllStaff', (req, res) => {
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.find({ type: 'student' })
     .populate({ path: 'studentInfo.chosenProject', populate: { path: 'students' } })
     .populate('studentInfo.supervisor')
     .exec((err, students) => {
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           title: 'Error',
           error: err
@@ -62,6 +82,7 @@ router.get('/getAllStaff', (req, res) => {
       User.find({ type: 'staff' })
         .exec((err, staff) => {
           if (err) {
+            logger.error('UserId = %s', decoded.userId, { error: err });
             return res.status(500).json({
               error: err
             });
@@ -75,8 +96,11 @@ router.get('/getAllStaff', (req, res) => {
 });
 
 router.post('/sendReminder', (req, res) => {
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.find({ type: 'student', 'studentInfo.confirmed': false }, 'email', (err, students) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         error: err
       });
@@ -95,9 +119,12 @@ router.post('/sendReminder', (req, res) => {
 });
 
 router.get('/getAllProjects', (req, res) => {
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   Project.find().populate('staff students').exec(
     (err, projects) => {
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           title: 'Error retrieving projects',
           error: err
@@ -112,8 +139,11 @@ router.get('/getAllProjects', (req, res) => {
 router.patch('/modifyProjectSupervisor', (req, res) => {
   const staffId = req.body.staffId;
   const studentId = req.body.studentId;
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findByIdAndUpdate(studentId, { $set: { 'studentInfo.supervisor': staffId } }, (err) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'Error updating supervisor',
         error: err
@@ -128,11 +158,14 @@ router.patch('/modifyProjectSupervisor', (req, res) => {
 router.put('/updateAreasList', (req, res) => {
   const newAreas = req.body.areas;
   const Areas = mongoose.connection.db.collection('areas');
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   Areas.updateOne(
     { areas: { $exists: true, $ne: [] } },
     { $set: { areas: newAreas } },
     (err) => {
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           message: 'Error occured updating the areas',
           error: err

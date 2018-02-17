@@ -49,7 +49,6 @@ router.use('/', (req, res, next) => {
 router.get('/getAllStudents', (req, res) => {
   const tokenString = req.headers.authorization,
     decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
-  logger.debug('fdfggfdgd');
   User.find({ type: 'student' })
     .populate('studentInfo.chosenProject studentInfo.supervisor')
     .exec((err, students) => {

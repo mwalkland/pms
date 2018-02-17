@@ -13,6 +13,7 @@
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Password" formControlName="password" type="password">
+      <mat-error>Must be at least 6 characters long and contain at least one number.</mat-error>
     </mat-form-field>
     <mat-radio-group class="radio-type" formControlName="type">
       <mat-radio-button value="student">Student</mat-radio-button>
@@ -21,5 +22,5 @@
     <br>
     <button mat-raised-button color="primary" type="submit" (click)="onSignup()" [disabled]="!signupForm.valid">Submit</button>
   </form>
-  <p *ngIf="error == true">Could not create User account. Your email address may already be in use.</p>
+  <mat-error *ngIf="error">Could not create User account. Your email address may already be in use.</mat-error>
 </div>

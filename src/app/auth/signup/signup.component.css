@@ -32,6 +32,14 @@ h2 {
   color: #0355A6;
 }
 
+.mat-error {
+  margin-top: 10px;
+}
+
+.mat-radio-group {
+  margin-top: 25px;
+}
+
 @media(min-width: 768px) {
   .signup-wrap {
     border-left: 1px solid #0355A6;

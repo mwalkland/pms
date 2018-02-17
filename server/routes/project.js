@@ -8,6 +8,19 @@ const mongoose = require('mongoose');
 const Project = require('../../models/project');
 const User = require('../../models/user');
 const EmailController = require('../email');
+const winston = require('winston');
+
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.File)({
+      filename: config.logFile,
+      handleExceptions: true,
+      humanReadableUnhandledException: true,
+      level: 'debug',
+      json: false
+    })
+  ]
+});
 
 router.use('/', (req, res, next) => {
   const tokenString = req.headers.authorization;
@@ -39,6 +52,7 @@ router.post('/new', (req, res) => {
     decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findById(decoded.userId, (err, user) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'An error occured getting the user',
         error: err
@@ -56,6 +70,7 @@ router.post('/new', (req, res) => {
     });
 
     project.save((err, result) => {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       if (err) {
         return res.status(500).json({
           title: 'An error occured creating Project',
@@ -79,6 +94,8 @@ router.post('/new', (req, res) => {
 // A Staff can update their suggested project details
 router.patch('/updateStaffProject', (req, res) => {
   const body = req.body;
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   Project.findByIdAndUpdate(body.id, {
     name: body.name,
     description: body.description,
@@ -87,6 +104,7 @@ router.patch('/updateStaffProject', (req, res) => {
     areas: body.areas
   }, { new: true }, (err, project) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'An error occured updating Project',
         error: err
@@ -101,8 +119,11 @@ router.patch('/updateStaffProject', (req, res) => {
 
 // Get all project areas to filter by in the student table
 router.get('/getAreas', (req, res) => {
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   Project.find().distinct('areas', (err, areas) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'An error occured retrieving project areas',
         error: err
@@ -116,9 +137,12 @@ router.get('/getAreas', (req, res) => {
 
 // Get All staff suggested projects for the student table
 router.get('/getAllStaffProjects', (req, res) => {
+  const tokenString = req.headers.authorization,
+    decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   Project.find({ isStudentProject: false, full: false }).populate('staff').exec(
     (err, projects) => {
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           title: 'Error retrieving projects',
           error: err
@@ -135,6 +159,7 @@ router.get('/getProjectRequests', (req, res) => {
     decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findById(decoded.userId, (err, user) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'An error occured getting the user',
         error: err
@@ -162,6 +187,7 @@ router.get('/getConfirmedProjects', (req, res) => {
     decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findById(decoded.userId, (err, user) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'An error occured getting the user',
         error: err
@@ -189,6 +215,7 @@ router.get('/getStaffProjects', (req, res) => {
     decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   Project.find({ staff: decoded.userId, isStudentProject: false }, (err, projects) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'An error occured getting the projects',
         error: err
@@ -208,6 +235,7 @@ router.patch('/confirmProject', (req, res) => {
     decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
   User.findByIdAndUpdate(studentId, { $set: { 'studentInfo.confirmed': true } }, (err, student) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'An error occured getting the student',
         error: err
@@ -215,6 +243,7 @@ router.patch('/confirmProject', (req, res) => {
     }
     User.findById(decoded.userId, (err, staff) => {
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           title: 'An error occured getting the staff',
           error: err
@@ -222,6 +251,7 @@ router.patch('/confirmProject', (req, res) => {
       }
       User.findOne({ 'staffInfo.leader': true }, (err, leader) => {
         if (err) {
+          logger.error('UserId = %s', decoded.userId, { error: err });
           return res.status(500).json({
             title: 'An error occured getting the module leader',
             error: err
@@ -258,6 +288,7 @@ router.patch('/rejectProject', (req, res) => {
 
   User.findById(studentId, (err, student) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'Could not find student',
         error: err
@@ -265,6 +296,7 @@ router.patch('/rejectProject', (req, res) => {
     }
     Project.findById(project.id, (err, project) => {
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           title: 'Could not find project',
           error: err
@@ -278,6 +310,7 @@ router.patch('/rejectProject', (req, res) => {
       project.save();
       User.findById(decoded.userId, (err, staff) => {
         if (err) {
+          logger.error('UserId = %s', decoded.userId, { error: err });
           return res.status(500).json({
             title: 'An error occured getting the user',
             error: err
@@ -306,6 +339,7 @@ router.get('/getStudentProject', (req, res) => {
     .populate('studentInfo.supervisor studentInfo.chosenProject')
     .exec((err, student) => {
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           title: 'Could not get student',
           error: err
@@ -327,6 +361,7 @@ router.patch('/addStudentProject', (req, res) => {
   Project.findById(body.id)
     .populate('staff').exec((err, project) => {
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           title: 'An error occured finding the project',
           error: err
@@ -336,6 +371,7 @@ router.patch('/addStudentProject', (req, res) => {
         $set: { 'studentInfo.chosenProject': project, 'studentInfo.supervisor': project.staff },
       }, (err, user) => {
         if (err) {
+          logger.error('UserId = %s', decoded.userId, { error: err });
           return res.status(500).json({
             title: 'An error occured updating the user',
             error: err
@@ -367,9 +403,9 @@ router.post('/createStudentProject', (req, res) => {
   const body = req.body;
   const tokenString = req.headers.authorization,
     decoded = jwt.decode(tokenString.substr(tokenString.indexOf(' ') + 1));
-
   User.findById(decoded.userId, (err, student) => {
     if (err) {
+      logger.error('UserId = %s', decoded.userId, { error: err });
       return res.status(500).json({
         title: 'An error occured getting the user',
         error: err
@@ -387,6 +423,7 @@ router.post('/createStudentProject', (req, res) => {
       });
       project.save((err, result) => {
         if (err) {
+          logger.error('UserId = %s', decoded.userId, { error: err });
           return res.status(500).json({
             title: 'An error occured creating Project',
             error: err
@@ -424,6 +461,7 @@ router.get('/getSuggestedAreas', (req, res) => {
   const Areas = mongoose.connection.db.collection('areas');
   Areas.findOne({}, (err, response) => {
     if (err) {
+      logger.error('Error getting suggested areas', { error: err });
       return res.status(500).json({
         title: 'Could not get suggested areas',
         error: err

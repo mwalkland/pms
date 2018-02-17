@@ -32,6 +32,7 @@
     "nodemailer-express-handlebars": "^2.0.0",
     "nodemon": "^1.12.5",
     "rxjs": "^5.5.5",
+    "winston": "^2.4.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

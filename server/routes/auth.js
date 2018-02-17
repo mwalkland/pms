@@ -3,8 +3,21 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
+const winston = require('winston');
 
 const User = require('../../models/user');
+
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.File)({
+      filename: config.logFile,
+      handleExceptions: true,
+      humanReadableUnhandledException: true,
+      level: 'debug',
+      json: false
+    })
+  ]
+});
 
 /**
  * Server endpoint for signing up a user
@@ -20,6 +33,7 @@ router.post('/signup', (req, res) => {
     });
     user.save((err, result) => {
       if (err) {
+        logger.error('Error saving new user.', { error: err });
         return res.status(500).json({
           title: 'An error occured creating User',
           error: err
@@ -41,6 +55,7 @@ router.post('/login', (req, res) => {
   // find the user in the database by the email address
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
+      logger.error('Login error', { email: req.body.email, error: err });
       return res.status(500).json({
         title: 'Login failed. Invalid email or password.',
         error: err

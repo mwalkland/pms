@@ -16,7 +16,7 @@ export class AdminStudentsTableComponent implements OnInit, AfterViewInit {
   displayedColumns = ['firstname', 'surname', 'projectname', 'supervisorName', 'confirmed'];
   @ViewChild(MatSort) set sort(sort: MatSort) {
     this.dataSource.sort = sort;
-  };
+  }
   @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
   }

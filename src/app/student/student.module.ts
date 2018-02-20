@@ -21,7 +21,8 @@ import {
   MatInputModule,
   MatTooltipModule,
   MatExpansionModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatPaginatorModule
 } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
@@ -67,7 +68,8 @@ import {
     MatInputModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   exports: [
     StudentHeaderComponent

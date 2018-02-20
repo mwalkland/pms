@@ -1,14 +1,12 @@
 @import "./angular-material-colour-scheme.css";
 html {
   height: 100%;
-  overflow: auto;
 }
 
 body {
   height: 100%;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  overflow: auto;
 }
 
 h1, h2, h3 {

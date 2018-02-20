@@ -1,6 +1,6 @@
 import { Project } from '../../../core/project.model';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatSort, MatDialog, MatPaginator } from '@angular/material';
 import { StudentService } from '../../student.service';
 import { StudentProjectsTableDialogComponent } from './student-projects-table-dialog/student-projects-table-dialog.component';
 
@@ -16,7 +16,10 @@ export class StudentProjectsTableComponent implements OnInit, AfterViewInit {
   displayedColumns = ['name', 'type', 'staff', 'areas'];
   @ViewChild(MatSort) set sort(sort: MatSort) {
     this.dataSource.sort = sort;
-  };
+  }
+  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
+    this.dataSource.paginator = paginator;
+  }
   loaded = false;
 
   constructor(private studentService: StudentService, private dialog: MatDialog) { }

@@ -2,11 +2,14 @@
   height: 100%;
   min-width: 300px;
   width: 100%;
+  max-height: 650px;
+  overflow: auto;
 }
 
 .table-wrap {
   height: 100%;
   display: flex;
+  flex-direction: column;
 }
 
 .mat-row:hover {
@@ -23,5 +26,9 @@
   }
   .mat-cell {
     font-size: 12px;
+  }
+  .mat-table {
+    overflow: initial;
+    max-height: initial;
   }
 }

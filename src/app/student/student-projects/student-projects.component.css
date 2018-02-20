@@ -22,8 +22,6 @@
 .projects-table {
   width: 100%;
   height: 100%;
-  max-height: 650px;
-  overflow: auto;
 }
 
 .container {
@@ -54,8 +52,6 @@
   }
   .projects-table {
     height: auto;
-    overflow: initial;
-    max-height: initial;
   }
   .left {
     margin-bottom: 30px;

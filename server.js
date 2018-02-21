@@ -54,4 +54,4 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => console.log(`API running on 144.173.116.200:${port}`));
+server.listen(port, () => console.log(`API running on http://emps-ugproj2-vm.ex.ac.uk/:${port}`));

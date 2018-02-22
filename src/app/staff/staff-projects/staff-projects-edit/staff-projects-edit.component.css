@@ -33,3 +33,11 @@
   margin: 10px;
   text-align: center;
 }
+
+.delete-button:hover {
+  cursor: pointer;
+}
+
+.form {
+  padding-top: 15px;
+}

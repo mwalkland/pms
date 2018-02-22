@@ -4,7 +4,7 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <mat-table [dataSource]="dataSource" matSort *ngIf="loaded">
+  <mat-table [dataSource]="dataSource" matSort *ngIf="loaded && dataSource.filteredData.length !== 0">
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
@@ -30,6 +30,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></mat-row>
 
   </mat-table>
-  <mat-paginator #paginator [pageSize]="15" [pageSizeOptions]="[10, 15, 20, 30]" *ngIf="loaded"></mat-paginator>
+  <mat-paginator #paginator [pageSize]="15" [pageSizeOptions]="[10, 15, 20, 30]" *ngIf="loaded && dataSource.filteredData.length !== 0"></mat-paginator>
+  <h3 *ngIf="loaded && dataSource.filteredData.length === 0">No Projects Available</h3>
 
 </div>

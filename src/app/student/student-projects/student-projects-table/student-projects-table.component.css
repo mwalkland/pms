@@ -20,6 +20,10 @@
   color: #0355A6;
 }
 
+h3 {
+  text-align: center;
+}
+
 @media(max-width: 868px) {
   .mat-header-row, .mat-row {
     padding: 0px;

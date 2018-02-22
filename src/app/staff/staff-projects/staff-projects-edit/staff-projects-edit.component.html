@@ -48,7 +48,7 @@
       <div class="area-wrap">
         <div class="area-list-wrap" *ngFor="let area of form.get('areas').value; let i = index">
           {{area}}
-          <i class="material-icons delete-button" style="color:black;font-size:20px;" (click)="removeArea(i)">clear</i>
+          <i class="material-icons delete-button" style="color:black;font-size:20px;" (click)="removeArea(i)" matTooltip="Remove">clear</i>
         </div>
       </div>
     </div>

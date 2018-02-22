@@ -1,5 +1,19 @@
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
+const winston = require('winston');
+const config = require('../config');
+
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.File)({
+      filename: config.logFile,
+      handleExceptions: true,
+      humanReadableUnhandledException: true,
+      level: 'debug',
+      json: false
+    })
+  ]
+});
 
 class EmailController {
 
@@ -7,24 +21,13 @@ class EmailController {
 
   }
 
-  // createTransport() {
-  //   return nodemailer.createTransport({
-  //     service: 'Outlook365',
-  //     port: 587,
-  //     auth: {
-  //       user: 'mw482@exeter.ac.uk',
-  //       pass: 'g9Pz7$gkVAwm'
-  //     }
-  //   });
-  // }
-
-  createTransport(account) {
+  createTransport() {
     return nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
+      service: 'Outlook365',
       port: 587,
       auth: {
-        user: account.user,
-        pass: account.pass
+        user: 'mw482@exeter.ac.uk',
+        pass: 'g9Pz7$gkVAwm'
       }
     });
   }
@@ -43,34 +46,33 @@ class EmailController {
   }
 
   sendStaffEmail(student, staff, email, project) {
-    console.log('hit');
-    nodemailer.createTestAccount((err, account) => {
 
-      let transporter = this.createTransport(account);
+    let transporter = this.createTransport();
 
-      const options = this.getOptions();
+    const options = this.getOptions();
 
-      transporter.use('compile', hbs(options));
+    transporter.use('compile', hbs(options));
 
-      let mailOptions = {
-        from: '"Test" <test@test.com>',
-        to: staff + ' ' + email,
-        subject: 'You have a new Project request',
-        template: 'staff.body',
-        context: {
-          student: student,
-          project: project
-        }
-      };
+    let mailOptions = {
+      from: '"Project Management System" <mw482@exeter.ac.uk>',
+      to: staff + ' ' + email,
+      subject: 'You have a new Project request',
+      template: 'staff.body',
+      context: {
+        student: student,
+        project: project
+      }
+    };
 
-      transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-          return console.log(err);
-        }
-        console.log('url ' + nodemailer.getTestMessageUrl(info));
-      });
-
+    transporter.sendMail(mailOptions, (err) => {
+      if (err) {
+        logger.error('Failed to send email.', {
+          to: email,
+          error: err
+        });
+      }
     });
+
   }
 
   sendStudentEmail(staff, student, email, project, isAccepted) {
@@ -90,7 +92,7 @@ class EmailController {
       }
 
       let mailOptions = {
-        from: '"Test" <test@test.com>',
+        from: '"Project Management System" <mw482@exeter.ac.uk>',
         to: student + ' ' + email,
         subject: 'Your Project request has a response',
         template: 'student.body',
@@ -101,44 +103,45 @@ class EmailController {
         }
       };
 
-      transporter.sendMail(mailOptions, (err, info) => {
+      transporter.sendMail(mailOptions, (err) => {
         if (err) {
-          return console.log(err);
+          logger.error('Failed to send email.', {
+            to: email,
+            error: err
+          });
         }
-        console.log('url ' + nodemailer.getTestMessageUrl(info));
       });
 
     });
   }
 
   sendModuleLeaderEmail(staffName, studentName, projectName, leaderName, email) {
-    nodemailer.createTestAccount((err, account) => {
 
-      let transporter = this.createTransport(account);
+    let transporter = this.createTransport();
 
-      const options = this.getOptions();
+    const options = this.getOptions();
 
-      transporter.use('compile', hbs(options));
+    transporter.use('compile', hbs(options));
 
-      let mailOptions = {
-        from: '"Test" <test@test.com>',
-        to: leaderName + ' ' + email,
-        subject: 'A final-year project has been confirmed',
-        template: 'leader.body',
-        context: {
-          staff: staffName,
-          student: studentName,
-          project: projectName
-        }
-      };
+    let mailOptions = {
+      from: '"Project Management System" <mw482@exeter.ac.uk>',
+      to: leaderName + ' ' + email,
+      subject: 'A final-year project has been confirmed',
+      template: 'leader.body',
+      context: {
+        staff: staffName,
+        student: studentName,
+        project: projectName
+      }
+    };
 
-      transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-          return console.log(err);
-        }
-        console.log('url ' + nodemailer.getTestMessageUrl(info));
-      });
-
+    transporter.sendMail(mailOptions, (err) => {
+      if (err) {
+        logger.error('Failed to send email.', {
+          to: email,
+          error: err
+        });
+      }
     });
   }
 
@@ -152,18 +155,20 @@ class EmailController {
       transporter.use('compile', hbs(options));
 
       let mailOptions = {
-        from: '"Test" <test@test.com>',
+        from: '"Project Management System" <mw482@exeter.ac.uk>',
         to: emailList,
         subject: 'Final-year project reminder',
         template: 'reminder.body',
       };
 
-      transporter.sendMail(mailOptions, (err, info) => {
+      transporter.sendMail(mailOptions, (err) => {
         if (err) {
-          return console.log(err);
+          logger.error('Failed to send email.', {
+            to: emailList,
+            error: err
+          });
         } else {
           cb();
-          console.log('url ' + nodemailer.getTestMessageUrl(info));
         }
       });
 

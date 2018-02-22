@@ -1,0 +1,99 @@
+2018-02-22T15:59:02.140Z - error: uncaughtException: Cannot find module '../../config' date=Thu Feb 22 2018 15:59:02 GMT+0000 (GMT), pid=23806, uid=501, gid=20, cwd=/Users/matt/pms, execPath=/Users/matt/.nvm/versions/node/v8.9.1/bin/node, version=v8.9.1, argv=[/Users/matt/.nvm/versions/node/v8.9.1/bin/node, /Users/matt/pms/server], rss=53891072, heapTotal=34971648, heapUsed=23509816, external=18718208, loadavg=[2.00244140625, 1.94677734375, 1.85986328125], uptime=440885
+Error: Cannot find module '../../config'
+    at Function.Module._resolveFilename (module.js:536:15)
+    at Function.Module._load (module.js:466:25)
+    at Module.require (module.js:579:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/Users/matt/pms/server/email.js:4:16)
+    at Module._compile (module.js:635:30)
+    at Object.Module._extensions..js (module.js:646:10)
+    at Module.load (module.js:554:32)
+    at tryModuleLoad (module.js:497:12)
+    at Function.Module._load (module.js:489:3)
+    at Module.require (module.js:579:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/Users/matt/pms/server/routes/project.js:10:25)
+    at Module._compile (module.js:635:30)
+    at Object.Module._extensions..js (module.js:646:10)
+    at Module.load (module.js:554:32)
+2018-02-22T15:59:02.142Z - error: uncaughtException: Cannot find module '../../config' date=Thu Feb 22 2018 15:59:02 GMT+0000 (GMT), pid=23806, uid=501, gid=20, cwd=/Users/matt/pms, execPath=/Users/matt/.nvm/versions/node/v8.9.1/bin/node, version=v8.9.1, argv=[/Users/matt/.nvm/versions/node/v8.9.1/bin/node, /Users/matt/pms/server], rss=54153216, heapTotal=35495936, heapUsed=23691392, external=18718232, loadavg=[2.00244140625, 1.94677734375, 1.85986328125], uptime=440885
+Error: Cannot find module '../../config'
+    at Function.Module._resolveFilename (module.js:536:15)
+    at Function.Module._load (module.js:466:25)
+    at Module.require (module.js:579:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/Users/matt/pms/server/email.js:4:16)
+    at Module._compile (module.js:635:30)
+    at Object.Module._extensions..js (module.js:646:10)
+    at Module.load (module.js:554:32)
+    at tryModuleLoad (module.js:497:12)
+    at Function.Module._load (module.js:489:3)
+    at Module.require (module.js:579:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/Users/matt/pms/server/routes/project.js:10:25)
+    at Module._compile (module.js:635:30)
+    at Object.Module._extensions..js (module.js:646:10)
+    at Module.load (module.js:554:32)
+2018-02-22T16:01:21.840Z - error: Error saving new user. message=Error, expected `email` to be unique. Value: `matthewwalkland@gmail.com`, name=ValidatorError, validator=function () {
+                        var doc = this;
+
+                        return new Promise(function(resolve) {
+                            var isSubdocument = typeof doc.ownerDocument === 'function';
+                            var isQuery = doc.constructor.name === 'Query';
+                            var parentDoc = isSubdocument ? doc.ownerDocument() : doc;
+                            var isNew = typeof parentDoc.isNew === 'boolean' ? parentDoc.isNew : !isQuery;
+
+                            var conditions = [];
+                            paths.forEach(function(name) {
+                                var pathValue;
+
+                                // If the doc is a query, this is a findAndUpdate
+                                if (isQuery) {
+                                    pathValue = get(doc, '_update.' + name) || get(doc, '_update.$set.' + name);
+                                } else {
+                                    pathValue = get(doc, isSubdocument ? name.split('.').pop() : name);
+                                }
+
+                                // Wrap with case-insensitivity
+                                if (get(path, 'options.uniqueCaseInsensitive') || indexOptions.uniqueCaseInsensitive) {
+                                    pathValue = new RegExp('^' + pathValue + '$', 'i');
+                                }
+
+                                var condition = {};
+                                condition[name] = pathValue;
+
+                                conditions.push(condition);
+                            });
+
+                            if (!isNew) {
+                                // Use conditions the user has with find*AndUpdate
+                                if (isQuery) {
+                                    each(doc._conditions, function(value, key) {
+                                        var cond = {};
+                                        cond[key] = { $ne: value };
+                                        conditions.push(cond);
+                                    });
+                                } else if (doc._id) {
+                                    conditions.push({ _id: { $ne: doc._id } });
+                                }
+                            }
+
+                            // Obtain the model depending on context
+                            // https://github.com/Automattic/mongoose/issues/3430
+                            // https://github.com/Automattic/mongoose/issues/3589
+                            var model;
+                            if (doc.constructor.name === 'Query') {
+                                model = doc.model;
+                            } else if (isSubdocument) {
+                                model = doc.ownerDocument().model(doc.ownerDocument().constructor.modelName);
+                            } else if (typeof doc.model === 'function') {
+                                model = doc.model(doc.constructor.modelName);
+                            }
+
+                            model.where({ $and: conditions }).count(function(err, count) {
+                                resolve(count === 0);
+                            });
+                        });
+                    }, type=unique, message=Error, expected `{PATH}` to be unique. Value: `{VALUE}`, path=email, value=matthewwalkland@gmail.com, kind=unique, path=email, value=matthewwalkland@gmail.com, reason=undefined, $isValidatorError=true, _message=User validation failed, message=User validation failed: email: Error, expected `email` to be unique. Value: `matthewwalkland@gmail.com`, name=ValidationError
+2018-02-22T16:03:08.568Z - error: UserId = 5a8ee9ab408c805d31339dcc error=null
+2018-02-22T16:12:28.287Z - error: Failed to send email. to=[jamie@gmail.com, jasnah@gmail.com, hoid@gmail.com, test1@t.com, 1@2.com, 2@1.com, a@n.com, c@m.com, 1@3.com, 2@3.com, 4@5.com, t@t.com, matt@test.com, h@g.com, z@x.com, w@r.com, testuppercase@email.com, MaTTWaLK@email.com, t1@test.com], error=null

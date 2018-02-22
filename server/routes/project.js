@@ -70,8 +70,8 @@ router.post('/new', (req, res) => {
     });
 
     project.save((err, result) => {
-      logger.error('UserId = %s', decoded.userId, { error: err });
       if (err) {
+        logger.error('UserId = %s', decoded.userId, { error: err });
         return res.status(500).json({
           title: 'An error occured creating Project',
           error: err

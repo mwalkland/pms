@@ -50,6 +50,10 @@
   margin-left: 20px;
 }
 
+.delete-button:hover {
+  cursor: pointer;
+}
+
 .container {
   height: 100%;
   overflow-y: auto;

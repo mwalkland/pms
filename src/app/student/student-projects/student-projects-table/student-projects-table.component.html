@@ -30,6 +30,6 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></mat-row>
 
   </mat-table>
-  <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30]" *ngIf="loaded"></mat-paginator>
+  <mat-paginator #paginator [pageSize]="15" [pageSizeOptions]="[10, 15, 20, 30]" *ngIf="loaded"></mat-paginator>
 
 </div>

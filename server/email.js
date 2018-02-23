@@ -18,7 +18,7 @@ const logger = new (winston.Logger)({
 class EmailController {
 
   constructor() {
-
+    this.fromEmail = 'mw482@exeter.ac.uk';
   }
 
   createTransport() {
@@ -26,7 +26,7 @@ class EmailController {
       service: 'Outlook365',
       port: 587,
       auth: {
-        user: 'mw482@exeter.ac.uk',
+        user: this.fromEmail,
         pass: 'g9Pz7$gkVAwm'
       }
     });
@@ -54,7 +54,7 @@ class EmailController {
     transporter.use('compile', hbs(options));
 
     let mailOptions = {
-      from: '"Project Management System" <mw482@exeter.ac.uk>',
+      from: '"Project Management System" <' + this.fromEmail + '>',
       to: staff + ' ' + email,
       subject: 'You have a new Project request',
       template: 'staff.body',
@@ -76,42 +76,39 @@ class EmailController {
   }
 
   sendStudentEmail(staff, student, email, project, isAccepted) {
-    nodemailer.createTestAccount((err, account) => {
 
-      let transporter = this.createTransport(account);
+    let transporter = this.createTransport();
 
-      const options = this.getOptions();
+    const options = this.getOptions();
 
-      transporter.use('compile', hbs(options));
+    transporter.use('compile', hbs(options));
 
-      let response;
-      if (isAccepted) {
-        response = 'accepted';
-      } else {
-        response = 'rejected';
+    let response;
+    if (isAccepted) {
+      response = 'accepted';
+    } else {
+      response = 'rejected';
+    }
+
+    let mailOptions = {
+      from: '"Project Management System" <' + this.fromEmail + '>',
+      to: student + ' ' + email,
+      subject: 'Your Project request has a response',
+      template: 'student.body',
+      context: {
+        staff: staff,
+        project: project,
+        response: response
       }
+    };
 
-      let mailOptions = {
-        from: '"Project Management System" <mw482@exeter.ac.uk>',
-        to: student + ' ' + email,
-        subject: 'Your Project request has a response',
-        template: 'student.body',
-        context: {
-          staff: staff,
-          project: project,
-          response: response
-        }
-      };
-
-      transporter.sendMail(mailOptions, (err) => {
-        if (err) {
-          logger.error('Failed to send email.', {
-            to: email,
-            error: err
-          });
-        }
-      });
-
+    transporter.sendMail(mailOptions, (err) => {
+      if (err) {
+        logger.error('Failed to send email.', {
+          to: email,
+          error: err
+        });
+      }
     });
   }
 
@@ -124,7 +121,7 @@ class EmailController {
     transporter.use('compile', hbs(options));
 
     let mailOptions = {
-      from: '"Project Management System" <mw482@exeter.ac.uk>',
+      from: '"Project Management System" <' + this.fromEmail + '>',
       to: leaderName + ' ' + email,
       subject: 'A final-year project has been confirmed',
       template: 'leader.body',
@@ -146,32 +143,29 @@ class EmailController {
   }
 
   sendReminder(emailList, cb) {
-    nodemailer.createTestAccount((err, account) => {
 
-      let transporter = this.createTransport(account);
+    let transporter = this.createTransport();
 
-      const options = this.getOptions();
+    const options = this.getOptions();
 
-      transporter.use('compile', hbs(options));
+    transporter.use('compile', hbs(options));
 
-      let mailOptions = {
-        from: '"Project Management System" <mw482@exeter.ac.uk>',
-        to: emailList,
-        subject: 'Final-year project reminder',
-        template: 'reminder.body',
-      };
+    let mailOptions = {
+      from: '"Project Management System" <' + this.fromEmail + '>',
+      to: emailList,
+      subject: 'Final-year project reminder',
+      template: 'reminder.body',
+    };
 
-      transporter.sendMail(mailOptions, (err) => {
-        if (err) {
-          logger.error('Failed to send email.', {
-            to: emailList,
-            error: err
-          });
-        } else {
-          cb();
-        }
-      });
-
+    transporter.sendMail(mailOptions, (err) => {
+      if (err) {
+        logger.error('Failed to send email.', {
+          to: emailList,
+          error: err
+        });
+      } else {
+        cb();
+      }
     });
   }
 

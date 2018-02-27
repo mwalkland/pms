@@ -56,7 +56,7 @@ router.post('/login', (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
       logger.error('Login error', { email: req.body.email, error: err });
-      return res.status(500).json({
+      return res.status(401).json({
         title: 'Login failed. Invalid email or password.',
         error: err
       });

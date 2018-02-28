@@ -25,6 +25,10 @@
   align-items: center;
 }
 
+.buttons {
+  display: flex;
+}
+
 h1 {
   font-size: 25px !important;
 }

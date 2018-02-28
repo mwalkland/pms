@@ -17,3 +17,7 @@
 .mat-raised-button {
   color: white;
 }
+
+.desc {
+  white-space: pre-line;
+}

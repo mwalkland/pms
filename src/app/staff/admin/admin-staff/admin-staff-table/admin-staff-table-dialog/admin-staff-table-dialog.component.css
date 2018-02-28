@@ -11,6 +11,10 @@
   justify-content: flex-end;
 }
 
+.desc {
+  white-space: pre-line;
+}
+
 @media(max-width: 668px) {
   .mat-expansion-panel-header {
     overflow: hidden;

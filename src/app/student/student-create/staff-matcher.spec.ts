@@ -78,7 +78,7 @@ describe('StaffMatcher', () => {
       matcher = new StaffMatcher(null, null);
     });
 
-    it('should return array of length 3 if the top 3 scores are different', () => {
+    it('returns array of length 3 if the top 3 scores are different', () => {
       const sorted = [
         { email: '', score: 3 },
         { email: '', score: 2 },
@@ -87,7 +87,7 @@ describe('StaffMatcher', () => {
       expect(matcher.getMostRelevantStaff(sorted).length).toEqual(3);
     });
 
-    it('should return array of length 4 if the top 4 scores are all the same', () => {
+    it('returns array of length 4 if the top 4 scores are all the same', () => {
       const sorted = [
         { email: '', score: 1 },
         { email: '', score: 1 },
@@ -97,7 +97,7 @@ describe('StaffMatcher', () => {
       expect(matcher.getMostRelevantStaff(sorted).length).toEqual(4);
     });
 
-    it('should return array of length 3 if the top 2 scores are the same and the 3rd is different', () => {
+    it('returns array of length 3 if the top 2 scores are the same and the 3rd is different', () => {
       const sorted = [
         { email: '', score: 2 },
         { email: '', score: 2 },
@@ -106,7 +106,7 @@ describe('StaffMatcher', () => {
       expect(matcher.getMostRelevantStaff(sorted).length).toEqual(3);
     });
 
-    it('should return array of length 3 if the top 3 scores are the same and the 4th is different', () => {
+    it('returns array of length 3 if the top 3 scores are the same and the 4th is different', () => {
       const sorted = [
         { email: '', score: 2 },
         { email: '', score: 2 },
@@ -116,7 +116,7 @@ describe('StaffMatcher', () => {
       expect(matcher.getMostRelevantStaff(sorted).length).toEqual(3);
     });
 
-    it('should return array of length 0 if all scores are 0', () => {
+    it('returns array of length 0 if all scores are 0', () => {
       const sorted = [
         { email: '', score: 0 },
         { email: '', score: 0 },
@@ -126,7 +126,7 @@ describe('StaffMatcher', () => {
       expect(matcher.getMostRelevantStaff(sorted).length).toEqual(0);
     });
 
-    it('should return array of length 1 if only 1 score is not 0', () => {
+    it('returns array of length 1 if only 1 score is not 0', () => {
       const sorted = [
         { email: '', score: 3 },
         { email: '', score: 0 },
@@ -136,7 +136,7 @@ describe('StaffMatcher', () => {
       expect(matcher.getMostRelevantStaff(sorted).length).toEqual(1);
     });
 
-    it('should return the top 3 different scores', () => {
+    it('returns the top 3 different scores', () => {
       const sorted = [
         { email: '', score: 10 },
         { email: '', score: 8 },
@@ -152,7 +152,7 @@ describe('StaffMatcher', () => {
         { email: '', score: 7 },
       ]);
     });
-    it('should return the top 4 scores if the last two are the same', () => {
+    it('returns the top 4 scores if the last two are the same', () => {
       const sorted = [
         { email: '', score: 10 },
         { email: '', score: 8 },
@@ -173,7 +173,7 @@ describe('StaffMatcher', () => {
 
   describe('findStaff()', () => {
 
-    it('should return the correct top 3 staff', () => {
+    it('returns the correct top 3 staff', () => {
       matcher = new StaffMatcher(['area1', 'area2', 'area3'], [
         new User('email1', 'password', 'firstname', 'surname', 'type', false, {
           first: 'area2',

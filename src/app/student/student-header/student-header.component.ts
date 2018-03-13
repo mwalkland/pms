@@ -31,8 +31,4 @@ export class StudentHeaderComponent implements OnInit {
     this.navlist.nativeElement.style.display = 'none';
   }
 
-  // onLogOut() {
-  //   this.authService.notifyLogoutEvent();
-  // }
-
 }

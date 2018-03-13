@@ -19,7 +19,6 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isLoggedIn()) {
       return true;
     } else {
-      console.log(this.router.url)
       if (this.router.url !== '/') {
         this.dialog.open(ExpiredComponent);
         return false;

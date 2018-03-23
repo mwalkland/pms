@@ -80,24 +80,20 @@ export class StaffService {
   }
 
   getStaffProjects(): Observable<Project[]> {
-    if (!this.staffProjects) {
-      return this.http.get('/project/getStaffProjects')
-        .map(response => {
-          const projects = response['projects'];
-          const projectList: Project[] = [];
-          for (const project of projects) {
-            const newProject = new Project(
-              project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
-              project.staff, null, null, project.students, project.isStudentProject
-            );
-            projectList.push(newProject);
-          }
-          this.staffProjects = projectList;
-          return projectList;
-        });
-    } else {
-      return Observable.of(this.staffProjects);
-    }
+    return this.http.get('/project/getStaffProjects')
+      .map(response => {
+        const projects = response['projects'];
+        const projectList: Project[] = [];
+        for (const project of projects) {
+          const newProject = new Project(
+            project._id, project.name, project.description, project.type, project.maxStudents, project.areas,
+            project.staff, null, null, project.students, project.isStudentProject
+          );
+          projectList.push(newProject);
+        }
+        this.staffProjects = projectList;
+        return projectList;
+      });
   }
 
   getProjectRequests(): Observable<Project[]> {
